@@ -8,21 +8,30 @@
     ~/.config/i3/:
       glob: true
       path: configs/i3/*
+
     ~/.config/polybar/:
       glob: true
       path: configs/polybar/*
+
     ~/.config/rofi/:
       glob: true
       path: configs/rofi/*
+
     ~/.config/alacritty/:
       glob: true
       path: configs/alacritty/*
+
     ~/.local/share/fonts/:
       glob: true
       path: configs/fonts/*
+
     ~/.config/wal/:
       glob: true
       path: configs/wal/*
+
+    ~/.config/picom.conf:
+      glob: false
+      path: configs/picom/picom.conf
 
 - clean: ['~']
 
