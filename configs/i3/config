@@ -164,16 +164,17 @@ gaps outer -4
 #  the .Xresources file via:
 #  xrdb -merge ~/.cache/wal/colors.Xresources
 
-set_from_resource $bg    i3wm.background #151f21
-set_from_resource $fg    i3wm.foreground #000000
-set_from_resource $focus i3wm.color6 #151f21
+set_from_resource $bg          i3wm.background #151f21
+set_from_resource $bg_alpha    i3wm.background_alpha #151f21
+set_from_resource $fg          i3wm.color6 #000000
+set_from_resource $focus       i3wm.foreground #151f21
 
-## Theme colors         Border  BG   Text    Indicator  Child
-client.focused          $bg     $bg  $focus  $bg        $bg
-client.focused_inactive $bg     $bg  $fg     $bg        $bg
-client.unfocused        $bg     $bg  $fg     $bg        $bg
-client.urgent           $bg     $bg  $fg     $bg        $bg
-client.placeholder      $bg     $bg  $fg     $bg        $bg
+## Theme colors         Border        BG         Text    Indicator  Child
+client.focused          $bg           $bg        $focus  $bg        $bg
+client.focused_inactive $bg_alpha     $bg_alpha  $fg     $bg_alpha  $bg_alpha
+client.unfocused        $bg_alpha     $bg_alpha  $fg     $bg_alpha  $bg_alpha
+client.urgent           $bg           $bg        $fg     $bg        $bg
+client.placeholder      $bg           $bg        $fg     $bg        $bg
 
 client.background       $bg
 
