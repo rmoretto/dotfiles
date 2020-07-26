@@ -33,6 +33,10 @@
       glob: false
       path: configs/picom/picom.conf
 
+    ~/.config/starship.toml:
+      glob: false
+      path: configs/starship/starship.toml
+
 - clean: ['~']
 
 - clean:
