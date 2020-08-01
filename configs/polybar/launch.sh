@@ -16,7 +16,6 @@ SECONDARY_MONITOR=$(xrandr | grep " connected|^primary" | cut -f1 -d' ')
 
 if [ ${IS_LAPTOP} -eq 0 ]; then
   # We are in the Desktop land, use the default bars
-
   MONITOR=${PRIMARY_MONITOR} polybar -c ~/.config/polybar/config.ini --reload main &
   [ -n "${SECONDARY_MONITOR}" ] && MONITOR=${SECONDARY_MONITOR} NET_IF=enp3s0 polybar -c ~/.config/polybar/config.ini --reload secondary &
 else
