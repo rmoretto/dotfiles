@@ -14,7 +14,7 @@ echo "Is laptop: ${IS_LAPTOP}"
 
 # Get the primary and secondary monitors
 PRIMARY_MONITOR=$(xrandr | grep " connected primary" | cut -f1 -d' ')
-SECONDARY_MONITOR=$(xrandr | grep " connected|^primary" | cut -f1 -d' ')
+SECONDARY_MONITOR=$(xrandr | grep " connected" | grep -v "primary" | cut -f1 -d' ')
 
 if [ ${IS_LAPTOP} -eq 0 ]; then
   # We are in the Desktop land, use the default bars
