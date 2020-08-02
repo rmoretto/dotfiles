@@ -37,6 +37,9 @@
       glob: false
       path: configs/starship/starship.toml
 
+    ~/.config/dunst/dunstrc:
+      path: configs/dunst/dunstrc
+
 - clean: ['~']
 
 - clean:
