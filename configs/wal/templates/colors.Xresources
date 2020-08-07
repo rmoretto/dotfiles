@@ -52,10 +52,10 @@ URxvt*borderColor:  {background.alpha}
 *color15:  {color15}
 
 ! Custom Colors
-*foreground_alpha:        {foreground}66
-*background_alpha:        {background}66
-*.foreground_alpha:       {foreground}66
-*.background_alpha:       {background}66
+*foreground_alpha:        {foreground}C8
+*background_alpha:        {background}C8
+*.foreground_alpha:       {foreground}C8
+*.background_alpha:       {background}C8
 
 ! Black color that will not be affected by bold highlighting.
 *.color66: {color0}

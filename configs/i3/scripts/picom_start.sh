@@ -9,9 +9,7 @@ if [[ ! -z ${COMPTON_PID} ]]; then
 fi
 
 # Retart the nitrogen
-# nitrogen --restore
-
-feh --bg-fill $HOME/Pictures/1452371862297-1.jpg & 
+nitrogen --restore
 
 # Waits to make sure that everithing was done 
 sleep 1
