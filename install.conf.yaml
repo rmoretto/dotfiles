@@ -29,6 +29,14 @@
       glob: true
       path: configs/wal/*
 
+    ~/.config/nvim/:
+      glob: true
+      path: configs/nvim/*
+
+    ~/.config/ranger/:
+      glob: true
+      path: configs/ranger/*
+
     ~/.config/picom.conf:
       glob: false
       path: configs/picom/picom.conf
