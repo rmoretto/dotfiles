@@ -44,12 +44,12 @@ Plug 'https://github.com/ryanoasis/vim-devicons'
 Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/mhinz/vim-startify'
 Plug 'https://github.com/simeji/winresizer'
+Plug 'https://github.com/tpope/vim-dispatch'
 
 " Code utils
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/preservim/nerdcommenter'
 Plug 'https://github.com/easymotion/vim-easymotion'
-Plug 'https://github.com/tpope/vim-dotenv'
 
 " Code Config
 Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
@@ -127,7 +127,19 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 nnoremap <Leader><CR> :noh<cr>
 
 " ----- Vim Test
-let test#strategy = "neovim"
+function! DispatchEnv(cmd) abort
+    let env_file = getcwd() . "/.env"
+    if filereadable(env_file)
+        return "eval $(egrep -v '^\\#' " . env_file . " | xargs) " . a:cmd
+    else
+        return a:cmd
+    endif
+endfunction
+
+let g:test#custom_transformations = {"dispatch": function("DispatchEnv")}
+let g:test#transformation = 'dispatch'
+
+let test#strategy = "dispatch"
 
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
@@ -163,6 +175,18 @@ endfunction
 nnoremap <A-t> :call TermToggle(12)<CR>
 inoremap <A-t> <Esc>:call TermToggle(12)<CR>
 tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
+
+" --- -ENVS
+function! s:env(var) abort
+  return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
+endfunction
+
+function! Env()
+    redir => s
+    sil! exe "norm!:ec$\<c-a>'\<c-b>\<right>\<right>\<del>'\<cr>"
+    redir END
+    return split(s)
+endfunction
 
 " ----- COCO BIMV
 " Always show the signcolumn, otherwise it would shift the text each time
