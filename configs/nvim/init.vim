@@ -71,6 +71,7 @@ let g:sonokai_disable_italic_comment = 1
 
 colorscheme sonokai
 
+" -------- Linha voadora
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
@@ -83,6 +84,10 @@ let g:airline_right_alt_sep = ''
 let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
+let g:airline#extensions#tabline#left_sep = ''
+let g:airline#extensions#tabline#left_alt_sep = ''
+
+let g:airline#extensions#tabline#enabled = 1
 
 " ------- FFZFZF
 let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!{node_modules,.git}"'
@@ -104,13 +109,20 @@ noremap <C-e> :WinResizerStartFocus<CR>
 nnoremap <F12> :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>y "+y
 nnoremap <silent> <C-p> :Files<CR>
-" MOVE LINES babe
+nnoremap <silent> <C-f> :Rg<CR>
+
+nnoremap <silent> <S-A-l> :bnext<CR>
+nnoremap <silent> <S-A-h> :bprev<CR>
+nnoremap <silent> <A-w> :bdelete<CR>
+
+" move libe BABYYYY
 nnoremap <A-j> :m .+1<CR>==
 nnoremap <A-k> :m .-2<CR>==
 inoremap <A-j> <Esc>:m .+1<CR>==gi
 inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
+
 nnoremap <Leader><CR> :noh<cr>
 
 " ----- Vim Test
@@ -129,11 +141,13 @@ function! TermToggle(height)
     if win_gotoid(g:term_win)
         hide
     else
-        botright new
-        exec "resize " . a:height
         try
-            exec "buffer " . g:term_buf
+            exec "botright sbuffer " . g:term_buf
+            exec "resize " . a:height
         catch
+            botright new
+            exec "resize " . a:height
+
             call termopen($SHELL, {"detach": 0})
             let g:term_buf = bufnr("")
             set nonumber
@@ -163,9 +177,7 @@ endif
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
@@ -214,7 +226,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
-
 " Formatting selected code.
 xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
@@ -248,14 +259,9 @@ omap ic <Plug>(coc-classobj-i)
 xmap ac <Plug>(coc-classobj-a)
 omap ac <Plug>(coc-classobj-a)
 
-" Remap <C-f> and <C-b> for scroll float windows/popups.
 if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  nnoremap <silent><nowait><expr> <TAB> coc#float#has_scroll() ? coc#float#scroll(1) : "\<TAB>"
+  nnoremap <silent><nowait><expr> <S-TAB> coc#float#has_scroll() ? coc#float#scroll(0) : "\<S-TAB>"
 endif
 
 " Use CTRL-S for selections ranges.
