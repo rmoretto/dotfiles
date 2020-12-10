@@ -97,6 +97,7 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden -g "!{node_modules,.git}"'
 let g:rnvimr_draw_border = 1
 let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
 let g:rnvimr_enable_ex = 1
+let g:rnvimr_enable_picker = 1
 
 tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
 nnoremap <silent> <A-q> :RnvimrToggle<CR>
@@ -162,6 +163,16 @@ endfunction
 nnoremap <A-t> :call TermToggle(12)<CR>
 inoremap <A-t> <Esc>:call TermToggle(12)<CR>
 tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
+
+" -0- - - - DotFILES
+function GetEnvFile()
+    let env_file = getcwd() . '/.env'
+    if filereadable(env_file)
+        DotenvGet(env_file)
+    else
+        echoerr "BURRO " . env_file
+    endif
+endfunction
 
 " ----- COCO BIMV
 " Always show the signcolumn, otherwise it would shift the text each time
