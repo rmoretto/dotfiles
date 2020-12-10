@@ -5,6 +5,10 @@
       force: true
 
 - link:
+    ~/.bashrc:
+      glob: false
+      path: configs/bash/.bashrc
+
     ~/.config/i3/:
       glob: true
       path: configs/i3/*
