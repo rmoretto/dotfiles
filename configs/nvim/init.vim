@@ -53,7 +53,7 @@ Plug 'https://github.com/easymotion/vim-easymotion'
 
 " Code Config
 Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
-Plug 'https://github.com/elixir-editors/vim-elixir'
+Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/vim-test/vim-test'
 Plug 'https://github.com/raimondi/delimitmate'
 
