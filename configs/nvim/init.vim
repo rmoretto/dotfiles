@@ -104,7 +104,7 @@ nnoremap <silent> <A-q> :RnvimrToggle<CR>
 tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
 
 " ------ WIN Reserziers
-noremap <C-e> :WinResizerStartFocus<CR>
+"noremap <C-e> :WinResizerStartFocus<CR>
 
 " ----- KeyMAPERS
 nnoremap <F12> :source ~/.config/nvim/init.vim<CR>
@@ -114,7 +114,7 @@ nnoremap <silent> <C-f> :Rg<CR>
 
 nnoremap <silent> <S-A-l> :bnext<CR>
 nnoremap <silent> <S-A-h> :bprev<CR>
-nnoremap <silent> <A-w> :bdelete<CR>
+nnoremap <silent> <A-w> :bprev\|bdelete #<CR>
 
 " move libe BABYYYY
 nnoremap <A-j> :m .+1<CR>==
@@ -125,6 +125,9 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 nnoremap <Leader><CR> :noh<cr>
+
+" sai TERMINAL
+tnoremap <Esc> <C-\><C-n>
 
 " ----- Vim Test
 function! DispatchEnv(cmd) abort
@@ -252,8 +255,12 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 " Formatting selected code.
-xmap <leader>f  :Format<CR>
-nmap <leader>f  :Format<CR>
+"xmap <leader>f  :Format<CR>
+"nmap <leader>f  :Format<CR>
+
+xmap <leader>f :Format<CR> :update<CR>
+nmap <leader>f :Format<CR> :update<CR>
+nmap <C-A-o> :call CocAction('runCommand', 'editor.action.organizeImport')<CR> :update<CR>
 
 augroup mygroup
   autocmd!

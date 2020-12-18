@@ -179,3 +179,10 @@ source /home/rodrigo/programations/misc/alacritty/extra/completions/alacritty.ba
 
 export PATH=$PATH:/usr/local/go/bin
 
+echo ".______      ___      .__   __.      ___       ______     ___      ";
+echo "|   _  \    /   \     |  \ |  |     /   \     /      |   /   \     ";
+echo "|  |_)  |  /  ^  \    |   \|  |    /  ^  \   |  ,----'  /  ^  \    ";
+echo "|   ___/  /  /_\  \   |  . \`  |   /  /_\  \  |  |      /  /_\  \   ";
+echo "|  |     /  _____  \  |  |\   |  /  _____  \ |  \`----./  _____  \  ";
+echo "| _|    /__/     \__\ |__| \__| /__/     \__\ \______/__/     \__\ ";
+echo "                                                                   ";
