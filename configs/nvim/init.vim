@@ -113,9 +113,25 @@ nnoremap <Leader>y "+y
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-f> :Rg<CR>
 
-nnoremap <silent> <S-A-l> :bnext<CR>
-nnoremap <silent> <S-A-h> :bprev<CR>
-nnoremap <silent> <A-w> :bprev\|bdelete #<CR>
+" vai emorvra wtermina lidiota 
+function! BnSkipTerm()
+  let start_buffer = bufnr('%')
+  bn
+  while &buftype ==# 'terminal' && bufnr('%') != start_buffer
+    bn
+  endwhile
+endfunction
+function! BpSkipTerm()
+  let start_buffer = bufnr('%')
+  bp
+  while &buftype ==# 'terminal' && bufnr('%') != start_buffer
+    bp
+  endwhile
+endfunction
+nnoremap <silent> <S-A-l> :call BnSkipTerm()<CR>
+nnoremap <silent> <S-A-h> :call BpSkipTerm()<CR>
+
+nnoremap <silent> <A-w> :call BpSkipTerm()\|bdelete #<CR>
 
 " move libe BABYYYY
 nnoremap <A-j> :m .+1<CR>==
