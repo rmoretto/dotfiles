@@ -56,6 +56,7 @@ Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
 Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/vim-test/vim-test'
 Plug 'https://github.com/raimondi/delimitmate'
+Plug 'https://github.com/OmniSharp/omnisharp-vim'
 
 call plug#end()
 
@@ -142,6 +143,7 @@ vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
 nnoremap <Leader><CR> :noh<cr>
+nnoremap <Leader><CR> :let @/ = ""<cr>
 
 " sai TERMINAL
 tnoremap <Esc> <C-\><C-n>
@@ -195,6 +197,9 @@ endfunction
 nnoremap <A-t> :call TermToggle(12)<CR>
 inoremap <A-t> <Esc>:call TermToggle(12)<CR>
 tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
+
+" ----- Uniters OMIUNS
+let g:OmniSharp_server_use_mono = 1
 
 " --- -ENVS
 function! s:env(var) abort
