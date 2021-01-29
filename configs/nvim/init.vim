@@ -27,6 +27,8 @@ set completeopt=menuone,noinsert,noselect
 set shortmess+=c
 set cmdheight=2
 set updatetime=50
+set title
+set mouse=a
 
 " Vim Plug
 call plug#begin('~/.vim/plugged')
@@ -45,6 +47,7 @@ Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'https://github.com/mhinz/vim-startify'
 Plug 'https://github.com/simeji/winresizer'
 Plug 'https://github.com/tpope/vim-dispatch'
+Plug 'edkolev/tmuxline.vim'
 
 " Code utils
 Plug 'https://github.com/tpope/vim-surround'
@@ -53,10 +56,10 @@ Plug 'https://github.com/easymotion/vim-easymotion'
 
 " Code Config
 Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
-Plug 'https://github.com/sheerun/vim-polyglot'
 Plug 'https://github.com/vim-test/vim-test'
 Plug 'https://github.com/raimondi/delimitmate'
 Plug 'https://github.com/OmniSharp/omnisharp-vim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
@@ -111,6 +114,7 @@ tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
 " ----- KeyMAPERS
 nnoremap <F12> :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>y "+y
+vnoremap <Leader>y "+y
 nnoremap <silent> <C-p> :Files<CR>
 nnoremap <silent> <C-f> :Rg<CR>
 
@@ -145,9 +149,6 @@ vnoremap <A-k> :m '<-2<CR>gv=gv
 nnoremap <Leader><CR> :noh<cr>
 nnoremap <Leader><CR> :let @/ = ""<cr>
 
-" sai TERMINAL
-tnoremap <Esc> <C-\><C-n>
-
 " ----- Vim Test
 function! DispatchEnv(cmd) abort
     let env_file = getcwd() . "/.env"
@@ -169,35 +170,6 @@ nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
-" ----- Terminal EU QUE FIZ
-let g:term_buf = 0
-let g:term_win = 0
-function! TermToggle(height)
-    if win_gotoid(g:term_win)
-        hide
-    else
-        try
-            exec "botright sbuffer " . g:term_buf
-            exec "resize " . a:height
-        catch
-            botright new
-            exec "resize " . a:height
-
-            call termopen($SHELL, {"detach": 0})
-            let g:term_buf = bufnr("")
-            set nonumber
-            set norelativenumber
-            set signcolumn=no
-        endtry
-        startinsert!
-        let g:term_win = win_getid()
-    endif
-endfunction
-
-nnoremap <A-t> :call TermToggle(12)<CR>
-inoremap <A-t> <Esc>:call TermToggle(12)<CR>
-tnoremap <A-t> <C-\><C-n>:call TermToggle(12)<CR>
-
 " ----- Uniters OMIUNS
 let g:OmniSharp_server_use_mono = 1
 
@@ -212,6 +184,14 @@ function! Env()
     redir END
     return split(s)
 endfunction
+
+" ----- CVSS CSCOCO
+autocmd FileType scss setl iskeyword+=@-@
+
+
+" ------ Vuezers
+" Only enable this pre processor as is teh oienf ely one ai Uuse
+let g:vue_pre_processors = ['html', 'scss', "typescript", "css"]
 
 " ----- COCO BIMV
 " Always show the signcolumn, otherwise it would shift the text each time

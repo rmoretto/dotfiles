@@ -128,6 +128,7 @@ PATH=$PATH:$HOME/.local/share/godot
 PATH=$PATH:$HOME/.local/share/godot
 PATH=$PATH:$HOME/.cargo/bin
 PATH=$PATH:$HOME/.local/bin
+PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
 
 
 alias myip='curl -fSsL 'https://api.ipify.org?format=json' | jq '\''.ip'\'''
@@ -178,6 +179,7 @@ complete -F _ssh_configfile get-ssh-hostname
 source /home/rodrigo/programations/misc/alacritty/extra/completions/alacritty.bash
 
 export PATH=$PATH:/usr/local/go/bin
+export EDITOR=nvim
 
 echo "     _              _        _           ";
 echo "  __| |    ___     (_)    __| |    ___   ";
