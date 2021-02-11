@@ -163,7 +163,6 @@ let g:test#custom_transformations = {"dispatch": function("DispatchEnv")}
 let g:test#transformation = 'dispatch'
 
 let test#strategy = "dispatch"
-
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
@@ -192,6 +191,10 @@ autocmd FileType scss setl iskeyword+=@-@
 " ------ Vuezers
 " Only enable this pre processor as is teh oienf ely one ai Uuse
 let g:vue_pre_processors = ['html', 'scss', "typescript", "css"]
+
+" ------ find TODOS ETRC
+nnoremap <silent> <leader>x :ccl <CR>
+nnoremap <silent> <leader>z :cexpr system('git grep --line-number -e PERFORMANCE -e FIXME -e TODO') <CR> :botright copen <CR>
 
 " ----- COCO BIMV
 " Always show the signcolumn, otherwise it would shift the text each time
