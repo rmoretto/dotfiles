@@ -53,6 +53,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/preservim/nerdcommenter'
 Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'tpope/vim-fugitive'
 
 " Code Config
 Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
