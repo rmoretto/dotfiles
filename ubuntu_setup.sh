@@ -8,7 +8,7 @@ echo "Setting up environment for Ubuntu"
 echo "Installing basic packages"
 sudo apt-get install -y git wget vim nano make build-essential \
 	                cmake nitrogen python3-pip python3-dev \
-			dunst
+			dunst jq ddcutils
 
 
 mkdir -p /tmp/dotfilessetup
@@ -23,21 +23,20 @@ sudo apt-get install -y libxcb1-dev libxcb-keysyms1-dev libpango1.0-dev \
                      libstartup-notification0-dev libxcb-randr0-dev \
                      libev-dev libxcb-cursor-dev libxcb-xinerama0-dev \
                      libxcb-xkb-dev libxkbcommon-dev libxkbcommon-x11-dev \
-                     autoconf libxcb-xrm0 libxcb-xrm-dev automake libxcb-shape0-dev
+                     autoconf libxcb-xrm0 libxcb-xrm-dev automake libxcb-shape0-dev ninja-build
+
+sudo pip3 install meson
 
 echo "Cloning I3-Gaps"
-git clone https://www.github.com/Airblader/i3 i3-gaps
+git clone https://www.github.com/Airblader/i3 --depth=1 i3-gaps
 
 echo "Building I3-Gaps"
 cd i3-gaps
 
-autoreconf --force --install
-rm -rf build/
-mkdir -p build && cd build/
-
-../configure --prefix=/usr --sysconfdir=/etc --disable-sanitizers
-make -j$(nproc)
-sudo make install
+mkdir -p build && cd build
+meson ..
+ninja
+sudo ninja install
 
 echo "Installing i3lock-color"
 sudo apt-get install i3lock
@@ -51,13 +50,13 @@ echo "Installing polybar dependencies"
 sudo apt install -y cmake-data pkg-config python3-sphinx libcairo2-dev \
                     libxcb1-dev libxcb-util0-dev libxcb-randr0-dev \
 		    libxcb-composite0-dev python3-xcbgen xcb-proto \
-		    libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev
+		    libxcb-image0-dev libxcb-ewmh-dev libxcb-icccm4-dev \
+		    libpulse-dev libasound2-dev libnl-genl-3-dev  \
+		    libcurlpp-dev libjsoncpp-dev 
 
 
-echo "Downloading polybar"
-
-wget -O polybar.tar https://github.com/polybar/polybar/releases/download/3.4.3/polybar-3.4.3.tar
-sha256sum -c <<<"d4ed121c1d3960493f8268f966d65a94d94c4646a4abb131687e37b63616822f ./polybar.tar"
+wget -O polybar.tar https://github.com/polybar/polybar/releases/download/3.5.4/polybar-3.5.4.tar.gz
+sha256sum -c <<<"133af4e8b29f426595ad3b773948eee27275230887844473853e7940c7959c2b ./polybar.tar"
 
 tar xf ./polybar.tar
 rm -f ./polybar.tar
@@ -74,7 +73,7 @@ echo "Compiling picom from source"
 cd /tmp/dotfilessetup
 
 echo "Installing picom dependencies"
-sudo apt-get install -y libxext-dev ninja-build meson libxcb1-dev libxcb-damage0-dev \
+sudo apt-get install -y libxext-dev libxcb1-dev libxcb-damage0-dev \
 	                libxcb-xfixes0-dev libxcb-shape0-dev \
 			libxcb-render-util0-dev libxcb-render0-dev \
 			libxcb-randr0-dev libxcb-composite0-dev \
@@ -144,3 +143,4 @@ pip3 install --user colorz
 
 echo "Installing Startship"
 curl -fsSL https://starship.rs/install.sh | bash
+

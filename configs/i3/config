@@ -200,6 +200,7 @@ for_window [title="Steam - News*"] floating enable
 for_window [class="Gnome-calendar"] floating enable
 for_window [title="About Mozilla Firefox"] floating enable
 for_window [title="Android Emulator*"] floating enable
+for_window [class="battle.net.exe"] floating enable
 
 
 # ===========================================
@@ -231,9 +232,10 @@ for_window [class="Sublime_text"] move window to scratchpad focus
 for_window [class="Slack" window_role="browser-window"] move window to scratchpad focus
 for_window [class="Joplin"] move window to scratchpad focus
 for_window [class="Rocket.Chat"] move window to scratchpad focus
+for_window [class="Mailspring"] move window to scratchpad focus
 
 # Define the shortcut for opening the above defined window
-set $create_scratchpad Create Scratchpad: [s]potify s[u]blime s[l]ack [j]oplin
+set $create_scratchpad Create Scratchpad: [s]potify s[u]blime s[l]ack [j]oplin [r]ocket [m]ail
 bindsym $mod+o mode "$create_scratchpad"
 mode "$create_scratchpad" {
         # Start spotify and put it in scrachpad
@@ -242,6 +244,7 @@ mode "$create_scratchpad" {
         bindsym l exec slack; mode default
         bindsym j exec /home/rodrigo/.joplin/Joplin.AppImage; mode default
         bindsym r exec rocketchat-desktop; mode default
+        bindsym m exec mailspring mode default
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -257,7 +260,7 @@ mode "$create_kk" {
 }
 
 # Define a shortcut for showing the window
-set $show_scratchpad Show Scratchpad: [s]potify s[u]blime s[l]ack [j]oplin
+set $show_scratchpad Show Scratchpad: [s]potify s[u]blime s[l]ack [j]oplin [r]ocket
 bindsym $mod+p mode "$show_scratchpad"
 mode "$show_scratchpad" {
         # Start spotify and put it in scrachpad
@@ -266,6 +269,7 @@ mode "$show_scratchpad" {
         bindsym l [class="Slack" window_role="browser-window"] scratchpad show; mode default
         bindsym j [class="Joplin"] scratchpad show; mode default
         bindsym r [class="Rocket.Chat"] scratchpad show; mode default
+        bindsym m [class="Mailspring"] scratchpad show; mode default
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
