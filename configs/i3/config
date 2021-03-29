@@ -232,7 +232,7 @@ for_window [class="Sublime_text"] move window to scratchpad focus
 for_window [class="Slack" window_role="browser-window"] move window to scratchpad focus
 for_window [class="Joplin"] move window to scratchpad focus
 for_window [class="Rocket.Chat"] move window to scratchpad focus
-for_window [class="Mailspring"] move window to scratchpad focus
+# for_window [class="Mailspring"] move window to scratchpad focus
 
 # Define the shortcut for opening the above defined window
 set $create_scratchpad Create Scratchpad: [s]potify s[u]blime s[l]ack [j]oplin [r]ocket [m]ail
@@ -244,7 +244,7 @@ mode "$create_scratchpad" {
         bindsym l exec slack; mode default
         bindsym j exec /home/rodrigo/.joplin/Joplin.AppImage; mode default
         bindsym r exec rocketchat-desktop; mode default
-        bindsym m exec mailspring mode default
+        bindsym m exec mailspring; mode default
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
