@@ -178,7 +178,10 @@ complete -F _ssh_configfile get-ssh-hostname
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 source /home/rodrigo/programations/misc/alacritty/extra/completions/alacritty.bash
 
+GOPATH=$(go env GOPATH) 
+
 export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:${GOPATH}/bin:$GOPATH
 export EDITOR=nvim
 
 echo "     _              _        _           ";
