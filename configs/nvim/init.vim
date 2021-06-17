@@ -170,6 +170,7 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " -------------- LSP Config
+nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
 lua require("lsp")
 
 " -------------- LSP Saga Config
@@ -180,7 +181,7 @@ nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_sag
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 
 nnoremap <silent>gr :Lspsaga rename<CR>
-nnoremap <silent>gd :Lspsaga preview_definition<CR>
+nnoremap <silent>gD :Lspsaga preview_definition<CR>
 
 nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>

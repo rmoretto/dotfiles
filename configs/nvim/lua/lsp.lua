@@ -60,5 +60,14 @@ require"lspconfig".efm.setup {
     root_dir = require"lspconfig".util.root_pattern("yarn.lock", "lerna.json", "mix.exs", "mix.lock", ".git"),
     init_options = {documentFormatting = true, codeAction = true},
     filetypes = vim.tbl_keys(languages),
-    settings = {rootMarkers = {".git/"}, languages = languages}
+    settings = {rootMarkers = {".git/"}, languages = languages, lintDebounce = 1000000000}
 }
+
+-- Omnimerda 
+local pid = vim.fn.getpid()
+local omnisharp_bin = "/home/rodrigo/.local/ominimerda/run"
+require'lspconfig'.omnisharp.setup{
+    cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
+
+
