@@ -139,6 +139,7 @@ alias cowalert='xcowsay --monitor 1 comando: " $(history | tail -n1 | grep -oP '
 alias restart-audio='pulseaudio -k && sudo alsa force-reload'
 alias toclip='xclip -selection clipboard'
 alias change-brightness='/home/rodrigo/.config/polybar/scripts/change-brightness.sh '
+alias camadb='droidcam-cli adb 4747'
 
 devf() {
     cd $HOME/programations/$1
@@ -178,11 +179,12 @@ complete -F _ssh_configfile get-ssh-hostname
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 source /home/rodrigo/programations/misc/alacritty/extra/completions/alacritty.bash
 
+export PATH=$PATH:/usr/local/go/bin
+export EDITOR=nvim
+
 GOPATH=$(go env GOPATH) 
 
-export PATH=$PATH:/usr/local/go/bin
 export PATH=$PATH:${GOPATH}/bin:$GOPATH
-export EDITOR=nvim
 
 echo "     _              _        _           ";
 echo "  __| |    ___     (_)    __| |    ___   ";

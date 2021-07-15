@@ -35,7 +35,7 @@ local eslint = {
 }
 
 local credo = {
-    lintCommand = "mix credo suggest --strict --format=flycheck --read-from-stdin ${INPUT}",
+    lintCommand = "mix credo suggest --strict --format=flycheck --read-from-stdin ${INPUT} --ignore Credo.Check.Readability.TrailingBlankLine,Credo.Check.Readability.TrailingWhiteSpace",
     lintIgnoreExitCode = true,
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
