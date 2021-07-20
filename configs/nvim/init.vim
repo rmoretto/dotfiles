@@ -134,8 +134,8 @@ nnoremap <silent> <leader>x :ccl <CR>
 nnoremap <silent> <leader>z :cexpr system('git grep --line-number -e PERFORMANCE -e FIXME -e TODO') <CR> :botright copen <CR>
 
 " New map to start and of line
-nnoremap <silent> <C-i> :normal ^<CR>
-nnoremap <silent> <C-a> :normal $<CR>
+"nnoremap <silent> <C-i> :normal ^<CR>
+"nnoremap <silent> <C-a> :normal $<CR>
 
 " -------------- Load Environment variables to Vim runtime
 function! s:env(var) abort
