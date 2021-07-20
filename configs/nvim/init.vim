@@ -94,6 +94,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhartington/formatter.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 
 call plug#end()
 
