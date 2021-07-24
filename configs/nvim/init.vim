@@ -269,6 +269,8 @@ nnoremap <silent> <A-q> :RnvimrToggle<CR>
 tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
 
 " -------------- Vim Test
+let g:cmux_elixir_tmux_session = 'elixir-test-session'
+
 function! DispatchEnv(cmd) abort
     let env_file = getcwd() . "/.env"
     if filereadable(env_file)
@@ -278,10 +280,16 @@ function! DispatchEnv(cmd) abort
     endif
 endfunction
 
-let g:test#custom_transformations = {"dispatch": function("DispatchEnv")}
-let g:test#transformation = 'dispatch'
+function! CMux(cmd) abort
+    call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 "clear; ' . a:cmd . '" ENTER')
+endfunction
 
-let test#strategy = "dispatch"
+let g:test#custom_strategies = {"cmux": function("CMux")}
+
+" let g:test#custom_transformations = {"dispatch": function("DispatchEnv")}
+" let g:test#transformation = 'dispatch'
+
+let test#strategy = "cmux"
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
 nmap <silent> t<C-s> :TestSuite<CR>
