@@ -1,11 +1,18 @@
 
  -- Elixir Config
 require'lspconfig'.elixirls.setup{
-    cmd = { "/home/rodrigo/.local/bin/language_server.sh" }
+    cmd = { "/home/rodrigo/.local/bin/language_server.sh" },
+    on_attach = function(c)
+        require 'illuminate'.on_attach(c)
+    end,
 }
 
 -- TypeScript Config
-require'lspconfig'.tsserver.setup{}
+require'lspconfig'.tsserver.setup{
+    on_attach = function(c)
+        require 'illuminate'.on_attach(c)
+    end,
+}
 
 -- HTML Config
 local html_capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -13,6 +20,9 @@ html_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require'lspconfig'.html.setup {
   capabilities = html_capabilities,
+  on_attach = function(c)
+    require 'illuminate'.on_attach(c)
+  end,
 }
 
 -- CSS Config
@@ -20,11 +30,19 @@ local css_capabilities = vim.lsp.protocol.make_client_capabilities()
 css_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require'lspconfig'.cssls.setup {
+  cmd = { "css-languageserver", "--stdio" },
   capabilities = css_capabilities,
+  on_attach = function(c)
+    require 'illuminate'.on_attach(c)
+  end,
 }
 
 -- Vue Config
-require'lspconfig'.vuels.setup{}
+require'lspconfig'.vuels.setup{
+  on_attach = function(c)
+    require 'illuminate'.on_attach(c)
+  end,
+}
 
 -- EFM LS
 local eslint = {
@@ -56,11 +74,14 @@ efm_capabilities.textDocument.completion.completionItem.snippetSupport = true
 efm_capabilities.textDocument.completion.completionItem.resolveSupport = {properties = {'documentation', 'detail', 'additionalTextEdits'}}
 
 require"lspconfig".efm.setup {
-    capabilities = efm_capabilities,
-    root_dir = require"lspconfig".util.root_pattern("yarn.lock", "lerna.json", "mix.exs", "mix.lock", ".git"),
-    init_options = {documentFormatting = true, codeAction = true},
-    filetypes = vim.tbl_keys(languages),
-    settings = {rootMarkers = {".git/"}, languages = languages, lintDebounce = 1000000000}
+  capabilities = efm_capabilities,
+  root_dir = require"lspconfig".util.root_pattern("yarn.lock", "lerna.json", "mix.exs", "mix.lock", ".git"),
+  init_options = {documentFormatting = true, codeAction = true},
+  filetypes = vim.tbl_keys(languages),
+  settings = {rootMarkers = {".git/"}, languages = languages, lintDebounce = 1000000000},
+  on_attach = function(c)
+    require 'illuminate'.on_attach(c)
+  end,
 }
 
 -- Omnimerda 

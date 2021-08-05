@@ -95,6 +95,7 @@ Plug 'elixir-editors/vim-elixir'
 Plug 'mhartington/formatter.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'RRethy/vim-illuminate'
 
 call plug#end()
 
@@ -176,16 +177,19 @@ nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " -------------- LSP Config
 nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
 lua require("lsp")
 
 " -------------- LSP Saga Config
 nnoremap <silent>K :Lspsaga hover_doc<CR>
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
+
+" Use tab for scroll only when the Lspsaga hover is visible
+nnoremap <silent><expr> <Tab> luaeval("require('lspsaga.hover').has_saga_hover()") ? "\<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)\<CR>" : "\<Tab>"
+nnoremap <silent><expr> <S-Tab> luaeval("require('lspsaga.hover').has_saga_hover()") ? "\<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)\<CR>" : "\<S-Tab>"
 
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 
-nnoremap <silent>gr :Lspsaga rename<CR>
+nnoremap <silent><leader>rn :Lspsaga rename<CR>
 nnoremap <silent>gD :Lspsaga preview_definition<CR>
 
 nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
@@ -281,7 +285,7 @@ function! DispatchEnv(cmd) abort
 endfunction
 
 function! CMux(cmd) abort
-    call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 "clear; ' . a:cmd . '" ENTER')
+    call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 "clear; echo ' . a:cmd . '; ' . a:cmd . '" ENTER')
 endfunction
 
 let g:test#custom_strategies = {"cmux": function("CMux")}
