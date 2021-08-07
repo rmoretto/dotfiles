@@ -30,7 +30,7 @@ local css_capabilities = vim.lsp.protocol.make_client_capabilities()
 css_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 require'lspconfig'.cssls.setup {
-  cmd = { "css-languageserver", "--stdio" },
+  cmd = { "vscode-css-language-server", "--stdio" },
   capabilities = css_capabilities,
   on_attach = function(c)
     require 'illuminate'.on_attach(c)

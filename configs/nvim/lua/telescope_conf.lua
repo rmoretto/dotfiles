@@ -19,9 +19,10 @@ require('telescope').setup{
       i = {
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,       -- otherwise, just set the mapping to the function that you want it to be.
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist
       },
       n = {
-        ["<C-q>"] = builtin.quickfix,
+        ["<C-q>"] = actions.send_selected_to_qflist + actions.open_qflist
       }
     },
   }
