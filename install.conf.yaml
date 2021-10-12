@@ -9,6 +9,10 @@
       glob: false
       path: configs/bash/.bashrc
 
+    ~/.zshrc:
+      glob: false
+      path: configs/zsh/.zshrc
+
     ~/.tmux.conf:
       glob: false
       path: configs/tmux/.tmux.conf

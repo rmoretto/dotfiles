@@ -1,15 +1,19 @@
 #!/bin/bash
 
 BRIGHTNESS_ACTION=$1
-BRIGHTNESS_VALUE=$2
+DISPLAY=$2
 
 if [[ -z ${BRIGHTNESS_ACTION} ]]; then
     ddcutil --brief getvcp 0x10 | awk -F' ' '{print $4}'
     exit 0
 fi
 
-if [[ ${BRIGHTNESS_ACTION} == '=' ]]; then
-    BRIGHTNESS_ACTION=""
+if [[ ! -z "${DISPLAY}" ]]; then
+   COMMAND="ddcutil setvcp 0x10 ${BRIGHTNESS_ACTION} ${BRIGHTNESS_VALUE} --display=${DISPLAY}"
+   echo "Running: ${COMMAND}"
+
+   eval "$COMMAND"
+   exit 0
 fi
 
 

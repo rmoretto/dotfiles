@@ -1,7 +1,12 @@
+-- Bash Config
+require'lspconfig'.bashls.setup{
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+}
 
- -- Elixir Config
+-- Elixir Config
 require'lspconfig'.elixirls.setup{
     cmd = { "/home/rodrigo/.local/bin/language_server.sh" },
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = function(c)
         require 'illuminate'.on_attach(c)
     end,
@@ -9,29 +14,15 @@ require'lspconfig'.elixirls.setup{
 
 -- TypeScript Config
 require'lspconfig'.tsserver.setup{
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
     on_attach = function(c)
         require 'illuminate'.on_attach(c)
     end,
 }
 
 -- HTML Config
-local html_capabilities = vim.lsp.protocol.make_client_capabilities()
-html_capabilities.textDocument.completion.completionItem.snippetSupport = true
-
 require'lspconfig'.html.setup {
-  capabilities = html_capabilities,
-  on_attach = function(c)
-    require 'illuminate'.on_attach(c)
-  end,
-}
-
--- CSS Config
-local css_capabilities = vim.lsp.protocol.make_client_capabilities()
-css_capabilities.textDocument.completion.completionItem.snippetSupport = true
-
-require'lspconfig'.cssls.setup {
-  cmd = { "vscode-css-language-server", "--stdio" },
-  capabilities = css_capabilities,
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   on_attach = function(c)
     require 'illuminate'.on_attach(c)
   end,
@@ -39,6 +30,16 @@ require'lspconfig'.cssls.setup {
 
 -- Vue Config
 require'lspconfig'.vuels.setup{
+  on_attach = function(c)
+    require 'illuminate'.on_attach(c)
+  end,
+}
+
+
+-- CSS Config
+require'lspconfig'.cssls.setup {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   on_attach = function(c)
     require 'illuminate'.on_attach(c)
   end,
@@ -69,12 +70,8 @@ local languages = {
     elixir = {credo}
 }
 
-local efm_capabilities = vim.lsp.protocol.make_client_capabilities()
-efm_capabilities.textDocument.completion.completionItem.snippetSupport = true
-efm_capabilities.textDocument.completion.completionItem.resolveSupport = {properties = {'documentation', 'detail', 'additionalTextEdits'}}
-
 require"lspconfig".efm.setup {
-  capabilities = efm_capabilities,
+  capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
   root_dir = require"lspconfig".util.root_pattern("yarn.lock", "lerna.json", "mix.exs", "mix.lock", ".git"),
   init_options = {documentFormatting = true, codeAction = true},
   filetypes = vim.tbl_keys(languages),
@@ -89,6 +86,11 @@ local pid = vim.fn.getpid()
 local omnisharp_bin = "/home/rodrigo/.local/ominimerda/run"
 require'lspconfig'.omnisharp.setup{
     cmd = { omnisharp_bin, "--languageserver" , "--hostPID", tostring(pid) };
+}
+
+-- Rust
+require'lspconfig'.rust_analyzer.setup{
+    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 }
 
 

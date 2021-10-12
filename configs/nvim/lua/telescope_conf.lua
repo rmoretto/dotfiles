@@ -14,7 +14,7 @@ require('telescope').setup{
       '--column',
       '--smart-case'
     },
-    file_ignore_patterns = {"node_modules", ".git", "_build", ".idea", ".elixis_ls"},
+    file_ignore_patterns = {"node_modules", ".git", "/^_build/", ".idea", ".elixis_ls"},
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,

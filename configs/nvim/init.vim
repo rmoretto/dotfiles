@@ -41,7 +41,17 @@ autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 autocmd FileType vue setlocal ts=2 sts=2 sw=2
 
-"autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+            \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
 
 
 " --------------------------------------------
@@ -88,14 +98,29 @@ Plug 'tommcdo/vim-exchange'
 
 " IDE Like 
 Plug 'neovim/nvim-lspconfig'
-Plug 'glepnir/lspsaga.nvim'
-Plug 'hrsh7th/nvim-compe'
+Plug 'tami5/lspsaga.nvim'
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'elixir-editors/vim-elixir'
 Plug 'mhartington/formatter.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'RRethy/vim-illuminate'
+Plug 'kyazdani42/nvim-tree.lua'
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-emoji'
+
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 call plug#end()
 
@@ -127,8 +152,38 @@ inoremap <A-k> <Esc>:m .-2<CR>==gi
 vnoremap <A-j> :m '>+1<CR>gv=gv
 vnoremap <A-k> :m '<-2<CR>gv=gv
 
+" Maintain visual mode after ident
+vnoremap < <gv
+vnoremap > >gv
+
 nnoremap <Leader><CR> :noh<cr>
 nnoremap <Leader><CR> :let @/ = ""<cr>
+
+" Copy 'til the end of line
+nnoremap Y yg_
+
+" Better search jump
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Maintain the cursor on BIG J
+nnoremap J mzJ`z
+
+" Undo break points BIG COCONUT OIL
+inoremap " "<c-g>u
+inoremap ' '<c-g>u
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap : :<c-g>u
+inoremap ; ;<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+inoremap ( (<c-g>u
+inoremap ) )<c-g>u
+inoremap [ [<c-g>u
+inoremap ] ]<c-g>u
+inoremap { {<c-g>u
+inoremap } }<c-g>u
 
 " Quick fix Key maps
 nnoremap <silent> <leader>x :ccl <CR>
@@ -137,6 +192,22 @@ nnoremap <silent> <leader>z :cexpr system('git grep --line-number -e PERFORMANCE
 " New map to start and of line
 "nnoremap <silent> <C-i> :normal ^<CR>
 "nnoremap <silent> <C-a> :normal $<CR>
+
+" -------------- Yank highlight
+function HighlightYank()
+    execute 'IlluminationDisable'
+    lua vim.highlight.on_yank{higroup="DiffAdd", timeout=300} 
+
+    timer_start(250, 'IlluminationEnable', {'repeat': 1})
+endfunction
+
+let g:Illuminate_highlightPriority = 100
+
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! call HighlightYank()
+    " au TextYankPost * silent! :IlluminateDisable<CR> lua vim.highlight.on_yank{higroup="DiffAdd", timeout=300} IlluminateEnable<CR>
+augroup END
 
 " -------------- Load Environment variables to Vim runtime
 function! s:env(var) abort
@@ -181,6 +252,9 @@ nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
 lua require("lsp")
 
 " -------------- LSP Saga Config
+" lua require("")
+
+" -------------- LSP Saga Config
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 
 " Use tab for scroll only when the Lspsaga hover is visible
@@ -205,39 +279,16 @@ vnoremap <silent><leader>a :<C-U>Lspsaga range_code_action<CR>
 nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
 tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 
-" -------------- NVim Compe Config
-set completeopt=menuone,noselect
-let g:compe = {}
-let g:compe.enabled = v:true
-let g:compe.autocomplete = v:true
-let g:compe.debug = v:false
-let g:compe.min_length = 1
-let g:compe.preselect = 'enable'
-let g:compe.throttle_time = 80
-let g:compe.source_timeout = 200
-let g:compe.incomplete_delay = 400
-let g:compe.max_abbr_width = 100
-let g:compe.max_kind_width = 100
-let g:compe.max_menu_width = 100
-let g:compe.documentation = v:true
+" -------------- NVim cmp
+set completeopt=menu,menuone,noselect
 
-let g:compe.source = {}
-let g:compe.source.path = v:true
-let g:compe.source.buffer = v:true
-let g:compe.source.calc = v:true
-let g:compe.source.nvim_lsp = v:true
-let g:compe.source.nvim_lua = v:true
-let g:compe.source.vsnip = v:false
-let g:compe.source.ultisnips = v:false
-
-inoremap <silent><expr> <C-Space> compe#complete()
-inoremap <silent><expr> <CR>      compe#confirm('<CR>')
-inoremap <silent><expr> <C-e>     compe#close('<C-e>')
-
-lua require("nvim_compe")
+lua require("cmp_conf")
 
 "inoremap <silent><expr> <Tab>   compe#scroll({ 'delta': +4 })
 "inoremap <silent><expr> <S-Tab> compe#scroll({ 'delta': -4 })
+
+" -------------- Coq Nvim
+" let g:coq_settings = { 'auto_start': v:true }
 
 " -------------- Treesitter
 lua require("treesitter")
@@ -264,13 +315,33 @@ let g:palette = sonokai#get_palette(s:configuration.style)
 lua require('galaxyline_conf')
 
 " -------------- Ranger
-let g:rnvimr_draw_border = 1
-let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
-let g:rnvimr_enable_picker = 1
+"let g:rnvimr_draw_border = 1
+"let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+"let g:rnvimr_enable_picker = 1
+"let g:rnvimr_hide_gitignore = 0
+"let g:rnvimr_enable_bw = 1
 
-tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-nnoremap <silent> <A-q> :RnvimrToggle<CR>
-tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
+"tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+"nnoremap <silent> <A-q> :RnvimrToggle<CR>
+"tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
+
+" -------------- Nvim tree
+let g:nvim_tree_width = 200
+let g:nvim_tree_follow = 1
+
+lua require('nvim_tree_conf')
+
+nnoremap <A-q> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+
+NvimTreeClose
+
+" -------------- Nerd Commenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
 
 " -------------- Vim Test
 let g:cmux_elixir_tmux_session = 'elixir-test-session'
@@ -285,6 +356,9 @@ function! DispatchEnv(cmd) abort
 endfunction
 
 function! CMux(cmd) abort
+    " Scroll down if the panel is in scroll mode
+    call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 ENTER')
+    " Print and send the test command
     call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 "clear; echo ' . a:cmd . '; ' . a:cmd . '" ENTER')
 endfunction
 
