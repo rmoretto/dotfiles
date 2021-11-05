@@ -40,6 +40,9 @@ autocmd FileType elixir setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
 autocmd FileType typescript setlocal ts=2 sts=2 sw=2
 autocmd FileType vue setlocal ts=2 sts=2 sw=2
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+autocmd FileType scss setlocal ts=2 sts=2 sw=2
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
@@ -86,15 +89,18 @@ Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 Plug 'edkolev/tmuxline.vim'
 Plug 'https://github.com/mhinz/vim-startify'
 Plug 'https://github.com/simeji/winresizer'
+Plug 'beauwilliams/focus.nvim' , {'branch': 'master'}
 
 " Misc
 Plug 'psliwka/vim-smoothie'
 Plug 'https://github.com/tpope/vim-surround'
 Plug 'https://github.com/preservim/nerdcommenter'
-Plug 'https://github.com/easymotion/vim-easymotion'
+Plug 'tpope/vim-repeat'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'https://github.com/vim-test/vim-test'
 Plug 'https://github.com/raimondi/delimitmate'
 Plug 'tommcdo/vim-exchange'
+Plug 'nvim-treesitter/playground'
 
 " IDE Like 
 Plug 'neovim/nvim-lspconfig'
@@ -102,7 +108,6 @@ Plug 'tami5/lspsaga.nvim'
 Plug 'RishabhRD/popfix'
 Plug 'RishabhRD/nvim-lsputils'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'elixir-editors/vim-elixir'
 Plug 'mhartington/formatter.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
@@ -138,6 +143,10 @@ let g:sonokai_enable_italic = 1
 let g:sonokai_disable_italic_comment = 1
 
 colorscheme sonokai
+
+" Override TS Colors
+highlight! link TSSymbol OrangeItalic
+highlight! link TSStringEscape Purple
 
 " -------------- General Keymaps
 nnoremap <F12> :source ~/.config/nvim/init.vim<CR>
@@ -198,10 +207,10 @@ function HighlightYank()
     execute 'IlluminationDisable'
     lua vim.highlight.on_yank{higroup="DiffAdd", timeout=300} 
 
-    timer_start(250, 'IlluminationEnable', {'repeat': 1})
+    timer_start(300, 'IlluminationEnable', {'repeat': 1})
 endfunction
 
-let g:Illuminate_highlightPriority = 100
+" let g:Illuminate_highlightPriority = 100
 
 augroup highlight_yank
     autocmd!
@@ -251,8 +260,8 @@ nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
 lua require("lsp")
 
-" -------------- LSP Saga Config
-" lua require("")
+" -------------- Focus Config
+lua require("focus").setup()
 
 " -------------- LSP Saga Config
 nnoremap <silent>K :Lspsaga hover_doc<CR>
@@ -270,7 +279,7 @@ nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
 nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
 
 " nnoremap <silent><leader>ed <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
-nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_cursor_diagnostics()<CR>
+nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
 
 nnoremap <silent> gh :Lspsaga lsp_finder<CR>
 nnoremap <silent><leader>a :Lspsaga code_action<CR>
@@ -287,8 +296,15 @@ lua require("cmp_conf")
 "inoremap <silent><expr> <Tab>   compe#scroll({ 'delta': +4 })
 "inoremap <silent><expr> <S-Tab> compe#scroll({ 'delta': -4 })
 
-" -------------- Coq Nvim
+" -------------- Lightspeed
 " let g:coq_settings = { 'auto_start': v:true }
+nmap <leader>s <Plug>Lightspeed_s
+nmap <leader>S <Plug>Lightspeed_S
+
+lua require('lightspeed').setup{}
+
+silent! unmap s
+silent! unmap S
 
 " -------------- Treesitter
 lua require("treesitter")
