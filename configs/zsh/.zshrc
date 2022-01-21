@@ -42,7 +42,7 @@ CASE_SENSITIVE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
@@ -70,7 +70,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions)
+plugins=(git fzf zsh-autosuggestions asdf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -119,6 +119,8 @@ export EDITOR=nvim
 export PATH=$PATH:/usr/local/go/bin
 GOPATH=$(go env GOPATH) 
 
+export ANDROID_HOME=$HOME/Android/Sdk
+
 export PATH=$PATH:${GOPATH}/bin:$GOPATH
 export PATH=$PATH:$HOME/.yarn/bin
 export PATH=$PATH:$HOME/.npm/bin
@@ -127,7 +129,11 @@ export PATH=$PATH:$HOME/.local/share/godot
 export PATH=$PATH:$HOME/.cargo/bin
 export PATH=$PATH:$HOME/.local/bin
 export PATH=$PATH:$HOME/.gem/ruby/2.7.0/bin
+export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin
+export PATH=$PATH:$HOME/.poetry/bin
 
+eval $(ssh-agent) > /dev/null 2>&1 
+ssh-add $HOME/.ssh/id_rsa_casa > /dev/null 2>&1 
 
 get-ssh-hostname() {
     ssh -G $1 | grep hostname | head -n1 | awk {'print $2'}
@@ -156,3 +162,5 @@ complete -F _ssh_configfile get-ssh-hostname
 fpath=(/opt/vagrant/embedded/gems/2.2.18/gems/vagrant-2.2.18/contrib/zsh $fpath)
 compinit
 # <<<<  Vagrant command completion (end)
+
+export PATH="$HOME/.poetry/bin:$PATH"

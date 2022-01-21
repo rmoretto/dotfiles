@@ -43,6 +43,7 @@ autocmd FileType vue setlocal ts=2 sts=2 sw=2
 autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType scss setlocal ts=2 sts=2 sw=2
+autocmd FileType dart setlocal ts=2 sts=2 sw=2
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
@@ -70,7 +71,6 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'https://github.com/ryanoasis/vim-devicons'
 
 " Vim Telescope
-Plug 'nvim-lua/popup.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
 
@@ -103,6 +103,7 @@ Plug 'tommcdo/vim-exchange'
 Plug 'nvim-treesitter/playground'
 
 " IDE Like 
+Plug 'mfussenegger/nvim-dap'
 Plug 'neovim/nvim-lspconfig'
 Plug 'tami5/lspsaga.nvim'
 Plug 'RishabhRD/popfix'
@@ -113,6 +114,7 @@ Plug 'folke/trouble.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'RRethy/vim-illuminate'
 Plug 'kyazdani42/nvim-tree.lua'
+Plug 'elixir-editors/vim-elixir'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -193,14 +195,32 @@ inoremap [ [<c-g>u
 inoremap ] ]<c-g>u
 inoremap { {<c-g>u
 inoremap } }<c-g>u
+inoremap - -<c-g>u
 
 " Quick fix Key maps
 nnoremap <silent> <leader>x :ccl <CR>
 nnoremap <silent> <leader>z :cexpr system('git grep --line-number -e PERFORMANCE -e FIXME -e TODO') <CR> :botright copen <CR>
 
+" Search and replace selected text
+" Reference: https://stackoverflow.com/a/676619/10106533
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
 " New map to start and of line
 "nnoremap <silent> <C-i> :normal ^<CR>
 "nnoremap <silent> <C-a> :normal $<CR>
+"
+" Search for selected text, forwards or backwards.
+" Ref: https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
 
 " -------------- Yank highlight
 function HighlightYank()
@@ -260,6 +280,8 @@ nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
 lua require("lsp")
 
+nnoremap <C-A-o> <cmd>lua vim.lsp.buf.code_action({only = {"source.organizeImports"}})<CR>
+
 " -------------- Focus Config
 lua require("focus").setup()
 
@@ -306,6 +328,9 @@ lua require('lightspeed').setup{}
 silent! unmap s
 silent! unmap S
 
+" -------------- DAP
+lua require("dap_conf")
+
 " -------------- Treesitter
 lua require("treesitter")
 
@@ -342,9 +367,6 @@ lua require('galaxyline_conf')
 "tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
 
 " -------------- Nvim tree
-let g:nvim_tree_width = 200
-let g:nvim_tree_follow = 1
-
 lua require('nvim_tree_conf')
 
 nnoremap <A-q> :NvimTreeToggle<CR>
