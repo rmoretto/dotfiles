@@ -211,3 +211,8 @@ require'lspconfig'.dartls.setup{
     cmd = {"dart", "/home/rodrigo/snap/flutter/common/flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot", "--lsp"} 
 }
 
+-- CLangD
+require'lspconfig'.clangd.setup{
+    cmd = { "clangd-12" }
+}
+

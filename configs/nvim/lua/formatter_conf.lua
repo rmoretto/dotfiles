@@ -18,6 +18,10 @@ local function luaformat()
     return {exe = "lua-format", args = {"-i"}, stdin = true}
 end
 
+local function rustformat()
+    return {exe = "rustfmt", args = {"--emit=stdout"}, stdin = true}
+end
+
 local function hindent() return {exe = "hindent", stdin = true} end
 
 function M.setup()
@@ -37,7 +41,8 @@ function M.setup()
             sass = {prettier},
             python = {black},
             elixir = {mix_format},
-            haskell = {hindent}
+            haskell = {hindent},
+            rust = {rustformat},
         }
     })
 end

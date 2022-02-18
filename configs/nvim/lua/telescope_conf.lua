@@ -24,12 +24,6 @@ local new_maker = function(filepath, bufnr, opts)
   previewers.buffer_previewer_maker(filepath, bufnr, opts)
 end
 
-require('telescope').setup {
-  defaults = {
-    buffer_previewer_maker = new_maker,
-  }
-}
-
 -- Global remapping
 ------------------------------
 require('telescope').setup{

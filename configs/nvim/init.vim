@@ -56,7 +56,12 @@ autocmd FileType dart setlocal ts=2 sts=2 sw=2
 autocmd FileChangedShellPost *
   \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
 
-
+autocmd BufEnter * :call SetFiletypeNewBuffer()
+function! SetFiletypeNewBuffer()
+  if @% == ""
+    :set filetype=none
+  endif
+endfunction
 
 " --------------------------------------------
 " ------------ Plug Configurations -----------
@@ -101,6 +106,7 @@ Plug 'https://github.com/vim-test/vim-test'
 Plug 'https://github.com/raimondi/delimitmate'
 Plug 'tommcdo/vim-exchange'
 Plug 'nvim-treesitter/playground'
+Plug 'meain/vim-printer'
 
 " IDE Like 
 Plug 'mfussenegger/nvim-dap'
@@ -115,6 +121,7 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'RRethy/vim-illuminate'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'elixir-editors/vim-elixir'
+Plug 'https://github.com/DingDean/wgsl.vim'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -260,9 +267,8 @@ autocmd FileType scss setl iskeyword+=@-@
 "autocmd VimEnter * Telescope find_files
 function! MaybeTelescope()
     if argc() == 1 && isdirectory(argv()[0])
-        " Uncomment this to remove the Netrw buffer (optional)
-        " execute "bdelete"
         execute "Telescope find_files"
+        execute "NvimTreeClose"
     endif
 endfunction
 
@@ -373,13 +379,16 @@ nnoremap <A-q> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
 
-NvimTreeClose
-
 " -------------- Nerd Commenter
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
+
+" -------------- Vim Test 
+let g:vim_printer_items = {
+      \ 'elixir': 'IO.inspect("{$}" label: "{$}:")',
+      \ }
 
 " -------------- Vim Test
 let g:cmux_elixir_tmux_session = 'elixir-test-session'
