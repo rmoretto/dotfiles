@@ -33,8 +33,8 @@ set title
 set mouse=a
 set foldlevelstart=20
 
-let g:loaded_netrw= 1 
-let g:netrw_loaded_netrwPlugin= 1
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
 
 autocmd FileType elixir setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
@@ -119,7 +119,7 @@ Plug 'mhartington/formatter.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'RRethy/vim-illuminate'
-Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-tree.lua'
 Plug 'elixir-editors/vim-elixir'
 Plug 'https://github.com/DingDean/wgsl.vim'
 
@@ -156,6 +156,15 @@ colorscheme sonokai
 " Override TS Colors
 highlight! link TSSymbol OrangeItalic
 highlight! link TSStringEscape Purple
+
+" I always hit the wrong key when using :w or :q
+cmap Q q
+cmap W w
+cmap ẅ w
+cmap WQ wq
+cmap wQ wq
+cmap Wq wq
+cmap ẅq wq
 
 " -------------- General Keymaps
 nnoremap <F12> :source ~/.config/nvim/init.vim<CR>
@@ -268,7 +277,6 @@ autocmd FileType scss setl iskeyword+=@-@
 function! MaybeTelescope()
     if argc() == 1 && isdirectory(argv()[0])
         execute "Telescope find_files"
-        execute "NvimTreeClose"
     endif
 endfunction
 
@@ -289,7 +297,7 @@ lua require("lsp")
 nnoremap <C-A-o> <cmd>lua vim.lsp.buf.code_action({only = {"source.organizeImports"}})<CR>
 
 " -------------- Focus Config
-lua require("focus").setup()
+" lua require("focus").setup()
 
 " -------------- LSP Saga Config
 nnoremap <silent>K :Lspsaga hover_doc<CR>
@@ -362,22 +370,22 @@ let g:palette = sonokai#get_palette(s:configuration.style)
 lua require('galaxyline_conf')
 
 " -------------- Ranger
-"let g:rnvimr_draw_border = 1
-"let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
-"let g:rnvimr_enable_picker = 1
-"let g:rnvimr_hide_gitignore = 0
-"let g:rnvimr_enable_bw = 1
+let g:rnvimr_draw_border = 1
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
+let g:rnvimr_enable_picker = 1
+let g:rnvimr_hide_gitignore = 0
+let g:rnvimr_enable_bw = 1
 
-"tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-"nnoremap <silent> <A-q> :RnvimrToggle<CR>
-"tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+nnoremap <silent> <A-q> :RnvimrToggle<CR>
+tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
 
 " -------------- Nvim tree
-lua require('nvim_tree_conf')
-
-nnoremap <A-q> :NvimTreeToggle<CR>
-nnoremap <leader>r :NvimTreeRefresh<CR>
-nnoremap <leader>n :NvimTreeFindFile<CR>
+" lua require('nvim_tree_conf')
+" 
+" nnoremap <A-q> :NvimTreeToggle<CR>
+" nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
 
 " -------------- Nerd Commenter
 let g:NERDSpaceDelims = 1
@@ -387,7 +395,7 @@ let g:NERDCommentEmptyLines = 1
 
 " -------------- Vim Test 
 let g:vim_printer_items = {
-      \ 'elixir': 'IO.inspect("{$}" label: "{$}:")',
+      \ 'elixir': 'IO.inspect({$}, label: "{$}")',
       \ }
 
 " -------------- Vim Test

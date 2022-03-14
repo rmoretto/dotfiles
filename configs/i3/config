@@ -88,8 +88,8 @@ bindsym $mod+minus scratchpad show
 
 
 ## Print Screen
-bindsym Print exec gnome-screenshot -i 
-bindsym $mod+Print exec gnome-screenshot -a
+bindsym Print exec flameshot gui
+bindsym $mod+Print exec flameshot gui
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

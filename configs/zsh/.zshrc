@@ -70,7 +70,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions asdf)
+plugins=(git fzf zsh-autosuggestions asdf colored-man-pages mix tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,18 +101,19 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 
+zstyle ':autocomplete:*' default-context history-incremental-search-backward
+
 (cat ~/.cache/wal/sequences &)
 eval "$(starship init zsh)"
 
 alias myip="curl -fSsL 'https://api.ipify.org?format=json' | jq \".ip\""
-alias add-ssh-horus='eval $(ssh-agent) && ssh-add $HOME/.ssh/id_rsa_casa'
 alias ssh='TERM=xterm-256color ssh'
-alias hossh='ssh -o ServerAliveInterval=60 -i $HOME/.ssh/horus-platform-kp.pem '
 alias cowalert='xcowsay --monitor 1 comando: " $(history | tail -n1 | grep -oP '\''(?<=  )[^;]++'\'' | head -n1) " acabou '
 alias restart-audio='pulseaudio -k && sudo alsa force-reload'
 alias toclip='xclip -selection clipboard'
 alias change-brightness='/home/rodrigo/.config/polybar/scripts/change-brightness.sh '
 alias camadb='droidcam-cli adb 4747'
+alias dotfiles='cd /home/rodrigo/programations/misc/dotfiles/ && nvim .'
 
 export EDITOR=nvim
 
