@@ -196,3 +196,9 @@ echo "\"\`-0-0-'\"\`-0-0-'\"\`-0-0-'\"\`-0-0-'\"\`-0-0-' ";
 # >>>> Vagrant command completion (start)
 . /opt/vagrant/embedded/gems/2.2.18/gems/vagrant-2.2.18/contrib/bash/completion.sh
 # <<<<  Vagrant command completion (end)
+
+complete -C /usr/bin/nomad nomad
+
+complete -C /usr/bin/vault vault
+
+complete -C /usr/bin/terraform terraform

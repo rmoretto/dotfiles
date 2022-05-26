@@ -8,7 +8,7 @@ local function prettier()
     }
 end
 
-local function black() return {exe = "black", args = {"-q", "-"}} end
+local function black() return {exe = "black", args = {"-q", "-"}, stdin = true} end
 
 local function mix_format()
     return {exe = "mix", args = {"format", "mix.exs", "-"}, stdin = true}
@@ -20,6 +20,10 @@ end
 
 local function rustformat()
     return {exe = "rustfmt", args = {"--emit=stdout"}, stdin = true}
+end
+
+local function terraform()
+    return {exe = "terraform", args = {"fmt", "-write=false"}, stdin = true}
 end
 
 local function hindent() return {exe = "hindent", stdin = true} end
@@ -43,6 +47,7 @@ function M.setup()
             elixir = {mix_format},
             haskell = {hindent},
             rust = {rustformat},
+            terraform = {terraform},
         }
     })
 end

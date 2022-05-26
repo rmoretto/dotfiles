@@ -201,7 +201,7 @@ require'lspconfig'.rust_analyzer.setup{
 }
 
 -- Python
-require'lspconfig'.pylsp.setup{}
+require'lspconfig'.pyright.setup {}
 
 -- GDScript
 require'lspconfig'.gdscript.setup{}
@@ -215,4 +215,7 @@ require'lspconfig'.dartls.setup{
 require'lspconfig'.clangd.setup{
     cmd = { "clangd-12" }
 }
+
+-- Terraform
+require'lspconfig'.terraformls.setup{}
 

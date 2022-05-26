@@ -47,7 +47,7 @@ CASE_SENSITIVE="true"
 # Uncomment the following line to display red dots whilst waiting for completion.
 # Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
 # See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -70,7 +70,7 @@ CASE_SENSITIVE="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf zsh-autosuggestions asdf colored-man-pages mix tmuxinator)
+plugins=(git fzf zsh-autosuggestions asdf colored-man-pages mix tmuxinator docker-compose)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -113,7 +113,14 @@ alias restart-audio='pulseaudio -k && sudo alsa force-reload'
 alias toclip='xclip -selection clipboard'
 alias change-brightness='/home/rodrigo/.config/polybar/scripts/change-brightness.sh '
 alias camadb='droidcam-cli adb 4747'
+
 alias dotfiles='cd /home/rodrigo/programations/misc/dotfiles/ && nvim .'
+alias granter='cd /home/rodrigo/programations/granter/'
+alias conecta='txs inova-defesa'
+alias flowtify='cd /home/rodrigo/programations/granter/flowtify/'
+
+alias ls="exa"
+alias ll="exa -la"
 
 export EDITOR=nvim
 
@@ -165,3 +172,10 @@ compinit
 # <<<<  Vagrant command completion (end)
 
 export PATH="$HOME/.poetry/bin:$PATH"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/bin/nomad nomad
+
+complete -o nospace -C /usr/bin/vault vault
+
+complete -o nospace -C /usr/bin/terraform terraform

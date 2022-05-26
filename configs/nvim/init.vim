@@ -33,8 +33,15 @@ set title
 set mouse=a
 set foldlevelstart=20
 
+" Vim wiki requirements
+set nocompatible
+filetype plugin on
+syntax on
+
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
+
+autocmd BufEnter *.nomad set filetype=hcl
 
 autocmd FileType elixir setlocal ts=2 sts=2 sw=2
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2
@@ -44,6 +51,8 @@ autocmd FileType html setlocal ts=2 sts=2 sw=2
 autocmd FileType css setlocal ts=2 sts=2 sw=2
 autocmd FileType scss setlocal ts=2 sts=2 sw=2
 autocmd FileType dart setlocal ts=2 sts=2 sw=2
+autocmd FileType hcl setlocal ts=2 sts=2 sw=2
+autocmd FileType terraform setlocal ts=2 sts=2 sw=2
 
 " Triger `autoread` when files changes on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
@@ -107,6 +116,7 @@ Plug 'https://github.com/raimondi/delimitmate'
 Plug 'tommcdo/vim-exchange'
 Plug 'nvim-treesitter/playground'
 Plug 'meain/vim-printer'
+Plug 'https://github.com/vimwiki/vimwiki'
 
 " IDE Like 
 Plug 'mfussenegger/nvim-dap'
@@ -122,6 +132,7 @@ Plug 'RRethy/vim-illuminate'
 " Plug 'kyazdani42/nvim-tree.lua'
 Plug 'elixir-editors/vim-elixir'
 Plug 'https://github.com/DingDean/wgsl.vim'
+Plug 'jansedivy/jai.vim'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -172,12 +183,12 @@ nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
 
 " Move lines
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <C-A-j> :m .+1<CR>==
+nnoremap <C-A-k> :m .-2<CR>==
+inoremap <C-A-j> <Esc>:m .+1<CR>==gi
+inoremap <C-A-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-A-j> :m '>+1<CR>gv=gv
+vnoremap <C-A-k> :m '<-2<CR>gv=gv
 
 " Maintain visual mode after ident
 vnoremap < <gv
@@ -303,8 +314,8 @@ nnoremap <C-A-o> <cmd>lua vim.lsp.buf.code_action({only = {"source.organizeImpor
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 
 " Use tab for scroll only when the Lspsaga hover is visible
-nnoremap <silent><expr> <Tab> luaeval("require('lspsaga.hover').has_saga_hover()") ? "\<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)\<CR>" : "\<Tab>"
-nnoremap <silent><expr> <S-Tab> luaeval("require('lspsaga.hover').has_saga_hover()") ? "\<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)\<CR>" : "\<S-Tab>"
+" nnoremap <silent> <Tab> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<Tab>')<CR>
+" nnoremap <silent> <S-Tab> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<S-Tab>')<CR>
 
 nnoremap <silent> gs :Lspsaga signature_help<CR>
 
@@ -399,7 +410,7 @@ let g:vim_printer_items = {
       \ }
 
 " -------------- Vim Test
-let g:cmux_elixir_tmux_session = 'elixir-test-session'
+let g:tmux_test_session = 'test-session'
 
 function! DispatchEnv(cmd) abort
     let env_file = getcwd() . "/.env"
@@ -412,9 +423,12 @@ endfunction
 
 function! CMux(cmd) abort
     " Scroll down if the panel is in scroll mode
-    call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 ENTER')
-    " Print and send the test command
-    call system('tmux send-keys -t ' . g:cmux_elixir_tmux_session . ':1.1 "clear; echo ' . a:cmd . '; ' . a:cmd . '" ENTER')
+    call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 ENTER')
+
+    let root_dir = finddir('.git/..', expand('%:p:h').';')
+    call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 "cd ' . root_dir . '" ENTER')
+
+    call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 "clear; echo ' . a:cmd . '; ' . a:cmd . '" ENTER')
 endfunction
 
 let g:test#custom_strategies = {"cmux": function("CMux")}

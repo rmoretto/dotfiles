@@ -11,7 +11,7 @@
 
     ~/.zshrc:
       glob: false
-      path: configs/zsh/.zshrc
+      path: configs/zsh/zshrc
 
     ~/.tmux.conf:
       glob: false
