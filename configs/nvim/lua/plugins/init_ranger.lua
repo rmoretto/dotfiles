@@ -1,7 +1,7 @@
 local keymap = vim.keymap
 
 vim.g.rnvimr_draw_border = 1
-vim.g.rnvimr_ranger_cmd = {'ranger', '--cmd="set draw_borders both"'}
+vim.g.rnvimr_ranger_cmd = { "ranger", '--cmd="set draw_borders both"' }
 vim.g.rnvimr_enable_picker = 1
 vim.g.rnvimr_hide_gitignore = 0
 vim.g.rnvimr_enable_bw = 1

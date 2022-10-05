@@ -1,4 +1,4 @@
-local keymap = vim.keymap 
+local keymap = vim.keymap
 
 vim.cmd([[
     let g:tmux_test_session = 'test-session'

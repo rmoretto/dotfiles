@@ -44,7 +44,7 @@ vim.g.mapleader = "\\"
 vim.o.encoding = "UTF-8"
 vim.o.pastetoggle = "<F3>"
 
-vim.o.tabstop = 4 
+vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
 vim.o.updatetime = 50
@@ -55,7 +55,7 @@ vim.o.hidden = true
 vim.o.relativenumber = true
 vim.o.errorbells = false
 vim.o.expandtab = true
-vim.o.smartindent =  true
+vim.o.smartindent = true
 vim.o.nu = true
 vim.o.wrap = false
 vim.o.smartcase = true
@@ -76,5 +76,3 @@ vim.o.mouse = "a"
 
 -- Setup color scheme
 vim.cmd("colorscheme kanagawa")
-
-

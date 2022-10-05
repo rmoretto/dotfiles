@@ -1,54 +1,37 @@
-local keymap = vim.keymap
-
-local function prettier()
-    return {
-        exe = "prettier",
-        args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0)},
-        stdin = true
-    }
-end
-
-local function black() return {exe = "black", args = {"-q", "-"}, stdin = true} end
-
 local function mix_format()
-    return {exe = "mix", args = {"format", "mix.exs", "-"}, stdin = true}
-end
-
-local function luaformat()
-    return {exe = "lua-format", args = {"-i"}, stdin = true}
-end
-
-local function rustformat()
-    return {exe = "rustfmt", args = {"--emit=stdout"}, stdin = true}
+	return { exe = "mix", args = { "format", "mix.exs", "-" }, stdin = true }
 end
 
 local function terraform()
-    return {exe = "terraform", args = {"fmt", "-write=false"}, stdin = true}
+	return { exe = "terraform", args = { "fmt", "-write=false" }, stdin = true }
 end
 
-local function hindent() return {exe = "hindent", stdin = true} end
+local stylua = require("formatter.filetypes.lua").stylua
+local prettier = require("formatter.filetypes.javascript").prettier
+local black = require("formatter.filetypes.python").black
+local rustfmt = require("formatter.filetypes.rust").rustfmt
 
 require("formatter").setup({
-    logging = true,
-    filetype = {
-        lua = {luaformat},
-        javascript = {prettier},
-        javascriptreact = {prettier},
-        typescript = {prettier},
-        typescriptreact = {prettier},
-        vue = {prettier},
-        html = {prettier},
-        json = {prettier},
-        css = {prettier},
-        scss = {prettier},
-        sass = {prettier},
-        python = {black},
-        elixir = {mix_format},
-        haskell = {hindent},
-        rust = {rustformat},
-        terraform = {terraform},
-    }
+	logging = true,
+	filetype = {
+		elixir = { mix_format },
+		lua = { stylua },
+		javascript = { prettier },
+		javascriptreact = { prettier },
+		typescript = { prettier },
+		typescriptreact = { prettier },
+		vue = { prettier },
+		html = { prettier },
+		json = { prettier },
+		css = { prettier },
+		scss = { prettier },
+		sass = { prettier },
+		python = { black },
+		rust = { rustfmt },
+		terraform = { terraform },
+	},
 })
 
+local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 keymap.set("n", "<leader>f", ":Format<CR> :w<CR>", opts)
