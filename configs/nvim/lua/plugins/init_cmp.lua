@@ -30,8 +30,8 @@ cmp.setup({
                                 {'i', 'c'}),
 
         -- BIG nice
-        ['<Tab>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
-        ['<S-Tab>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+        --['<Tab>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+        --['<S-Tab>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
 
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),

@@ -1,4 +1,4 @@
-local M = {}
+local keymap = vim.keymap
 
 local function prettier()
     return {
@@ -28,28 +28,27 @@ end
 
 local function hindent() return {exe = "hindent", stdin = true} end
 
-function M.setup()
-    require("formatter").setup({
-        logging = true,
-        filetype = {
-            lua = {luaformat},
-            javascript = {prettier},
-            javascriptreact = {prettier},
-            typescript = {prettier},
-            typescriptreact = {prettier},
-            vue = {prettier},
-            html = {prettier},
-            json = {prettier},
-            css = {prettier},
-            scss = {prettier},
-            sass = {prettier},
-            python = {black},
-            elixir = {mix_format},
-            haskell = {hindent},
-            rust = {rustformat},
-            terraform = {terraform},
-        }
-    })
-end
+require("formatter").setup({
+    logging = true,
+    filetype = {
+        lua = {luaformat},
+        javascript = {prettier},
+        javascriptreact = {prettier},
+        typescript = {prettier},
+        typescriptreact = {prettier},
+        vue = {prettier},
+        html = {prettier},
+        json = {prettier},
+        css = {prettier},
+        scss = {prettier},
+        sass = {prettier},
+        python = {black},
+        elixir = {mix_format},
+        haskell = {hindent},
+        rust = {rustformat},
+        terraform = {terraform},
+    }
+})
 
-return M
+local opts = { noremap = true, silent = true }
+keymap.set("n", "<leader>f", ":Format<CR> :w<CR>", opts)

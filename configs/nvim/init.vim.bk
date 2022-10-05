@@ -1,6 +1,8 @@
+" --------------------------------------------
+" ----------- Native Configurations ----------
+" --------------------------------------------
 syntax on
 
-" Remapping leader key
 let mapleader = "\\"
 
 set encoding=UTF-8
@@ -29,142 +31,231 @@ set cmdheight=2
 set updatetime=50
 set title
 set mouse=a
+set foldlevelstart=20
 
-" Vim Plug
+let g:loaded_netrw       = 1
+let g:loaded_netrwPlugin = 1
+
+autocmd BufEnter *.nomad set filetype=hcl
+
+autocmd FileType elixir setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+autocmd FileType typescript setlocal ts=2 sts=2 sw=2
+autocmd FileType vue setlocal ts=2 sts=2 sw=2
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType css setlocal ts=2 sts=2 sw=2
+autocmd FileType scss setlocal ts=2 sts=2 sw=2
+autocmd FileType dart setlocal ts=2 sts=2 sw=2
+autocmd FileType hcl setlocal ts=2 sts=2 sw=2
+autocmd FileType terraform setlocal ts=2 sts=2 sw=2
+
+" Triger `autoread` when files changes on disk
+" https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
+" https://vi.stackexchange.com/questions/13692/prevent-focusgained-autocmd-running-in-command-line-editing-mode
+    autocmd FocusGained,BufEnter,CursorHold,CursorHoldI *
+            \ if mode() !~ '\v(c|r.?|!|t)' && getcmdwintype() == '' | checktime | endif
+
+" Notification after file change
+" https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
+autocmd FileChangedShellPost *
+  \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+
+autocmd BufEnter * :call SetFiletypeNewBuffer()
+function! SetFiletypeNewBuffer()
+  if @% == ""
+    :set filetype=none
+  endif
+endfunction
+
+" --------------------------------------------
+" ------------ Plug Configurations -----------
+" --------------------------------------------
 call plug#begin('~/.vim/plugged')
 
 " Colorshemes
-Plug 'https://github.com/sainnhe/sonokai'
+" Plug 'https://github.com/sainnhe/sonokai'
+Plug 'rebelot/kanagawa.nvim'
 
-" Utils
-Plug 'https://github.com/junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'https://github.com/junegunn/fzf.vim'
-"Plug 'https://github.com/vim-airline/vim-airline'
-"Plug 'https://github.com/vim-airline/vim-airline-themes'
-Plug 'https://github.com/kevinhwang91/rnvimr'
-Plug 'https://github.com/ryanoasis/vim-devicons'
+" Icons because yes
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'https://github.com/airblade/vim-gitgutter'
-Plug 'https://github.com/mhinz/vim-startify'
-Plug 'https://github.com/simeji/winresizer'
-Plug 'https://github.com/tpope/vim-dispatch'
-Plug 'edkolev/tmuxline.vim'
-Plug 'mg979/vim-visual-multi', {'branch': 'master'}
-Plug 'psliwka/vim-smoothie'
-Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'https://github.com/ryanoasis/vim-devicons'
 
-" Code utils
-Plug 'https://github.com/tpope/vim-surround'
-Plug 'https://github.com/preservim/nerdcommenter'
-Plug 'https://github.com/easymotion/vim-easymotion'
+" Vim Telescope
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim'
+
+" Vim Ranger
+Plug 'https://github.com/kevinhwang91/rnvimr'
+
+" Git Stuffs 
+Plug 'https://github.com/airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 
-" Code Config
-Plug 'https://github.com/neoclide/coc.nvim', {'branch': 'release'}
+" The one and only tpoe
+Plug 'https://github.com/tpope/vim-dispatch'
+
+" Windows Helpers
+" Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'https://github.com/mhinz/vim-startify'
+Plug 'https://github.com/simeji/winresizer'
+
+" Misc
+Plug 'psliwka/vim-smoothie'
+Plug 'https://github.com/tpope/vim-surround'
+Plug 'https://github.com/preservim/nerdcommenter'
+Plug 'tpope/vim-repeat'
+Plug 'ggandor/lightspeed.nvim'
 Plug 'https://github.com/vim-test/vim-test'
 Plug 'https://github.com/raimondi/delimitmate'
-Plug 'https://github.com/OmniSharp/omnisharp-vim'
-Plug 'sheerun/vim-polyglot'
+Plug 'tommcdo/vim-exchange'
+Plug 'nvim-treesitter/playground'
+Plug 'meain/vim-printer'
+Plug 'gbprod/yanky.nvim'
+
+" IDE Like 
+Plug 'mfussenegger/nvim-dap'
+Plug 'neovim/nvim-lspconfig'
+Plug 'tami5/lspsaga.nvim'
+Plug 'RishabhRD/popfix'
+Plug 'RishabhRD/nvim-lsputils'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'mhartington/formatter.nvim'
+Plug 'folke/trouble.nvim'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
+Plug 'RRethy/vim-illuminate'
+" Plug 'kyazdani42/nvim-tree.lua'
+Plug 'elixir-editors/vim-elixir'
+Plug 'https://github.com/DingDean/wgsl.vim'
+Plug 'jansedivy/jai.vim'
+
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-emoji'
+
+" Plug 'hrsh7th/nvim-compe'
+" Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 call plug#end()
 
+" --------------------------------------------
+" ------------ Base Configurations -----------
+" --------------------------------------------
 " ------- Themes
 if has('termguicolors')
     set termguicolors
 endif
 
 " The configuration options should be placed before `colorscheme sonokai`.
-let g:sonokai_style = 'andromeda'
-let g:sonokai_enable_italic = 1
-let g:sonokai_disable_italic_comment = 1
+" let g:sonokai_style = 'andromeda'
+" let g:sonokai_enable_italic = 1
+" let g:sonokai_disable_italic_comment = 1
+" 
+" colorscheme sonokai
+colorscheme kanagawa
 
-colorscheme sonokai
+" Override TS Colors
+highlight! link TSSymbol OrangeItalic
+highlight! link TSStringEscape Purple
+highlight! link TSSymbol TSConstant
 
-" ------- LIansh galatxita
-let s:configuration = sonokai#get_configuration()
-let g:palette = sonokai#get_palette(s:configuration.style)
 
-lua require('linha_galatica')
-
-" ------- FFZFZF
-let $FZF_DEFAULT_COMMAND = 'rg -i --files --hidden -g "!{node_modules,.git}"'
-
-" ------- rangresr
-" Boridnha SHOW
-let g:rnvimr_draw_border = 1
-let g:rnvimr_ranger_cmd = 'ranger --cmd="set draw_borders both"'
-let g:rnvimr_enable_ex = 1
-let g:rnvimr_enable_picker = 1
-
-tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
-nnoremap <silent> <A-q> :RnvimrToggle<CR>
-tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
-
-" ------ WIN Reserziers
-"noremap <C-e> :WinResizerStartFocus<CR>
-
-" ----- KeyMAPERS
+" -------------- General Keymaps
 nnoremap <F12> :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>y "+y
 vnoremap <Leader>y "+y
-nnoremap <silent> <C-p> :Files<CR>
-nnoremap <silent> <C-f> :Rg<CR>
 
-" vai emorvra wtermina lidiota 
-function! BnSkipTerm()
-  let start_buffer = bufnr('%')
-  bn
-  while &buftype ==# 'terminal' && bufnr('%') != start_buffer
-    bn
-  endwhile
-endfunction
-function! BpSkipTerm()
-  let start_buffer = bufnr('%')
-  bp
-  while &buftype ==# 'terminal' && bufnr('%') != start_buffer
-    bp
-  endwhile
-endfunction
-nnoremap <silent> <S-A-l> :call BnSkipTerm()<CR>
-nnoremap <silent> <S-A-h> :call BpSkipTerm()<CR>
+" Move lines
+nnoremap <C-A-j> :m .+1<CR>==
+nnoremap <C-A-k> :m .-2<CR>==
+inoremap <C-A-j> <Esc>:m .+1<CR>==gi
+inoremap <C-A-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-A-j> :m '>+1<CR>gv=gv
+vnoremap <C-A-k> :m '<-2<CR>gv=gv
 
-nnoremap <silent> <A-w> :call BpSkipTerm()\|bdelete #<CR>
-
-" move libe BABYYYY
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+" Maintain visual mode after ident
+vnoremap < <gv
+vnoremap > >gv
 
 nnoremap <Leader><CR> :noh<cr>
 nnoremap <Leader><CR> :let @/ = ""<cr>
 
-" ----- Vim Test
-function! DispatchEnv(cmd) abort
-    let env_file = getcwd() . "/.env"
-    if filereadable(env_file)
-        return "eval $(egrep -v '^\\#' " . env_file . " | xargs) " . a:cmd
-    else
-        return a:cmd
-    endif
+" Copy 'til the end of line
+nnoremap Y yg_
+
+" Better search jump
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Maintain the cursor on BIG J
+nnoremap J mzJ`z
+
+" Undo break points BIG COCONUT OIL
+inoremap " "<c-g>u
+inoremap ' '<c-g>u
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap : :<c-g>u
+inoremap ; ;<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+inoremap ( (<c-g>u
+inoremap ) )<c-g>u
+inoremap [ [<c-g>u
+inoremap ] ]<c-g>u
+inoremap { {<c-g>u
+inoremap } }<c-g>u
+inoremap - -<c-g>u
+
+" Quick fix Key maps
+nnoremap <silent> <leader>x :ccl <CR>
+nnoremap <silent> <leader>z :cexpr system('git grep --line-number -e PERFORMANCE -e FIXME -e TODO') <CR> :botright copen <CR>
+
+" Search and replace selected text
+" Reference: https://stackoverflow.com/a/676619/10106533
+vnoremap <C-r> "hy:%s/<C-r>h//gc<left><left><left>
+
+" New map to start and of line
+"nnoremap <silent> <C-i> :normal ^<CR>
+"nnoremap <silent> <C-a> :normal $<CR>
+"
+" Search for selected text, forwards or backwards.
+" Ref: https://vim.fandom.com/wiki/Search_for_visually_selected_text
+vnoremap <silent> * :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+vnoremap <silent> # :<C-U>
+  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+
+" -------------- Yank highlight
+function HighlightYank()
+    execute 'IlluminationDisable'
+    lua vim.highlight.on_yank{higroup="DiffAdd", timeout=300} 
+
+    timer_start(300, 'IlluminationEnable', {'repeat': 1})
 endfunction
 
-let g:test#custom_transformations = {"dispatch": function("DispatchEnv")}
-let g:test#transformation = 'dispatch'
+" let g:Illuminate_highlightPriority = 100
 
-let test#strategy = "dispatch"
-nmap <silent> t<C-n> :TestNearest<CR>
-nmap <silent> t<C-f> :TestFile<CR>
-nmap <silent> t<C-s> :TestSuite<CR>
-nmap <silent> t<C-l> :TestLast<CR>
-nmap <silent> t<C-g> :TestVisit<CR>
+augroup highlight_yank
+    autocmd!
+    au TextYankPost * silent! call HighlightYank()
+    " au TextYankPost * silent! :IlluminateDisable<CR> lua vim.highlight.on_yank{higroup="DiffAdd", timeout=300} IlluminateEnable<CR>
+augroup END
 
-" ----- Uniters OMIUNS
-let g:OmniSharp_server_use_mono = 1
-
-" --- -ENVS
+" -------------- Load Environment variables to Vim runtime
 function! s:env(var) abort
   return exists('*DotenvGet') ? DotenvGet(a:var) : eval('$'.a:var)
 endfunction
@@ -176,162 +267,191 @@ function! Env()
     return split(s)
 endfunction
 
-" ----- CVSS CSCOCO
 autocmd FileType scss setl iskeyword+=@-@
 
+" --------------------------------------------
+" ---------- Plugins Configurations ----------
+" --------------------------------------------
 
-" ------ Vuezers
+" -------------- Telescop Config
+"autocmd VimEnter * Telescope find_files
+function! MaybeTelescope()
+    if argc() == 1 && isdirectory(argv()[0])
+        execute "Telescope find_files"
+    endif
+endfunction
+
+autocmd VimEnter * :call MaybeTelescope()
+
+lua require("telescope_conf")
+
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fp <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+" -------------- LSP Config
+nnoremap <silent>gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent>gr <cmd>lua vim.lsp.buf.references()<CR>
+lua require("lsp")
+
+nnoremap <C-A-o> <cmd>lua vim.lsp.buf.code_action({only = {"source.organizeImports"}})<CR>
+
+" -------------- Yanky Config
+lua require("yanky").setup()
+
+" nnoremap p  <Plug>YankyPutAfter
+" nnoremap P  <Plug>YankyPutBefore
+" nnoremap gp <Plug>YankyGPutAfter
+" nnoremap gP <Plug>YankyGPutBefore
+
+" vim.keymap.set({"n","x"}, "p", "<Plug>(YankyPutAfter)")
+" vim.keymap.set({"n","x"}, "P", "<Plug>(YankyPutBefore)")
+" vim.keymap.set({"n","x"}, "gp", "<Plug>(YankyGPutAfter)")
+" vim.keymap.set({"n","x"}, "gP", "<Plug>(YankyGPutBefore)")
+
+
+" -------------- LSP Saga Config
+nnoremap <silent>K :Lspsaga hover_doc<CR>
+
+" Use tab for scroll only when the Lspsaga hover is visible
+" nnoremap <silent> <Tab> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1, '<Tab>')<CR>
+" nnoremap <silent> <S-Tab> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1, '<S-Tab>')<CR>
+
+nnoremap <silent> gs :Lspsaga signature_help<CR>
+
+nnoremap <silent><leader>rn :Lspsaga rename<CR>
+nnoremap <silent>gD :Lspsaga preview_definition<CR>
+
+nnoremap <silent> [e :Lspsaga diagnostic_jump_next<CR>
+nnoremap <silent> ]e :Lspsaga diagnostic_jump_prev<CR>
+
+" nnoremap <silent><leader>ed <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+nnoremap <silent><leader>e <cmd>lua require'lspsaga.diagnostic'.show_line_diagnostics()<CR>
+
+nnoremap <silent> gh :Lspsaga lsp_finder<CR>
+nnoremap <silent><leader>a :Lspsaga code_action<CR>
+vnoremap <silent><leader>a :<C-U>Lspsaga range_code_action<CR>
+
+nnoremap <silent> <A-d> :Lspsaga open_floaterm<CR>
+tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
+
+
+" -------------- NVim cmp
+set completeopt=menu,menuone,noselect
+
+lua require("cmp_conf")
+
+"inoremap <silent><expr> <Tab>   compe#scroll({ 'delta': +4 })
+"inoremap <silent><expr> <S-Tab> compe#scroll({ 'delta': -4 })
+
+" -------------- Lightspeed
+" let g:coq_settings = { 'auto_start': v:true }
+nmap <leader>s <Plug>Lightspeed_s
+nmap <leader>S <Plug>Lightspeed_S
+vmap <leader>s <Plug>Lightspeed_s
+vmap <leader>S <Plug>Lightspeed_S
+
+lua require('lightspeed').setup{}
+
+silent! unmap s
+silent! unmap S
+
+" -------------- DAP
+lua require("dap_conf")
+
+" -------------- Treesitter
+lua require("treesitter")
+
+" -------------- Formatter
+lua require("formatter_conf").setup()
+
+nnoremap <silent> <leader>f :Format<CR> :w<CR>
+
+" -------------- Trouble
+lua require("trouble").setup {}
+
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+
+" -------------- Galaxy Line
+" let g:palette = kanagawa#get_palette()
+" 
+" lua require('galaxyline_conf')
+lua require('lualine_conf')
+
+" -------------- Ranger
+let g:rnvimr_draw_border = 1
+let g:rnvimr_ranger_cmd = ['ranger', '--cmd="set draw_borders both"']
+let g:rnvimr_enable_picker = 1
+let g:rnvimr_hide_gitignore = 0
+let g:rnvimr_enable_bw = 1
+
+tnoremap <silent> <M-i> <C-\><C-n>:RnvimrResize<CR>
+nnoremap <silent> <A-q> :RnvimrToggle<CR>
+tnoremap <silent> <A-q> <C-\><C-n>:RnvimrToggle<CR>
+
+" -------------- Nvim tree
+" lua require('nvim_tree_conf')
+" 
+" nnoremap <A-q> :NvimTreeToggle<CR>
+" nnoremap <leader>r :NvimTreeRefresh<CR>
+" nnoremap <leader>n :NvimTreeFindFile<CR>
+
+" -------------- Nerd Commenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDCommentEmptyLines = 1
+
+" -------------- Vim Test 
+let g:vim_printer_items = {
+      \ 'elixir': 'IO.inspect({$}, label: "{$}")',
+      \ }
+
+" -------------- Vim Test
+let g:tmux_test_session = 'test-session'
+
+function! DispatchEnv(cmd) abort
+    let env_file = getcwd() . "/.env"
+    if filereadable(env_file)
+        return "eval $(egrep -v '^\\#' " . env_file . " | xargs) " . a:cmd
+    else
+        return a:cmd
+    endif
+endfunction
+
+function! CMux(cmd) abort
+    " Scroll down if the panel is in scroll mode
+    call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 ENTER')
+
+    let root_dir = finddir('.git/..', expand('%:p:h').';')
+    call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 "cd ' . root_dir . '" ENTER')
+
+    call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 "clear; echo ' . a:cmd . '; ' . a:cmd . '" ENTER')
+endfunction
+
+let g:test#custom_strategies = {"cmux": function("CMux")}
+
+" let g:test#custom_transformations = {"dispatch": function("DispatchEnv")}
+" let g:test#transformation = 'dispatch'
+
+let test#strategy = "cmux"
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+" -------------- Vue
 " Only enable this pre processor as is teh oienf ely one ai Uuse
 let g:vue_pre_processors = ['html', 'scss', "typescript", "css"]
 
-" ------ find TODOS ETRC
-nnoremap <silent> <leader>x :ccl <CR>
-nnoremap <silent> <leader>z :cexpr system('git grep --line-number -e PERFORMANCE -e FIXME -e TODO') <CR> :botright copen <CR>
-
-" ----- COCO BIMV
-" Always show the signcolumn, otherwise it would shift the text each time
-" diagnostics appear/become resolved.
-if has("patch-8.1.1564")
-  " Recently vim can merge signcolumn and number column into one
-  set signcolumn=number
-else
-  set signcolumn=yes
-endif
-
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  elseif (coc#rpc#ready())
-    call CocActionAsync('doHover')
-  else
-    execute '!' . &keywordprg . " " . expand('<cword>')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-" Formatting selected code.
-"xmap <leader>f  :Format<CR>
-"nmap <leader>f  :Format<CR>
-
-xmap <leader>f :Format<CR> :update<CR>
-nmap <leader>f :Format<CR> :update<CR>
-nmap <C-A-o> :call CocAction('runCommand', 'editor.action.organizeImport')<CR> :update<CR>
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <TAB> coc#float#has_scroll() ? coc#float#scroll(1) : "\<TAB>"
-  nnoremap <silent><nowait><expr> <S-TAB> coc#float#has_scroll() ? coc#float#scroll(0) : "\<S-TAB>"
-endif
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocAction('format')
-
-" Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-
-" ------ STARTIF
+" -------------- Startify
 " 'Most Recent Files' number
 let g:startify_files_number           = 18
 

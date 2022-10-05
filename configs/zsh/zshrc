@@ -122,6 +122,8 @@ alias flowtify='cd /home/rodrigo/programations/granter/flowtify/'
 alias ls="exa"
 alias ll="exa -la"
 
+alias ip="ip -c"
+
 export EDITOR=nvim
 
 export PATH=$PATH:/usr/local/go/bin
@@ -142,6 +144,10 @@ export PATH=$PATH:$HOME/.poetry/bin
 
 eval $(ssh-agent) > /dev/null 2>&1 
 ssh-add $HOME/.ssh/id_rsa_casa > /dev/null 2>&1 
+
+cheat.sh() {
+    curl cheat.sh/$1
+}
 
 get-ssh-hostname() {
     ssh -G $1 | grep hostname | head -n1 | awk {'print $2'}

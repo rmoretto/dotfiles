@@ -1,7 +1,7 @@
+local keymap = vim.keymap
 local actions = require('telescope.actions')
 local builtin = require('telescope.builtin')
 local previewers = require('telescope.previewers')
-
 
 -- Disable elixir highligh
 ------------------------------
@@ -51,3 +51,19 @@ require('telescope').setup{
     },
   }
 }
+
+vim.cmd([[ 
+function! MaybeTelescope()
+    if argc() == 1 && isdirectory(argv()[0])
+        execute "Telescope find_files"
+    endif
+endfunction
+
+autocmd VimEnter * :call MaybeTelescope()
+]])
+
+local opts = { noremap = true, silent = true }
+keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", opts)
+keymap.set("n", "<leader>fp", "<cmd>Telescope live_grep<cr>", opts)
+keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>", opts)
+keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", opts)

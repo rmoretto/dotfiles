@@ -1,3 +1,4 @@
+local keymap = vim.keymap
 local lspconfig = require 'lspconfig'
 local util = require 'lspconfig/util'
 local configs = require 'lspconfig.configs'
@@ -218,4 +219,21 @@ require'lspconfig'.clangd.setup{
 
 -- Terraform
 require'lspconfig'.terraformls.setup{}
+
+
+local opts = { noremap = true, silent = true }
+
+vim.o.omnifunc = "v:lua.vim.lsp.omnifunc"
+keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+keymap.set("n", "gr", vim.lsp.buf.references, opts)
+keymap.set("n", "K", vim.lsp.buf.hover, opts)
+keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
+keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
+keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+
 
