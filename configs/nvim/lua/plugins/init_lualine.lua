@@ -156,14 +156,14 @@ ins_left {
   cond = conditions.buffer_not_empty,
 }
 
-ins_left {
-  'filename',
-  cond = conditions.buffer_not_empty,
-  file_status = false,
-  path = 1,
-  shorting_target = 100,
-  color = { fg = colors.magenta, gui = 'bold' },
-}
+-- ins_left {
+--   'filename',
+--   cond = conditions.buffer_not_empty,
+--   file_status = false,
+--   path = 1,
+--   shorting_target = 100,
+--   color = { fg = colors.magenta, gui = 'bold' },
+-- }
 
 local function modified()
   if vim.bo.modified then

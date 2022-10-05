@@ -47,9 +47,9 @@ vim.o.pastetoggle = "<F3>"
 vim.o.tabstop = 4 
 vim.o.softtabstop = 4
 vim.o.shiftwidth = 4
-vim.o.cmdheight = 2
 vim.o.updatetime = 50
 vim.o.foldlevelstart = 20
+vim.o.cmdheight = 0
 
 vim.o.hidden = true
 vim.o.relativenumber = true

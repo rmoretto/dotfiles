@@ -6,7 +6,7 @@ require("install")
 require("config")
 require("keymaps")
 
--- Load plugins
+-- Load and require all plugins
 local HOME = fn.expand("$HOME")
 local plugins_dir = HOME .. "/.config/nvim/lua/plugins"
 
