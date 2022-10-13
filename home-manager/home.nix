@@ -83,6 +83,13 @@
     };
   };
 
+  # programs.fish = {
+  #   enable = true;
+  #   shellInit = ''
+  #   export EDITOR=nvim
+  #   '';
+  # };
+
   programs.tmux = {
     enable = true;
     baseIndex = 1;
@@ -132,6 +139,10 @@
   systemd.user.startServices = "sd-switch";
 
   home.sessionVariables = {
+    EDITOR = "nvim";
+  };
+
+  systemd.user.sessionVariables = {
     EDITOR = "nvim";
   };
 
