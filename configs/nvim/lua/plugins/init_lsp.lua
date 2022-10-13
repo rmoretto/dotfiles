@@ -61,12 +61,22 @@ setup_lsp_config("pyright")
 setup_lsp_config("rust_analyzer")
 setup_lsp_config("sqls")
 setup_lsp_config("sumneko_lua", {
-	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+	settings = { 
+        Lua = { 
+            diagnostics = { 
+                globals = { 
+                    "vim",
+                    "awesome"
+                } 
+            } 
+        } 
+    },
 })
 setup_lsp_config("tailwindcss")
 setup_lsp_config("terraformls")
 setup_lsp_config("tsserver", { flags = { debounce_text_changes = 50 } })
 setup_lsp_config("volar")
+setup_lsp_config("rnix")
 
 -- Override global border configration for the lsp floating window
 local global_border = "rounded"

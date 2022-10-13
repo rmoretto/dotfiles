@@ -37,6 +37,8 @@ window:
     x: 5
     y: 5
 
+  opacity: 1.0
+
   # Spread additional padding evenly around the terminal content.
   #dynamic_padding: false
 
@@ -278,7 +280,6 @@ font:
 #
 # Window opacity as a floating point number from `0.0` to `1.0`.
 # The value `0.0` is completely transparent and `1.0` is opaque.
-background_opacity: 1.0
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -314,8 +315,8 @@ cursor:
 #   - (macOS) /bin/bash --login
 #   - (Linux/BSD) user login shell
 #   - (Windows) powershell
-shell:
-  program: /usr/bin/zsh
+# shell:
+#   program: /usr/bin/fish
 #  args:
 #    - --login
 
