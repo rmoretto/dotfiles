@@ -42,12 +42,25 @@
         pkgs = legacyPackages.x86_64-linux;
         specialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main nixos configuration file <
-        modules = [ ./nixos/configuration.nix ];
+        modules = [ ./nixos/desktop/configuration.nix ];
+      };
+      rodrigo-laptop = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        pkgs = legacyPackages.x86_64-linux;
+        specialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        # > Our main nixos configuration file <
+        modules = [ ./nixos/laptop/configuration.nix ];
       };
     };
 
     homeConfigurations = {
       "rodrigo@rodrigo-desktop" = home-manager.lib.homeManagerConfiguration {
+        pkgs = legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
+        # > Our main home-manager configuration file <
+        modules = [ ./home-manager/home.nix ];
+      };
+      "rodrigo@rodrigo-laptop" = home-manager.lib.homeManagerConfiguration {
         pkgs = legacyPackages.x86_64-linux;
         extraSpecialArgs = { inherit inputs; }; # Pass flake inputs to our config
         # > Our main home-manager configuration file <

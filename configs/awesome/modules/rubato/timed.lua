@@ -45,7 +45,6 @@ local function simulate_easing(pos, duration, intro, intro_e, outro, outro_e, m,
 	local ps_time = 0
 	local ps_pos = pos
 	local dx
-	print("simulating")
 
 
 	-- Key for cacheing results

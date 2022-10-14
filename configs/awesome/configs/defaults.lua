@@ -4,6 +4,7 @@ return {
     apps = {
         terminal = "alacritty",
         screenshot = "flameshot gui",
+        rofi = "rofi -modi drun,run,window,ssh -show drun -show-icons -drun-icon-theme -lines 20 -padding 25 -width 30 -columns 1",
     },
     client = {
         resize = {

@@ -83,12 +83,12 @@
     };
   };
 
-  # programs.fish = {
-  #   enable = true;
-  #   shellInit = ''
-  #   export EDITOR=nvim
-  #   '';
-  # };
+  programs.fish = {
+    enable = true;
+    shellInit = ''
+    export EDITOR=nvim
+    '';
+  };
 
   programs.tmux = {
     enable = true;

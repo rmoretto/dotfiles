@@ -1,5 +1,4 @@
 local awful = require("awful")
-local gears = require("gears")
 local bling = require("modules.bling")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local defaults = require("configs.defaults")
@@ -18,6 +17,10 @@ local toggle_float = awful.client.floating.toggle
 
 local function spawn_term()
 	awful.spawn(defaults.apps.terminal)
+end
+
+local function spawn_rofi()
+	awful.spawn(defaults.apps.rofi)
 end
 
 local function take_screenshot()
@@ -195,6 +198,7 @@ local global_keys = {
 	-- Spawner
 	-- Open terminal
 	key({ mod }, enter, spawn_term, { description = "open terminal", group = "app" }),
+	key({ mod }, "d", spawn_rofi, { description = "open rofi", group = "app" }),
 	key({}, "Print", take_screenshot, { description = "take screenshot", group = "app" }),
 
 	-- ----

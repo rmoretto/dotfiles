@@ -61,16 +61,20 @@ setup_lsp_config("pyright")
 setup_lsp_config("rust_analyzer")
 setup_lsp_config("sqls")
 setup_lsp_config("sumneko_lua", {
-	settings = { 
-        Lua = { 
-            diagnostics = { 
-                globals = { 
-                    "vim",
-                    "awesome"
-                } 
-            } 
-        } 
-    },
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = {
+					"vim",
+					"awesome",
+                    "client",
+                    "mouse",
+                    "tag",
+                    "screen"
+				},
+			},
+		},
+	},
 })
 setup_lsp_config("tailwindcss")
 setup_lsp_config("terraformls")
