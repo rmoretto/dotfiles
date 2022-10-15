@@ -130,6 +130,7 @@
     isNormalUser = true;
     description = "Rodrigo Ce Moretto";
     extraGroups = [ "networkmanager" "wheel" ];
+    shell = pkgs.fish;
   };
 
   # Create a link to the default nix linker into the generally expected 

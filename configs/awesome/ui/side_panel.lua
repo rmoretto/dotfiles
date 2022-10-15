@@ -3,8 +3,8 @@ local wibox = require("wibox")
 local gears = require("gears")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
-local beautiful = require("beautiful")
 local rubato = require("modules.rubato")
+local volume_widget = require("modules.awesome-wm-widgets.volume-widget.volume")
 
 local function close_button(side_panel_toggle)
 	return {
@@ -39,14 +39,14 @@ local function calendar()
 	return {
 		widget = wibox.container.place,
 		valing = "center",
-		{
-			date = os.date("*t"),
-			font = "sans 16",
-			spacing = 5,
-			week_numbers = false,
-			start_sunday = false,
-			widget = wibox.widget.calendar.month,
-		},
+        {
+            date = os.date("*t"),
+            font = "sans 16",
+            spacing = 5,
+            week_numbers = false,
+            start_sunday = false,
+            widget = wibox.widget.calendar.month,
+        },
 	}
 end
 
@@ -102,6 +102,7 @@ return function(screen)
                     text_clock(),
                     separator(),
                     calendar(),
+                    volume_widget(),
                 },
             }
 		},

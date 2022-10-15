@@ -58,6 +58,7 @@
     awesome
     lua
     pulseaudio
+    watchexec
   ];
 
   # xsession.windowManager.i3 = {
