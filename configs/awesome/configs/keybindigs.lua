@@ -199,7 +199,14 @@ local global_keys = {
 	-- Open terminal
 	key({ mod }, enter, spawn_term, { description = "open terminal", group = "app" }),
 	key({ mod }, "d", spawn_rofi, { description = "open rofi", group = "app" }),
-	key({}, "Print", take_screenshot, { description = "take screenshot", group = "app" }),
+
+
+	-- Hotkeys
+	-- Open terminal
+	key({}, "Print", take_screenshot, { description = "take screenshot", group = "hotkey" }),
+	-- Volume
+	key({ mod }, "XF86AudioRaiseVolume", function() volume:inc() end, { description = "inc volume", group = "hotkey" }),
+	key({ mod }, "XF86AudioLowerVolume", function() volume:dec() end, { description = "dec volume", group = "hotkey" }),
 
 	-- ----
 	-- WM
@@ -207,9 +214,6 @@ local global_keys = {
 	key({ mod, ctrl }, "r", awesome.restart, { description = "reload awesome", group = "WM" }),
 	-- Show Help
 	key({ mod }, "F1", hotkeys_popup.show_help, { description = "show help", group = "WM" }),
-	-- Volume
-	key({ mod }, "XF86AudioRaiseVolume", function() volume:inc() end, { description = "inc volume", group = "WM" }),
-	key({ mod }, "XF86AudioLowerVolume", function() volume:dec() end, { description = "dec volume", group = "WM" }),
 
 	-- ----
 	-- Client
