@@ -3,6 +3,7 @@ local bling = require("modules.bling")
 local hotkeys_popup = require("awful.hotkeys_popup")
 local defaults = require("configs.defaults")
 local scratchpad = require("configs.scratchpad")
+local volume = require("ui.widgets.volume")
 
 local mod = "Mod4"
 local alt = "Mod1"
@@ -151,7 +152,6 @@ local function _get_tag_by_idx(idx)
 end
 
 local function view_tag(index)
-    print(index)
 	local tag = _get_tag_by_idx(index)
 	if tag then
 		tag:view_only()
@@ -207,6 +207,9 @@ local global_keys = {
 	key({ mod, ctrl }, "r", awesome.restart, { description = "reload awesome", group = "WM" }),
 	-- Show Help
 	key({ mod }, "F1", hotkeys_popup.show_help, { description = "show help", group = "WM" }),
+	-- Volume
+	key({ mod }, "XF86AudioRaiseVolume", function() volume:inc() end, { description = "inc volume", group = "WM" }),
+	key({ mod }, "XF86AudioLowerVolume", function() volume:dec() end, { description = "dec volume", group = "WM" }),
 
 	-- ----
 	-- Client
