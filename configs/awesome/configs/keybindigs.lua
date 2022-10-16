@@ -245,21 +245,21 @@ local global_keys = {
 	-- Workspaces
 	-- Toggle Tag
 	key({
-		modifires = { mod },
+		modifiers = { mod },
 		keygroup = awful.key.keygroup.NUMROW,
 		description = "only view tag",
 		group = "tag",
 		on_press = view_tag,
 	}),
 	key({
-		modifires = { mod, ctrl },
+		modifiers = { mod, ctrl },
 		keygroup = awful.key.keygroup.NUMROW,
 		description = "toggle tag",
 		group = "tag",
 		on_press = toggle_tag,
 	}),
 	key({
-		modifires = { mod, shift },
+		modifiers = { mod, shift },
 		keygroup = awful.key.keygroup.NUMROW,
 		description = "move client to tag",
 		group = "tag",
