@@ -4,7 +4,9 @@ local gears = require("gears")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local rubato = require("modules.rubato")
-local volume_widget = require("modules.awesome-wm-widgets.volume-widget.volume")
+
+local volume = require("ui.widgets.volume")
+-- local volume_widget = require("modules.awesome-wm-widgets.volume-widget.volume")
 
 local function close_button(side_panel_toggle)
 	return {
@@ -102,7 +104,8 @@ return function(screen)
                     text_clock(),
                     separator(),
                     calendar(),
-                    volume_widget(),
+                    volume(),
+                    -- volume_widget(),
                 },
             }
 		},

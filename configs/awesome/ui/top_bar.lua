@@ -52,7 +52,7 @@ local function tag_list(s)
 		widget_template = {
 			widget = wibox.container.margin,
 			forced_width = dpi(40),
-			forced_height = dpi(40),
+			-- forced_height = dpi(40),
 			{
 				widget = wibox.container.place,
 				valing = "center",
@@ -187,16 +187,18 @@ local function side_panel_button(side_panel)
 end
 
 return function(screen, side_panel)
-	awful.popup({
+	awful.wibar({
 		screen = screen,
-		type = "dock",
+		minimum_height = dpi(32),
 		maximum_height = dpi(32),
+		height = dpi(32),
 		minimum_width = screen.geometry.width,
 		maximum_width = screen.geometry.width,
-		placement = function(c)
-			awful.placement.top(c)
-		end,
-		bg = beautiful.transparent,
+		-- type = "dock",
+		-- placement = function(c)
+		--     awful.placement.top(c)
+		-- end,
+		-- bg = beautiful.transparent,
 		widget = {
 			{
 				{
@@ -212,7 +214,6 @@ return function(screen, side_panel)
 			},
 			bg = beautiful.wibar_bg,
 			widget = wibox.container.background,
-			forced_height = dpi(74),
 		},
 	})
 end
