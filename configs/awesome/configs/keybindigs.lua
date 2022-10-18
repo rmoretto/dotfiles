@@ -177,9 +177,9 @@ end
 
 local function close_client()
 	local c_focus = client.focus
-    if c_focus then
-        c_focus:kill()
-    end
+	if c_focus then
+		c_focus:kill()
+	end
 end
 
 -- Layout
@@ -200,13 +200,16 @@ local global_keys = {
 	key({ mod }, enter, spawn_term, { description = "open terminal", group = "app" }),
 	key({ mod }, "d", spawn_rofi, { description = "open rofi", group = "app" }),
 
-
 	-- Hotkeys
 	-- Open terminal
 	key({}, "Print", take_screenshot, { description = "take screenshot", group = "hotkey" }),
 	-- Volume
-	key({ mod }, "XF86AudioRaiseVolume", function() volume:inc() end, { description = "inc volume", group = "hotkey" }),
-	key({ mod }, "XF86AudioLowerVolume", function() volume:dec() end, { description = "dec volume", group = "hotkey" }),
+	key({ mod }, "XF86AudioRaiseVolume", function()
+		volume:inc()
+	end, { description = "inc volume", group = "hotkey" }),
+	key({ mod }, "XF86AudioLowerVolume", function()
+		volume:dec()
+	end, { description = "dec volume", group = "hotkey" }),
 
 	-- ----
 	-- WM
@@ -302,7 +305,7 @@ end)
 --     awful.key({ modkey }, "Left", awful.tag.viewprev, { description = "view previous", group = "tag" }),
 --     awful.key({ modkey }, "Right", awful.tag.viewnext, { description = "view next", group = "tag" }),
 --  o  awful.key({ modkey }, "Escape", awful.tag.history.restore, { description = "go back", group = "tag" }),
--- 
+--
 --     awful.key({ modkey }, "j", function()
 --         awful.client.focus.byidx(1)
 --     end, { description = "focus next by index", group = "client" }),
@@ -312,7 +315,7 @@ end)
 --     awful.key({ modkey }, "w", function()
 --         mymainmenu:show()
 --     end, { description = "show main menu", group = "awesome" }),
--- 
+--
 --     -- Layout manipulation
 --     awful.key({ modkey, "Shift" }, "j", function()
 --         awful.client.swap.byidx(1)
@@ -333,14 +336,14 @@ end)
 --             client.focus:raise()
 --         end
 --     end, { description = "go back", group = "client" }),
--- 
+--
 --     -- Standard program
 --     awful.key({ modkey }, "Return", function()
 --         awful.spawn(terminal)
 --     end, { description = "open a terminal", group = "launcher" }),
 --     awful.key({ modkey, "Control" }, "r", awesome.restart, { description = "reload awesome", group = "awesome" }),
 --     awful.key({ modkey, "Shift" }, "q", awesome.quit, { description = "quit awesome", group = "awesome" }),
--- 
+--
 --     awful.key({ modkey }, "l", function()
 --         awful.tag.incmwfact(0.05)
 --     end, { description = "increase master width factor", group = "layout" }),
@@ -365,7 +368,7 @@ end)
 --     awful.key({ modkey, "Shift" }, "space", function()
 --         awful.layout.inc(-1)
 --     end, { description = "select previous", group = "layout" }),
--- 
+--
 --     awful.key({ modkey, "Control" }, "n", function()
 --         local c = awful.client.restore()
 --         -- Focus restored client
@@ -373,12 +376,12 @@ end)
 --             c:emit_signal("request::activate", "key.unminimize", { raise = true })
 --         end
 --     end, { description = "restore minimized", group = "client" }),
--- 
+--
 --     -- Prompt
 --     awful.key({ modkey }, "r", function()
 --         awful.screen.focused().mypromptbox:run()
 --     end, { description = "run prompt", group = "launcher" }),
--- 
+--
 --     awful.key({ modkey }, "x", function()
 --         awful.prompt.run({
 --             prompt = "Run Lua code: ",
@@ -392,7 +395,7 @@ end)
 --         menubar.show()
 --     end, { description = "show the menubar", group = "launcher" })
 -- )
--- 
+--
 -- clientkeys = gears.table.join(
 --     awful.key({ modkey }, "f", function(c)
 --         c.fullscreen = not c.fullscreen
@@ -434,7 +437,7 @@ end)
 --         c:raise()
 --     end, { description = "(un)maximize horizontally", group = "client" })
 -- )
--- 
+--
 -- -- Bind all key numbers to tags.
 -- -- Be careful: we use keycodes to make it work on any keyboard layout.
 -- -- This should map on the top row of your keyboard, usually 1 to 9.

@@ -93,8 +93,8 @@ local function tag_list(s)
 		{
 			widget = wibox.container.background,
 			bg = "#777777",
-            border_color = "#ffffff",
-            border_width = 1,
+			border_color = "#ffffff",
+			border_width = 1,
 			shape = gears.shape.rounded_bar,
 			{
 				widget = wibox.container.margin,
@@ -127,21 +127,23 @@ local function task_list(s)
 		screen = s,
 		filter = awful.widget.tasklist.filter.focused,
 		buttons = tasklist_buttons,
-		forced_width = dpi(256),
+		style = {
+			font = "sans 12",
+		},
 		widget_template = {
 			widget = wibox.container.margin,
+			forced_width = dpi(256),
 			top = dpi(4),
 			bottom = dpi(4),
 			{
 				widget = wibox.container.background,
-			    shape = gears.shape.rounded_bar,
-                bg = "#777777",
-                border_color = "#ffffff",
-                border_width = 1,
+				shape = gears.shape.rounded_bar,
+				bg = "#777777",
+				border_color = "#ffffff",
+				border_width = 1,
 				{
-					widget = wibox.container.margin,
-					left = 10,
-					right = 10,
+					widget = wibox.container.place,
+					haling = "center",
 					{
 						layout = wibox.layout.fixed.horizontal,
 						{
@@ -155,7 +157,7 @@ local function task_list(s)
 						{
 							id = "text_role",
 							widget = wibox.widget.textbox,
-                            font = "sans 12",
+							font = "sans 12",
 						},
 					},
 				},
@@ -204,34 +206,32 @@ end
 
 local function text_clock()
 	return wibox.widget({
-		-- widget = wibox.container.margin,
-		-- left = dpi(564),
 		widget = wibox.container.place,
 		haling = "center",
-        content_fill_vertical = true,
-        {
-            widget = wibox.container.margin,
-            top = dpi(4),
-            bottom = dpi(4),
-            right = dpi(256),
-            {
-                widget = wibox.container.background,
-                shape = gears.shape.rounded_bar,
-                bg = "#777777",
-                border_color = "#ffffff",
-                border_width = 1,
-                {
-                    widget = wibox.container.margin,
-                    left = dpi(8),
-                    right = dpi(8),
-                    {
-                        widget = wibox.widget.textclock,
-                        format = "%a, %d de %b - %H:%M",
-                        font = "sans 12",
-                    }
-                },
-            }
-        }
+		content_fill_vertical = true,
+		{
+			widget = wibox.container.margin,
+			top = dpi(4),
+			bottom = dpi(4),
+			right = dpi(256),
+			{
+				widget = wibox.container.background,
+				shape = gears.shape.rounded_bar,
+				bg = "#777777",
+				border_color = "#ffffff",
+				border_width = 1,
+				{
+					widget = wibox.container.margin,
+					left = dpi(8),
+					right = dpi(8),
+					{
+						widget = wibox.widget.textclock,
+						format = "%a, %d de %b - %H:%M",
+						font = "sans 12",
+					},
+				},
+			},
+		},
 	})
 end
 
@@ -255,7 +255,7 @@ return function(screen, side_panel)
 			{
 				layout = wibox.layout.fixed.horizontal,
 				spacing = dpi(8),
-                wibox.widget.systray(),
+				wibox.widget.systray(),
 				layout_box(screen),
 				side_panel_button(side_panel),
 			},

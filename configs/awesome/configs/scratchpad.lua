@@ -13,7 +13,7 @@ local _scratchpad = {}
 --     duration = 0.3,
 --     awestore_compat = true, -- This option must be set to true.
 -- })
--- 
+--
 -- local anim_x = rubato.timed({
 --     pos = -1000,
 --     rate = 60,
@@ -32,7 +32,7 @@ _scratchpad.spotify = bling.module.scratchpad({
 	geometry = { x = 20, y = 20, height = 200, width = 200 }, -- The geometry in a floating state
 	reapply = true, -- Whether all those properties should be reapplied on every new opening of the scratchpad (MUST BE TRUE FOR ANIMATIONS)
 	dont_focus_before_close = false, -- When set to true, the scratchpad will be closed by the toggle function regardless of whether its focused or not. When set to false, the toggle function will first bring the scratchpad into focus and only close it on a second call
-    -- rubato = { x = anim_x, y = anim_y }, -- Optional. This is how you can pass in the rubato tables for animations. If you don't want animations, you can ignore this option.
+	-- rubato = { x = anim_x, y = anim_y }, -- Optional. This is how you can pass in the rubato tables for animations. If you don't want animations, you can ignore this option.
 })
 
 _scratchpad.toggle_terminal = function()

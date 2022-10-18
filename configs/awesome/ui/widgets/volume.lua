@@ -32,42 +32,48 @@ local function init()
 		vol_bar,
 	})
 
-    local bar_anim = rubato.timed({
-        duration = 0.125,
-        subscribed = function(pos)
-            vol_bar.value = pos
-        end,
-    })
+	local bar_anim = rubato.timed({
+		duration = 0.125,
+		subscribed = function(pos)
+			vol_bar.value = pos
+		end,
+	})
 
 	local function update_bar(_, stdout)
-        bar_anim.pos = vol_bar.value or 0
+		bar_anim.pos = vol_bar.value or 0
 
 		local vol_level = string.match(stdout, "%[(%d?%d?%d?)%%%]")
 		local vol_value = tonumber(vol_level)
-        if not vol_value then
-            print("err parsing vol level")
-            return
-        end
+		if not vol_value then
+			print("err parsing vol level")
+			return
+		end
 
-        bar_anim.target = vol_value
+		bar_anim.target = vol_value
 	end
 
-    function volume:inc(s)
-        local cmd = string.format(INC_VOL_CMD, s or default_step)
-        spawn.easy_async(cmd, function(stdout) update_bar(volume.widget, stdout) end)
-    end
+	function volume:inc(s)
+		local cmd = string.format(INC_VOL_CMD, s or default_step)
+		spawn.easy_async(cmd, function(stdout)
+			update_bar(volume.widget, stdout)
+		end)
+	end
 
-    function volume:dec(s)
-        local cmd = string.format(DEC_VOL_CMD, s or default_step)
-        spawn.easy_async(cmd, function(stdout) update_bar(volume.widget, stdout) end)
-    end
+	function volume:dec(s)
+		local cmd = string.format(DEC_VOL_CMD, s or default_step)
+		spawn.easy_async(cmd, function(stdout)
+			update_bar(volume.widget, stdout)
+		end)
+	end
 
-    volume.widget:buttons(
-        gears.table.join(
-            awful.button({}, 4, function() volume:inc() end),
-            awful.button({}, 5, function() volume:dec() end)
-        )
-    )
+	volume.widget:buttons(gears.table.join(
+		awful.button({}, 4, function()
+			volume:inc()
+		end),
+		awful.button({}, 5, function()
+			volume:dec()
+		end)
+	))
 
 	watch(GET_VOL_CMD, refresh_rate, update_bar, volume.widget)
 	return volume.widget

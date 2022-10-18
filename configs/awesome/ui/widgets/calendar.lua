@@ -76,7 +76,7 @@ local function init()
 		spacing = 5,
 		week_numbers = false,
 		start_sunday = false,
-        fn_embed = decorate_cell,
+		fn_embed = decorate_cell,
 		widget = wibox.widget.calendar.month,
 	})
 

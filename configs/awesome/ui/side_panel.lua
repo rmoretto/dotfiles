@@ -11,13 +11,13 @@ local calendar = require("ui.widgets.calendar")
 
 local function close_button(side_panel_toggle)
 	return {
-        widget = wibox.widget.textclock,
-        format = "<b>X</b>",
-        font = "sans 12",
-        halign = "right",
-        buttons = {
-            awful.button({}, 1, side_panel_toggle)
-        }
+		widget = wibox.widget.textclock,
+		format = "<b>X</b>",
+		font = "sans 12",
+		halign = "right",
+		buttons = {
+			awful.button({}, 1, side_panel_toggle),
+		},
 	}
 end
 
@@ -80,19 +80,19 @@ return function(screen)
 				right = dpi(10),
 				bottom = dpi(10),
 			},
-            {
-                layout = wibox.layout.fixed.vertical,
-                spacing = dpi(8),
-                close_button(_M.toggle),
-			    {
-                    layout = wibox.layout.fixed.vertical,
-                    spacing = dpi(32),
-                    text_clock(),
-                    separator(),
-                    -- calendar(),
-                    volume(),
-                },
-            }
+			{
+				layout = wibox.layout.fixed.vertical,
+				spacing = dpi(8),
+				close_button(_M.toggle),
+				{
+					layout = wibox.layout.fixed.vertical,
+					spacing = dpi(32),
+					text_clock(),
+					separator(),
+					-- calendar(),
+					volume(),
+				},
+			},
 		},
 		minimum_width = popup_width,
 		minimum_height = popup_height,
@@ -103,7 +103,7 @@ return function(screen)
 		y = _M.popup_y,
 		shape = gears.shape.rounded_rect,
 		screen = screen,
-        visible = true,
+		visible = true,
 	})
 
 	_M.panel_anim = rubato.timed({
