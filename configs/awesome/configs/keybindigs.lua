@@ -117,7 +117,7 @@ local resize = {
 }
 
 -- Client Move
-function move_client(c, dir)
+local function move_client(c, dir)
 	-- local is_floating = is_floating(c)
 	local tilling = is_tilling()
 
