@@ -218,19 +218,19 @@ local global_keys = {
 	-- ----
 	-- Client
 	-- Change Focus
-	key({ mod }, "k", focus.up, { description = "focus up", group = "client" }),
-	key({ mod }, "j", focus.down, { description = "focus down", group = "client" }),
-	key({ mod }, "h", focus.left, { description = "focus left", group = "client" }),
+	key({ mod }, "i", focus.up, { description = "focus up", group = "client" }),
+	key({ mod }, "k", focus.down, { description = "focus down", group = "client" }),
+	key({ mod }, "j", focus.left, { description = "focus left", group = "client" }),
 	key({ mod }, "l", focus.right, { description = "focus right", group = "client" }),
 	-- Resize
-	key({ mod, ctrl }, "k", resize.up, { description = "resize up", group = "client" }),
-	key({ mod, ctrl }, "j", resize.down, { description = "resize down", group = "client" }),
-	key({ mod, ctrl }, "h", resize.left, { description = "resize left", group = "client" }),
+	key({ mod, ctrl }, "i", resize.up, { description = "resize up", group = "client" }),
+	key({ mod, ctrl }, "k", resize.down, { description = "resize down", group = "client" }),
+	key({ mod, ctrl }, "j", resize.left, { description = "resize left", group = "client" }),
 	key({ mod, ctrl }, "l", resize.right, { description = "resize right", group = "client" }),
 	-- Move
-	key({ mod, shift }, "k", move.up, { description = "move up", group = "client" }),
-	key({ mod, shift }, "j", move.down, { description = "move down", group = "client" }),
-	key({ mod, shift }, "h", move.left, { description = "move left", group = "client" }),
+	key({ mod, shift }, "i", move.up, { description = "move up", group = "client" }),
+	key({ mod, shift }, "k", move.down, { description = "move down", group = "client" }),
+	key({ mod, shift }, "j", move.left, { description = "move left", group = "client" }),
 	key({ mod, shift }, "l", move.right, { description = "move right", group = "client" }),
 	-- Close client
 	key({ mod, shift }, "q", close_client, { description = "close a client", group = "client" }),
@@ -242,8 +242,8 @@ local global_keys = {
 	-- ----
 	-- Layout
 	-- Change Layout
-	key({ mod }, "space", next_layout, { description = "select next", group = "layout" }),
-	key({ mod, shift }, "space", last_layout, { description = "select previous", group = "layout" }),
+	key({ mod }, "space", next_layout, { description = "select next layout", group = "layout" }),
+	key({ mod, shift }, "space", last_layout, { description = "select previous layout", group = "layout" }),
 
 	-- ----
 	-- Workspaces

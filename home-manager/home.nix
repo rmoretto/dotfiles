@@ -37,7 +37,7 @@
     ranger
     polybar
     rofi
-    dunst
+    # dunst
     picom
     vscode
     go
@@ -59,6 +59,7 @@
     lua
     pulseaudio
     watchexec
+    libnotify
   ];
 
   # xsession.windowManager.i3 = {
@@ -166,19 +167,19 @@
     # };
 
     # -- i3
-    ".config/i3" = {
-      source = ../configs/i3;
-      recursive = true;
-    };
+    # ".config/i3" = {
+    #   source = ../configs/i3;
+    #   recursive = true;
+    # };
+
+    # -- Polybar
+    # ".config/polybar" = {
+    #   source = ../configs/polybar;
+    #   recursive = true;
+    # };
 
     ".config/awesome" = {
       source = ../configs/awesome;
-      recursive = true;
-    };
-
-    # -- Polybar
-    ".config/polybar" = {
-      source = ../configs/polybar;
       recursive = true;
     };
 

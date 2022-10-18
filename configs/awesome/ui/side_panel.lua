@@ -89,7 +89,7 @@ return function(screen)
                     spacing = dpi(32),
                     text_clock(),
                     separator(),
-                    calendar(),
+                    -- calendar(),
                     volume(),
                 },
             }

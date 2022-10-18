@@ -87,16 +87,23 @@ local function tag_list(s)
 	})
 
 	local widget = wibox.widget({
-		widget = wibox.container.background,
-		bg = "#ffffff",
-		shape = gears.shape.rounded_bar,
+		widget = wibox.container.margin,
+		top = dpi(4),
+		bottom = dpi(4),
 		{
-			widget = wibox.container.margin,
-			margins = {
-				left = dpi(32),
-				right = dpi(32),
+			widget = wibox.container.background,
+			bg = "#777777",
+            border_color = "#ffffff",
+            border_width = 1,
+			shape = gears.shape.rounded_bar,
+			{
+				widget = wibox.container.margin,
+				margins = {
+					left = dpi(16),
+					right = dpi(16),
+				},
+				taglist,
 			},
-			taglist,
 		},
 	})
 
@@ -105,13 +112,6 @@ end
 
 local function task_list(s)
 	local tasklist_buttons = gears.table.join(
-		awful.button({}, 1, function(c)
-			if c == client.focus then
-				c.minimized = true
-			else
-				c:emit_signal("request::activate", "tasklist", { raise = true })
-			end
-		end),
 		awful.button({}, 3, function()
 			awful.menu.client_list({ theme = { width = 250 } })
 		end),
@@ -123,67 +123,116 @@ local function task_list(s)
 		end)
 	)
 
-	awful.widget.tasklist({
+	return awful.widget.tasklist({
 		screen = s,
-		filter = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons,
-		style = {
-			border_width = 1,
-			border_color = "#777777",
-			shape = gears.shape.rounded_bar,
-		},
-		layout = {
-			spacing = 10,
-			spacing_widget = {
-				{
-					forced_width = 5,
-					shape = gears.shape.circle,
-					widget = wibox.widget.separator,
-				},
-				valign = "center",
-				halign = "center",
-				widget = wibox.container.place,
-			},
-			layout = wibox.layout.flex.horizontal,
-		},
-		-- Notice that there is *NO* wibox.wibox prefix, it is a template,
-		-- not a widget instance.
+		filter = awful.widget.tasklist.filter.focused,
+		buttons = tasklist_buttons,
+		forced_width = dpi(256),
 		widget_template = {
+			widget = wibox.container.margin,
+			top = dpi(4),
+			bottom = dpi(4),
 			{
+				widget = wibox.container.background,
+			    shape = gears.shape.rounded_bar,
+                bg = "#777777",
+                border_color = "#ffffff",
+                border_width = 1,
 				{
+					widget = wibox.container.margin,
+					left = 10,
+					right = 10,
 					{
+						layout = wibox.layout.fixed.horizontal,
 						{
-							id = "icon_role",
-							widget = wibox.widget.imagebox,
+							widget = wibox.container.margin,
+							margins = 2,
+							{
+								id = "icon_role",
+								widget = wibox.widget.imagebox,
+							},
 						},
-						margins = 2,
-						widget = wibox.container.margin,
+						{
+							id = "text_role",
+							widget = wibox.widget.textbox,
+                            font = "sans 12",
+						},
 					},
-					{
-						id = "text_role",
-						widget = wibox.widget.textbox,
-					},
-					layout = wibox.layout.fixed.horizontal,
 				},
-				left = 10,
-				right = 10,
-				widget = wibox.container.margin,
 			},
-			id = "background_role",
-			widget = wibox.container.background,
 		},
 	})
 end
 
 local function side_panel_button(side_panel)
-    return awful.widget.button({
-        image = beautiful.awesome_icon,
-        buttons = {
-            awful.button({}, 1, nil, function ()
-                side_panel.toggle()
-            end)
+	return awful.widget.button({
+		image = beautiful.awesome_icon,
+		buttons = {
+			awful.button({}, 1, nil, function()
+				side_panel.toggle()
+			end),
+		},
+	})
+end
+
+local function layout_box(screen)
+	local layoutbox_buttons = gears.table.join(
+		awful.button({}, 1, function(_)
+			awful.layout.inc(1)
+		end),
+		awful.button({}, 3, function(_)
+			awful.layout.inc(-1)
+		end),
+		awful.button({}, 4, function()
+			awful.layout.inc(-1)
+		end),
+		awful.button({}, 5, function()
+			awful.layout.inc(1)
+		end)
+	)
+
+	screen.mylayoutbox = awful.widget.layoutbox()
+	screen.mylayoutbox:buttons(layoutbox_buttons)
+
+	local widget = wibox.widget({
+		widget = wibox.layout.fixed.horizontal,
+		screen.mylayoutbox,
+	})
+
+	return widget
+end
+
+local function text_clock()
+	return wibox.widget({
+		-- widget = wibox.container.margin,
+		-- left = dpi(564),
+		widget = wibox.container.place,
+		haling = "center",
+        content_fill_vertical = true,
+        {
+            widget = wibox.container.margin,
+            top = dpi(4),
+            bottom = dpi(4),
+            right = dpi(256),
+            {
+                widget = wibox.container.background,
+                shape = gears.shape.rounded_bar,
+                bg = "#777777",
+                border_color = "#ffffff",
+                border_width = 1,
+                {
+                    widget = wibox.container.margin,
+                    left = dpi(8),
+                    right = dpi(8),
+                    {
+                        widget = wibox.widget.textclock,
+                        format = "%a, %d de %b - %H:%M",
+                        font = "sans 12",
+                    }
+                },
+            }
         }
-    })
+	})
 end
 
 return function(screen, side_panel)
@@ -194,26 +243,22 @@ return function(screen, side_panel)
 		height = dpi(32),
 		minimum_width = screen.geometry.width,
 		maximum_width = screen.geometry.width,
-		-- type = "dock",
-		-- placement = function(c)
-		--     awful.placement.top(c)
-		-- end,
-		-- bg = beautiful.transparent,
 		widget = {
+			layout = wibox.layout.align.horizontal,
 			{
-				{
-					layout = wibox.layout.align.horizontal,
-					expand = "none",
-					tag_list(screen),
-					task_list(screen),
-                    side_panel_button(side_panel)
-				},
-				left = dpi(10),
-				right = dpi(10),
-				widget = wibox.container.margin,
+				layout = wibox.layout.fixed.horizontal,
+				spacing = dpi(8),
+				tag_list(screen),
+				task_list(screen),
 			},
-			bg = beautiful.wibar_bg,
-			widget = wibox.container.background,
+			text_clock(),
+			{
+				layout = wibox.layout.fixed.horizontal,
+				spacing = dpi(8),
+                wibox.widget.systray(),
+				layout_box(screen),
+				side_panel_button(side_panel),
+			},
 		},
 	})
 end
