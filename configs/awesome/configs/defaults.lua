@@ -1,6 +1,7 @@
 local dpi = require("beautiful.xresources").apply_dpi
 
 return {
+    modkey = "Mod4",
 	apps = {
 		terminal = "alacritty",
 		screenshot = "flameshot gui",

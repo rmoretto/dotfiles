@@ -60,6 +60,7 @@
     pulseaudio
     watchexec
     libnotify
+    dig
   ];
 
   # xsession.windowManager.i3 = {

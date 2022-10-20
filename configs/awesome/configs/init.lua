@@ -1,6 +1,6 @@
 require("configs.errors")
-require("configs.tags")
 require("configs.keybindigs")
-require("configs.layouts")
 require("configs.client")
 require("configs.rules")
+require("configs.layouts")
+require("configs.tags")

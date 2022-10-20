@@ -8,15 +8,14 @@ require("awful.autofocus")
 -- Widget and layout library
 -- Theme handling library
 local beautiful = require("beautiful")
--- Notification library
 
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
 
--- local theme_dir = gears.filesystem.get_configuration_dir() .. "theme/"
--- beautiful.init(theme_dir .. "theme.lua")
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+local theme_dir = gears.filesystem.get_configuration_dir() .. "theme/"
+beautiful.init(theme_dir .. "theme.lua")
+-- beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 require("configs")
 require("ui")

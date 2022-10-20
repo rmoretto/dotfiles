@@ -5,6 +5,7 @@ local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local rubato = require("modules.rubato")
+local defaults = require("configs.defaults")
 
 local function set_tag_indicator(c3, indicator, indicator_anim)
 	if c3.selected then
@@ -20,6 +21,7 @@ local function set_tag_indicator(c3, indicator, indicator_anim)
 end
 
 local function tag_list(s)
+    local modkey = defaults.modkey
 	local taglist_buttons = gears.table.join(
 		awful.button({}, 1, function(t)
 			t:view_only()

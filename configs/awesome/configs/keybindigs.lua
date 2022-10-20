@@ -4,8 +4,9 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local defaults = require("configs.defaults")
 local scratchpad = require("configs.scratchpad")
 local volume = require("ui.widgets.volume")
+local gears = require("gears")
 
-local mod = "Mod4"
+local mod = defaults.modkey
 local alt = "Mod1"
 local ctrl = "Control"
 local shift = "Shift"
@@ -43,6 +44,8 @@ end
 
 -- Client Focus
 local function change_focus(dir)
+    gears.debug.dump(client.focus)
+
 	awful.client.focus.bydirection(dir)
 	bling.module.flash_focus.flashfocus(client.focus)
 end
@@ -191,6 +194,19 @@ local function last_layout()
 	awful.layout.inc(1)
 end
 
+-- Tabbed Layout
+local function tabbed_iter()
+    bling.module.tabbed.iter()
+end
+
+local function tabbed_pop()
+    bling.module.tabbed.pop()
+end
+
+local function tabbed_pick_with_dmenu()
+    bling.module.tabbed.pick_with_dmenu()
+end
+
 -- -------------------
 -- -- Global Keybings
 local global_keys = {
@@ -247,6 +263,12 @@ local global_keys = {
 	-- Change Layout
 	key({ mod }, "space", next_layout, { description = "select next layout", group = "layout" }),
 	key({ mod, shift }, "space", last_layout, { description = "select previous layout", group = "layout" }),
+
+	-- ----
+	-- Tabbed Layout
+	key({ alt }, "s", tabbed_iter, { description = "iter through tabs", group = "tabs" }),
+	key({ alt }, "a", tabbed_pop, { description = "pop tabs", group = "tabs" }),
+	key({ alt }, "d", tabbed_pick_with_dmenu, { description = "pck tabs via dmenu", group = "tabs" }),
 
 	-- ----
 	-- Workspaces
