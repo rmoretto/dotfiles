@@ -9,19 +9,19 @@ local defaults = require("configs.defaults")
 
 local function set_tag_indicator(c3, indicator, indicator_anim)
 	if c3.selected then
-		indicator.bg = "#ff0000"
+		indicator.bg = beautiful.taglist_bg_selected
 		indicator_anim.target = dpi(32)
 	elseif #c3:clients() == 0 then
-		indicator.bg = "#00ff00"
+		indicator.bg = beautiful.taglist_bg_wo_clients
 		indicator_anim.target = dpi(16)
 	else
-		indicator.bg = "#0000ff"
+		indicator.bg = beautiful.taglist_bg_with_clients
 		indicator_anim.target = dpi(16)
 	end
 end
 
 local function tag_list(s)
-    local modkey = defaults.modkey
+	local modkey = defaults.modkey
 	local taglist_buttons = gears.table.join(
 		awful.button({}, 1, function(t)
 			t:view_only()
@@ -94,8 +94,8 @@ local function tag_list(s)
 		bottom = dpi(4),
 		{
 			widget = wibox.container.background,
-			bg = "#777777",
-			border_color = "#ffffff",
+			bg = beautiful.taglist_bg,
+			border_color = beautiful.taglist_border_color,
 			border_width = 1,
 			shape = gears.shape.rounded_bar,
 			{
@@ -140,8 +140,8 @@ local function task_list(s)
 			{
 				widget = wibox.container.background,
 				shape = gears.shape.rounded_bar,
-				bg = "#777777",
-				border_color = "#ffffff",
+				bg = beautiful.tasklist_bg,
+				border_color = beautiful.tasklist_border_color,
 				border_width = 1,
 				{
 					widget = wibox.container.place,
@@ -207,7 +207,7 @@ local function layout_box(screen)
 end
 
 local function text_clock()
-	return wibox.widget({
+	local widget = wibox.widget({
 		widget = wibox.container.place,
 		haling = "center",
 		content_fill_vertical = true,
@@ -219,22 +219,24 @@ local function text_clock()
 			{
 				widget = wibox.container.background,
 				shape = gears.shape.rounded_bar,
-				bg = "#777777",
-				border_color = "#ffffff",
+				bg = beautiful.textclock_bg,
+				border_color = beautiful.textclock_border_color,
 				border_width = 1,
 				{
 					widget = wibox.container.margin,
-					left = dpi(8),
-					right = dpi(8),
+					left = dpi(24),
+					right = dpi(24),
 					{
 						widget = wibox.widget.textclock,
-						format = "%a, %d de %b - %H:%M",
+						format = "%a, %d de %b - <b>%H:%M</b>",
 						font = "sans 12",
 					},
 				},
 			},
 		},
 	})
+
+    return widget
 end
 
 return function(screen, side_panel)
@@ -245,21 +247,27 @@ return function(screen, side_panel)
 		height = dpi(32),
 		minimum_width = screen.geometry.width,
 		maximum_width = screen.geometry.width,
+		bg = beautiful.wibar_bg,
 		widget = {
-			layout = wibox.layout.align.horizontal,
+			widget = wibox.container.margin,
+			left = dpi(16),
+			right = dpi(16),
 			{
-				layout = wibox.layout.fixed.horizontal,
-				spacing = dpi(8),
-				tag_list(screen),
-				task_list(screen),
-			},
-			text_clock(),
-			{
-				layout = wibox.layout.fixed.horizontal,
-				spacing = dpi(8),
-				wibox.widget.systray(),
-				layout_box(screen),
-				side_panel_button(side_panel),
+				layout = wibox.layout.align.horizontal,
+				{
+					layout = wibox.layout.fixed.horizontal,
+					spacing = dpi(8),
+					tag_list(screen),
+					task_list(screen),
+				},
+				text_clock(),
+				{
+					layout = wibox.layout.fixed.horizontal,
+					spacing = dpi(8),
+					wibox.widget.systray(),
+					layout_box(screen),
+					side_panel_button(side_panel),
+				},
 			},
 		},
 	})

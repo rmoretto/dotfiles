@@ -94,6 +94,7 @@ return require("packer").startup(function(use)
 	use("hrsh7th/vim-vsnip")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-emoji")
+    use("norcalli/nvim-colorizer.lua")
 
 	if packer_bootstrap then
 		require("packer").sync()

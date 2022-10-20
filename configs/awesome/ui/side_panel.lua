@@ -1,6 +1,7 @@
 local awful = require("awful")
 local wibox = require("wibox")
 local gears = require("gears")
+local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local rubato = require("modules.rubato")
@@ -26,6 +27,7 @@ local function separator()
 		widget = wibox.widget.separator,
 		forced_height = dpi(16),
 		forced_width = dpi(16),
+        color = beautiful.sidepanel_separator_color
 	}
 end
 
@@ -89,7 +91,7 @@ return function(screen)
 					spacing = dpi(32),
 					text_clock(),
 					separator(),
-					-- calendar(),
+                    calendar(),
 					volume(),
 				},
 			},
@@ -104,6 +106,7 @@ return function(screen)
 		shape = gears.shape.rounded_rect,
 		screen = screen,
 		visible = true,
+        bg = beautiful.sidepanel_bg
 	})
 
 	_M.panel_anim = rubato.timed({

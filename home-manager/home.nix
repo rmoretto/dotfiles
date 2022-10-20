@@ -61,6 +61,7 @@
     watchexec
     libnotify
     dig
+    pywal
   ];
 
   # xsession.windowManager.i3 = {

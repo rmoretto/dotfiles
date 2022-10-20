@@ -4,33 +4,87 @@ local dpi = require("beautiful.xresources").apply_dpi
 local theme = {}
 
 local theme_dir = gears.filesystem.get_configuration_dir() .. "theme"
+
+local colors = {
+    bg = "#18070d",
+    bg_light1 = "#631D36",
+    bg_light2 = "#A32F58",
+    bg_dark1 = "#330F1B",
+    bg_dark2 = "#240A13",
+
+    fg = "#cad2df",
+    fg_light1 = "D5DEEB",
+    fg_dark1 = "90959E",
+    fg_dark2 = "56595E",
+
+    cursor = "#cad2df",
+    color0 = "#18070d",
+    color1 = "#D7AA5C",
+    color2 = "#616D99",
+    color3 = "#957788",
+    color4 = "#A89695",
+    color5 = "#CDB098",
+    color6 = "#E6D8A3",
+    color7 = "#cad2df",
+    color8 = "#8d939c",
+    color9 = "#D7AA5C",
+    color10 = "#616D99",
+    color11 = "#957788",
+    color12 = "#A89695",
+    color13 = "#CDB098",
+    color14 = "#E6D8A3",
+    color15 = "#cad2df"
+}
+
+
 theme.dir = theme_dir
 
 theme.wallpaper = theme.dir .. "/wall.png"
 
 theme.font = "Terminus 9"
 
-theme.fg_normal = "#FEFEFE"
-theme.fg_focus = "#32D6FF"
+theme.fg_normal = colors.fg
+theme.fg_focus = colors.fg_dark1
+
 theme.fg_urgent = "#C83F11"
-theme.bg_normal = "#222222"
-theme.bg_focus = "#1E2320"
-theme.bg_urgent = "#3F3F3F"
 
-theme.border_width = dpi(2)
-theme.border_normal = "#3F3F3F"
-theme.border_focus = "#6F6F6F"
-theme.border_marked = "#CC9393"
+theme.bg_normal = colors.bg
+theme.bg_focus = colors.bg_dark1
+theme.bg_urgent = colors.bg_light1
 
-theme.menu_height = dpi(16)
-theme.menu_width = dpi(140)
-theme.menu_submenu_icon = theme.dir .. "/icons/submenu.png"
+theme.border_width = dpi(1)
+theme.border_normal = colors.color11
+theme.border_focus = colors.color13
+theme.border_marked = colors.color14
+
+theme.useless_gap = 3
 
 theme.awesome_icon = theme.dir .. "/icons/awesome.png"
 
-theme.taglist_fg_focus = "#00CCFF"
+theme.wibar_bg = colors.bg_dark1
+
+theme.taglist_bg = colors.bg_light1
+theme.taglist_border_color = colors.bg_dark1
+theme.taglist_bg_selected = colors.color7
+theme.taglist_bg_wo_clients = colors.color3
+theme.taglist_bg_with_clients = colors.color5
+
 theme.taglist_squares_sel = theme.dir .. "/icons/square_sel.png"
 theme.taglist_squares_unsel = theme.dir .. "/icons/square_unsel.png"
+
+theme.tasklist_bg = colors.bg_light1
+theme.tasklist_border_color = colors.bg_dark1
+theme.tasklist_fg_focus = colors.fg
+
+theme.textclock_bg = colors.bg_light1
+theme.textclock_border_color = colors.bg_dark1
+
+theme.sidepanel_bg = colors.bg_dark2
+theme.sidepanel_separator_color = colors.fg
+
+theme.widget_volume_color = colors.color2
+theme.widget_volume_background_color = colors.color5
+theme.widget_volume_border_color = colors.color3
 
 theme.layout_tile = theme.dir .. "/icons/tile.png"
 theme.layout_tileleft = theme.dir .. "/icons/tileleft.png"
@@ -67,13 +121,6 @@ theme.widget_mail = theme.dir .. "/icons/mail.png"
 theme.widget_mail_on = theme.dir .. "/icons/mail_on.png"
 theme.widget_task = theme.dir .. "/icons/task.png"
 theme.widget_scissors = theme.dir .. "/icons/scissors.png"
-
-theme.tasklist_bg_focus = "#222222"
-theme.tasklist_fg_focus = "#00CCFF"
-theme.tasklist_plain_task_name = true
-theme.tasklist_disable_icon = true
-
-theme.useless_gap = 3
 
 theme.titlebar_bg_focus = "#3F3F3F"
 theme.titlebar_bg_normal = "#3F3F3F"

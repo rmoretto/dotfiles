@@ -1,5 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
+local beautiful = require("beautiful")
 local xresources = require("beautiful.xresources")
 local dpi = xresources.apply_dpi
 local gears = require("gears")
@@ -18,13 +19,16 @@ local function init()
 	local default_step = 5
 
 	local vol_bar = wibox.widget({
+		widget = wibox.widget.progressbar,
+        shape = gears.shape.rounded_bar,
+        border_color = beautiful.widget_volume_border_color,
+        color = beautiful.widget_volume_color,
+        background_color = beautiful.widget_volume_background_color,
 		max_value = 100,
 		value = 0,
 		forced_height = dpi(16),
 		forced_width = 100,
 		paddings = 1,
-		shape = gears.shape.rounded_bar,
-		widget = wibox.widget.progressbar,
 	})
 
 	volume.widget = wibox.widget({
