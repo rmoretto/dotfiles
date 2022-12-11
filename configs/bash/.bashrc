@@ -202,3 +202,5 @@ complete -C /usr/bin/nomad nomad
 complete -C /usr/bin/vault vault
 
 complete -C /usr/bin/terraform terraform
+
+complete -C /home/rodrigo/minio-binaries/mc mc

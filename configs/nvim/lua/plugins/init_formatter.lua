@@ -9,7 +9,10 @@ end
 local stylua = require("formatter.filetypes.lua").stylua
 local prettier = require("formatter.filetypes.javascript").prettier
 local black = require("formatter.filetypes.python").black
-local rustfmt = require("formatter.filetypes.rust").rustfmt
+local rustfmt = {
+    exe = "rustfmt --edition 2021",
+    stdin = true,
+  }
 
 require("formatter").setup({
 	logging = true,

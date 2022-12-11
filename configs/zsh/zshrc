@@ -123,6 +123,7 @@ alias ls="exa"
 alias ll="exa -la"
 
 alias ip="ip -c"
+alias redesul="/home/rodrigo/programations/misc/rede_sul/.venv/bin/python /home/rodrigo/programations/misc/rede_sul/main.py"
 
 export EDITOR=nvim
 
@@ -185,3 +186,5 @@ complete -o nospace -C /usr/bin/nomad nomad
 complete -o nospace -C /usr/bin/vault vault
 
 complete -o nospace -C /usr/bin/terraform terraform
+
+complete -o nospace -C /home/rodrigo/minio-binaries/mc mc

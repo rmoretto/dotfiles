@@ -3,7 +3,7 @@ local cmp = require("cmp_nvim_lsp")
 local illuminate = require("illuminate")
 
 local function base_capabilities()
-	return cmp.update_capabilities(vim.lsp.protocol.make_client_capabilities())
+	return cmp.default_capabilities()
 end
 
 local function base_on_attach()
@@ -38,7 +38,7 @@ setup_lsp_config("cssls", {
 		less = { validate = true },
 	},
 })
-setup_lsp_config("denols")
+-- setup_lsp_config("denols")
 setup_lsp_config("dockerls")
 setup_lsp_config("efm", {
 	filetypes = {
@@ -61,7 +61,16 @@ setup_lsp_config("pyright")
 setup_lsp_config("rust_analyzer")
 setup_lsp_config("sqls")
 setup_lsp_config("sumneko_lua", {
-	settings = { Lua = { diagnostics = { globals = { "vim" } } } },
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = {
+					"vim",
+					"awesome",
+				},
+			},
+		},
+	},
 })
 setup_lsp_config("tailwindcss")
 setup_lsp_config("terraformls")
