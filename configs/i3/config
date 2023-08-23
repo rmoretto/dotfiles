@@ -24,7 +24,7 @@ floating_modifier $mod
 # ===========================================
 # Key Bindings
 # ===========================================
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty -e "tmux"
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+d exec --no-startup-id "rofi -modi drun,run,window,ssh -show drun -show-icons -drun-icon-theme -lines 20 -padding 25 -width 30 -columns 1"
 bindsym $mod+Shift+q kill
@@ -113,8 +113,13 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace $9 output secondary
-workspace $10 output primary
+workspace $ws2 output primary
+workspace $ws4 output primary
+
+workspace $ws1 output DP-2
+workspace $ws3 output DP-2
+
+workspace $ws6 output DP-0
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -159,7 +164,9 @@ exec_always --no-startup-id xset fp rehash
 # ===========================================
 gaps inner 10
 gaps outer -4
- 
+
+default_border pixel 1
+default_floating_border pixel 1
 
 # ===========================================
 # Colors

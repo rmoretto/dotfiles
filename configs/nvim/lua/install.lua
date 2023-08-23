@@ -30,7 +30,6 @@ return require("packer").startup(function(use)
 
 	-- Icons because yes
 	use("kyazdani42/nvim-web-devicons")
-	use("https://github.com/ryanoasis/vim-devicons")
 
 	-- Vim Telescope
 	use("nvim-lua/plenary.nvim")
@@ -40,7 +39,7 @@ return require("packer").startup(function(use)
 	use("https://github.com/kevinhwang91/rnvimr")
 
 	-- Git Stuffs
-	use("https://github.com/airblade/vim-gitgutter")
+	use("https://github.com/lewis6991/gitsigns.nvim")
 	-- 🙏
 	use("tpope/vim-fugitive")
 
@@ -55,7 +54,7 @@ return require("packer").startup(function(use)
 	-- Misc
 	use("psliwka/vim-smoothie")
 	use("https://github.com/tpope/vim-surround")
-	use("https://github.com/preservim/nerdcommenter")
+	use("https://github.com/numToStr/Comment.nvim")
 	use("tpope/vim-repeat")
 	use("ggandor/lightspeed.nvim")
 	use("https://github.com/vim-test/vim-test")
@@ -68,6 +67,7 @@ return require("packer").startup(function(use)
 
 	-- IDE Like
 	use("mfussenegger/nvim-dap")
+	use("rcarriga/nvim-dap-ui")
 	use("neovim/nvim-lspconfig")
 	use("RishabhRD/popfix")
 	use("RishabhRD/nvim-lsputils")
@@ -81,20 +81,38 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("RRethy/vim-illuminate")
+  use("https://github.com/pearofducks/ansible-vim")
+  use("https://github.com/akinsho/toggleterm.nvim")
+  -- use("/home/rodrigo/programations/misc/LspUI-fork")
+  -- use("https://github.com/jinzhongjia/LspUI.nvim")
+  use("https://github.com/nvimdev/lspsaga.nvim")
 
 	-- use 'kyazdani42/nvim-tree.lua'
-	use("elixir-editors/vim-elixir")
+	-- use("elixir-editors/vim-elixir")
 	use("https://github.com/DingDean/wgsl.vim")
 	use("jansedivy/jai.vim")
+  use("https://github.com/elkowar/yuck.vim")
 
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/nvim-cmp")
 	use("hrsh7th/cmp-vsnip")
 	use("hrsh7th/vim-vsnip")
-	use("hrsh7th/vim-vsnip")
+	use("hrsh7th/vim-vsnip-integ")
+	use("https://github.com/rafamadriz/friendly-snippets")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-emoji")
+
+  use({
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+      "jfpedroza/neotest-elixir",
+      "rouge8/neotest-rust",
+    }
+  })
 
 	if packer_bootstrap then
 		require("packer").sync()

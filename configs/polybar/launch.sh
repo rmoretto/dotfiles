@@ -14,12 +14,14 @@ echo "Is laptop: ${IS_LAPTOP}"
 
 # Get the primary and secondary monitors
 PRIMARY_MONITOR=$(xrandr | grep " connected primary" | cut -f1 -d' ')
-SECONDARY_MONITOR=$(xrandr | grep " connected" | grep -v "primary" | cut -f1 -d' ')
+SECONDARY_MONITOR=$(xrandr | grep -P " connected ([\d]*)x([\d]*)\+([\d]*)\+([\d]*) \(" | grep -v "primary" | cut -f1 -d' ')
+TERCEARY_MONITOR=$(xrandr | grep -P " connected ([\d]*)x([\d]*)\+([\d]*)\+([\d]*) right" | grep -v "primary" | cut -f1 -d' ')
 
 if [ ${IS_LAPTOP} -eq 0 ]; then
   # We are in the Desktop land, use the default bars
   MONITOR=${PRIMARY_MONITOR} NET_IF=enp3s0 polybar -c ~/.config/polybar/config.ini --reload main &
-   [ -n "${SECONDARY_MONITOR}" ] && MONITOR=${SECONDARY_MONITOR} polybar -c ~/.config/polybar/config.ini --reload secondary &
+  [ -n "${SECONDARY_MONITOR}" ] && MONITOR=${SECONDARY_MONITOR} polybar -c ~/.config/polybar/config.ini --reload secondary &
+  [ -n "${TERCEARY_MONITOR}" ] && MONITOR=${TERCEARY_MONITOR} NET_IF=wlo1 polybar -c ~/.config/polybar/config.ini --reload secondary &
 else
   # We are in the Laptop land, use the default bars
   MONITOR=${PRIMARY_MONITOR} polybar -c ~/.config/polybar/config.ini --reload main_notebook &

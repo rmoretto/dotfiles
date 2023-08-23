@@ -15,6 +15,8 @@ require("nvim-treesitter.configs").setup({
 		"hcl",
 		"elixir",
 		"comment",
+    "rust",
+    "scss"
 	},
 })
 

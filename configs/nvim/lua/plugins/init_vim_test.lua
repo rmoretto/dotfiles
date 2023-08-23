@@ -14,7 +14,7 @@ vim.cmd([[
 
     function! CMux(cmd) abort
         " Scroll down if the panel is in scroll mode
-        call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 ENTER')
+        call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 C-c')
 
         let root_dir = finddir('.git/..', expand('%:p:h').';')
         call system('tmux send-keys -t ' . g:tmux_test_session . ':1.1 "cd ' . root_dir . '" ENTER')

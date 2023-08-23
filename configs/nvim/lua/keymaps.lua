@@ -57,28 +57,31 @@ keymap.set("n", "<leader>x", ":ccl <CR>", opts)
 -- Search and replace
 keymap.set("v", "<C-r>", '"hy:%s/<C-r>h//gc<left><left><left>', opts)
 
+-- Copy the current path to clipboard
+keymap.set("n", "<Leader>c", ":let @+=expand('%:p')<CR>")
+
 -- Search for selected text, forwards or backwards.
 -- Ref: https://vim.fandom.com/wiki/Search_for_visually_selected_text
-keymap.set(
-	"v",
-	"*",
-	[[ :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
-  \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-]],
-	opts
-)
-
-keymap.set(
-	"v",
-	"#",
-	[[ :<C-U>
-  \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
-  \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
-  \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
-  \gVzv:call setreg('"', old_reg, old_regtype)<CR>
-]],
-	opts
-)
+-- keymap.set(
+--   "v",
+--   "*",
+--   [[ :<C-U>
+--   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+--   \gvy/<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+--   \escape(@", '/\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+--   \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+-- ]],
+--   opts
+-- )
+-- 
+-- keymap.set(
+--   "v",
+--   "#",
+--   [[ :<C-U>
+--   \let old_reg=getreg('"')<Bar>let old_regtype=getregtype('"')<CR>
+--   \gvy?<C-R>=&ic?'\c':'\C'<CR><C-R><C-R>=substitute(
+--   \escape(@", '?\.*$^~['), '\_s\+', '\\_s\\+', 'g')<CR><CR>
+--   \gVzv:call setreg('"', old_reg, old_regtype)<CR>
+-- ]],
+--   opts
+-- )

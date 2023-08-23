@@ -1,6 +1,7 @@
 local lspconfig = require("lspconfig")
 local cmp = require("cmp_nvim_lsp")
 local illuminate = require("illuminate")
+local utils = require("utils")
 
 local function base_capabilities()
 	return cmp.default_capabilities()
@@ -76,33 +77,44 @@ setup_lsp_config("tailwindcss")
 setup_lsp_config("terraformls")
 setup_lsp_config("tsserver", { flags = { debounce_text_changes = 50 } })
 setup_lsp_config("volar")
+setup_lsp_config("arduino_language_server")
 
 -- Override global border configration for the lsp floating window
-local global_border = "rounded"
-local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-	opts = opts or {}
-	opts.border = opts.border or global_border
-	return orig_util_open_floating_preview(contents, syntax, opts, ...)
-end
+-- local global_border = "rounded"
+-- local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+-- -- function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+-- 	opts = opts or {}
+-- 	opts.border = opts.border or global_border
+-- 	return orig_util_open_floating_preview(contents, syntax, opts, ...)
+-- end
+-- local function show_diagnostic()
+-- 	vim.diagnostic.open_float(0, { scope = "line", width = 75 })
+-- end
 
 local keymap = vim.keymap
 local opts = { noremap = true, silent = true }
 
-local function show_diagnostic()
-	vim.diagnostic.open_float(0, { scope = "line" })
-end
-
 vim.o.omnifunc = "v:lua.vim.lsp.omnifunc"
-keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-keymap.set("n", "gr", vim.lsp.buf.references, opts)
-keymap.set("n", "K", vim.lsp.buf.hover, opts)
-keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-keymap.set("n", "<leader>e", show_diagnostic, opts)
-keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
-keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
-keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
-keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+-- keymap.set("n", "gr", vim.lsp.buf.references, opts)
+-- keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
+-- keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+-- keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+-- keymap.set("n", "K", vim.lsp.buf.hover, opts)
+-- keymap.set("n", "<leader>e", show_diagnostic, opts)
+-- keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
+-- keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
+-- keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
+
+keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+keymap.set("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
+keymap.set("n", "gi", "<cmd>Lspsaga peek_definition<cr>", opts)
+keymap.set("n", "gs", "<cmd>Lspsaga peek_type_definition<cr>", opts)
+keymap.set({ "n", "v" }, "<leader>a", "<cmd>Lspsaga code_action<cr>", opts)
+keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
+keymap.set("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
+keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
+keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<cr>", opts)
+
 keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)

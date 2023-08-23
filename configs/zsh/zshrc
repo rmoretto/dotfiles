@@ -4,6 +4,8 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/rodrigo/.oh-my-zsh"
 
+fpath=($HOME/.completion_zsh $fpath)
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -99,7 +101,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
 
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 
