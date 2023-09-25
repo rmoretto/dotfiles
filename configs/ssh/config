@@ -1,0 +1,138 @@
+Host meu_lote_hom
+    HostName 52.67.216.214
+    User rodrigo
+    IdentityFile ~/.ssh/id_rsa
+    ServerAliveInterval 60
+
+
+Host meu_lote_prod
+    HostName 52.67.42.210
+    User rodrigo
+    ServerAliveInterval 60
+
+Host meu_lote_prod_kp
+    HostName 52.67.42.210
+    User centos
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+Host meu_lote_hom_kp
+    HostName 52.67.216.214
+    User centos
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+
+Host meu_lote_keycloak
+    HostName 18.231.49.221
+    User ubuntu
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+
+Host meu_lote_elk
+    HostName 18.231.192.209
+    User centos
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+
+Host meu_lote_clickhouse
+    HostName 18.231.128.46
+    User centos
+    IdentityFile ~/.ssh/meulote-kp.pem
+    ServerAliveInterval 60
+
+Host meu_lote_services
+    HostName 15.228.56.10
+    User centos
+    IdentityFile ~/.ssh/meulote-kp.pem
+    ServerAliveInterval 60
+
+Host sigen_ssh
+    HostName 200.135.218.254 
+    Port 10422
+    User rodrigo
+    IdentityFile ~/.ssh/id_rsa
+    ServerAliveInterval 60
+
+
+Host ciasc_orchestrator_01
+    HostName 10.111.43.129
+    User rmoretto
+    ServerAliveInterval 60
+
+Host ciasc_pgsql_01
+    HostName 10.111.43.128
+    User cidasc_admin
+    ServerAliveInterval 60
+
+Host ciasc_lb_01
+    HostName 200.19.215.252
+    User rmoretto
+    ServerAliveInterval 60
+
+Host ciasc_app_01
+    HostName 10.111.43.130
+    User rmoretto
+    ServerAliveInterval 60
+    LocalForward 9191 localhost:9191
+    LocalForward 45989 localhost:45989
+
+Host ciasc_app_02
+    HostName 10.111.43.131
+    User rmoretto
+    ServerAliveInterval 60
+
+Host ciasc_app_03
+    HostName 10.111.43.132
+    User rmoretto
+    ServerAliveInterval 60
+
+Host ciasc_app_04
+    HostName 10.111.43.133
+    User rmoretto
+    ServerAliveInterval 60
+
+Host ciasc_app_05
+    HostName 10.111.43.134
+    User rmoretto
+    ServerAliveInterval 60
+    LocalForward 8088 localhost:8088
+    LocalForward 3030 localhost:3000
+
+Host ciasc_app_06
+    HostName 10.111.43.135
+    User rmoretto
+    ServerAliveInterval 60
+    LocalForward 8080 localhost:8080
+    LocalForward 5433 10.111.43.128:5432
+
+Host ciasc_app_07
+    HostName 10.111.43.136
+    User rmoretto
+    ServerAliveInterval 60
+    LocalForward 9047 localhost:9047
+    LocalForward 31010 localhost:31010
+    LocalForward 0.0.0.0:32010 localhost:32010
+
+Host flowtify_demo
+    HostName 18.229.165.215
+    User admin
+    ServerAliveInterval 60
+    IdentityFile ~/.ssh/flowtify-kp.pem
+
+Host flowtify_bastion
+    HostName 54.232.19.197
+    User admin
+    ServerAliveInterval 60
+    IdentityFile ~/.ssh/flowtify-kp.pem
+    LocalForward 8200 active.vault.service.consul:8200
+    LocalForward 8500 consul.service.consul:8500
+    LocalForward 4646 nomad.service.consul:4646
+    LocalForward 9090 prometheus.service.consul:9090
+    LocalForward 3031 grafana.service.consul:3000
+    LocalForward 5433 flowtify-demo.c3yty0cpxryt.sa-east-1.rds.amazonaws.com:5432
+    LocalForward 5434 flowtify-prod.c3yty0cpxryt.sa-east-1.rds.amazonaws.com:5432
+
+

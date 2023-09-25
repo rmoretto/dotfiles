@@ -1,0 +1,11 @@
+keys:
+  - &users:
+    - &rodrigo age1sclmehhme36v2qxprft9vsnufl3rcvgkctcyakj0c6pqkzgeuawstwalxk
+  - &hosts:
+    - &rodrigo_pc age14t5l2ze0xhjp9tz4gwe26jyvsnnf0u30nar42v6mcmhmx6nynufqgzcjw4
+creation_rules:
+  - path_regex: secrets/common/secrets.ya?ml$
+    key_groups:
+    - age:
+      - *rodrigo
+      - *rodrigo_pc

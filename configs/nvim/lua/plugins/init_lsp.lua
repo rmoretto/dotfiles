@@ -2,6 +2,7 @@ local lspconfig = require("lspconfig")
 local cmp = require("cmp_nvim_lsp")
 local illuminate = require("illuminate")
 local utils = require("utils")
+local mason_path = require("mason-core.path")
 
 local function base_capabilities()
 	return cmp.default_capabilities()
@@ -53,7 +54,7 @@ setup_lsp_config("efm", {
 		"elixir",
 	},
 })
-setup_lsp_config("elixirls", { cmd = { "/home/rodrigo/.local/bin/language_server.sh" } })
+setup_lsp_config("elixirls", { cmd = { mason_path.bin_prefix() .. "/elixir-ls" } })
 setup_lsp_config("erlangls")
 setup_lsp_config("eslint")
 setup_lsp_config("gopls")
