@@ -27,6 +27,8 @@ local function setup_lsp_config(lsp_name, opts)
 	lspconfig[lsp_name].setup(opts)
 end
 
+require("neodev").setup()
+
 setup_lsp_config("ansiblels")
 setup_lsp_config("awk_ls")
 setup_lsp_config("bashls")
@@ -60,19 +62,8 @@ setup_lsp_config("jsonls")
 setup_lsp_config("marksman")
 setup_lsp_config("pyright")
 setup_lsp_config("rust_analyzer")
-setup_lsp_config("sqls")
-setup_lsp_config("sumneko_lua", {
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = {
-					"vim",
-					"awesome",
-				},
-			},
-		},
-	},
-})
+setup_lsp_config("sqlls")
+setup_lsp_config("lua_ls")
 setup_lsp_config("tailwindcss")
 setup_lsp_config("terraformls")
 setup_lsp_config("tsserver", { flags = { debounce_text_changes = 50 } })
@@ -112,8 +103,8 @@ keymap.set("n", "gs", "<cmd>Lspsaga peek_type_definition<cr>", opts)
 keymap.set({ "n", "v" }, "<leader>a", "<cmd>Lspsaga code_action<cr>", opts)
 keymap.set("n", "K", "<cmd>Lspsaga hover_doc<cr>", opts)
 keymap.set("n", "<leader>e", "<cmd>Lspsaga show_cursor_diagnostics<cr>", opts)
-keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
-keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
+keymap.set("n", "]e", "<cmd>Lspsaga diagnostic_jump_next<cr>", opts)
+keymap.set("n", "[e", "<cmd>Lspsaga diagnostic_jump_prev<cr>", opts)
 keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
 keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<cr>", opts)
 

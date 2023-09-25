@@ -340,6 +340,7 @@ tnoremap <silent> <A-d> <C-\><C-n>:Lspsaga close_floaterm<CR>
 " -------------- NVim cmp
 set completeopt=menu,menuone,noselect
 
+lua require("init")
 lua require("cmp_conf")
 
 "inoremap <silent><expr> <Tab>   compe#scroll({ 'delta': +4 })

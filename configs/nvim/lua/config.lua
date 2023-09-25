@@ -19,6 +19,7 @@ vim.cmd([[
     autocmd FileType terraform setlocal ts=2 sts=2 sw=2
     autocmd FileType json setlocal ts=2 sts=2 sw=2
     autocmd FileType lua setlocal ts=2 sts=2 sw=2
+    autocmd FileType nix setlocal ts=2 sts=2 sw=2
 
     " Triger `autoread` when files changes on disk
     " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044

@@ -86,6 +86,7 @@ return require("packer").startup(function(use)
   -- use("/home/rodrigo/programations/misc/LspUI-fork")
   -- use("https://github.com/jinzhongjia/LspUI.nvim")
   use("https://github.com/nvimdev/lspsaga.nvim")
+  use("https://github.com/folke/neodev.nvim")
 
 	-- use 'kyazdani42/nvim-tree.lua'
 	-- use("elixir-editors/vim-elixir")
