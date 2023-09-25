@@ -62,8 +62,17 @@
   networking.networkmanager.enable = true;
 
   # TODO: This is just an example, be sure to use whatever bootloader you prefer
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    grub = {
+      enable = true;
+      efiSupport = true;
+      enableCryptodisk = true;
+      device = "nodev";
+      useOSProber = true;
+    };
+    efi.canTouchEfiVariables = true;
+    efi.efiSysMountPoint = "/boot/efi";
+  };
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -109,9 +118,10 @@
   #       '';
   #     }
   # ];
+  hardware.opengl.enable = true;
   services.xserver = {
     enable = true;
-    # videoDrivers = [ "nvidia" ];
+    videoDrivers = [ "nvidia" ];
     displayManager = {
       autoLogin.user = "rmoretto";
       lightdm.enable = true;
