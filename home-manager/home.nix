@@ -72,6 +72,8 @@
     exa
     xcowsay
     xclip
+
+    # networking
     openfortivpn
 
     # very cool code kid0
@@ -91,6 +93,7 @@
       ]);
     in
     python3-with-packages)
+    jetbrains.pycharm-professional
 
     # Fonts
     nerdfonts
