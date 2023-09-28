@@ -3,7 +3,15 @@
 polybar-msg cmd quit
 
 echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
+
+LEFT='DP-2'
+CENTER='DP-4'
+RIGHT='DP-0'
+
 polybar example 2>&1 | tee -a /tmp/polybar1.log & disown
+MONITOR=$LEFT polybar example 2>&1 | tee -a /tmp/polybar1.log & disown
+MONITOR=$RIGHT polybar example 2>&1 | tee -a /tmp/polybar1.log & disown
+
 # exit 0
 #
 # # Terminate already running bar instances

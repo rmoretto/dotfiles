@@ -1,0 +1,10 @@
+# /home/rodrigo/.config/tmuxinator/inova-defesa.yml
+
+name: elixir-test-session
+root: ~/programations/granter/inova-defesa/backend/inova-backend
+
+windows:
+  - backend-term:
+      root: ~/programations/granter/inova-defesa/backend/inova-backend
+      panes:
+        - echo oi

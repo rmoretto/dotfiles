@@ -1,0 +1,10 @@
+# /home/rodrigo/.config/tmuxinator/inova-defesa.yml
+
+name: test-session
+root: ~/
+
+windows:
+  - test-term:
+      root: ~/
+      panes:
+        - echo "Test Sessions"

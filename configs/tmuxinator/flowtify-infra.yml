@@ -1,0 +1,22 @@
+# /home/rodrigo/.config/tmuxinator/flowtify.yml
+
+name: flowtify
+root: ~/programations/granter/flowtify/infra
+
+windows:
+  - infra-editor:
+      root: ~/programations/granter/flowtify/infra/
+      panes:
+        - nvim .
+
+  - infra-term:
+      root: ~/programations/granter/flowtify/infra/
+      layout: even-horizontal
+      panes:
+        - git status
+
+  - infra-bastion:
+      root: ~/programations/granter/flowtify/infra/
+      layout: even-horizontal
+      panes:
+        - ssh flowtify_bastion

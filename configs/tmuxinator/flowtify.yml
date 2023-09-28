@@ -1,0 +1,43 @@
+# /home/rodrigo/.config/tmuxinator/flowtify.yml
+
+name: flowtify
+root: ~/programations/granter/flowtify/
+
+windows:
+  - frontend-editor:
+      root: ~/programations/granter/flowtify/frontend/flowtify-frontend
+      panes:
+        - nvim .
+
+  - frontend-term:
+      root: ~/programations/granter/flowtify/frontend/flowtify-frontend
+      layout: even-horizontal
+      panes:
+        - yarn dev --port 3001
+        - git status
+
+  - backend-editor:
+      root: ~/programations/granter/flowtify/backend/flowtify-backend
+      panes:
+        - nvim .
+
+  - backend-term:
+      root: ~/programations/granter/flowtify/backend/flowtify-backend
+      layout: even-horizontal
+      panes:
+        - MIX_ENV=dev mix phx.server
+        - git status
+
+  - granter-tools-editor:
+      root: ~/programations/granter/flowtify/frontend/granter-tools
+      panes:
+        - nvim .
+
+  - granter-tools-term:
+      root: ~/programations/granter/flowtify/frontend/granter-tools
+      layout: even-horizontal
+      panes:
+        - yarn dev
+        - git status
+
+

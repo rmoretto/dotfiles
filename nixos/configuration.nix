@@ -16,11 +16,11 @@
 
   nixpkgs = {
     # You can add overlays here
-    overlays = [
+    # overlays = [
       # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
+      # outputs.overlays.additions
+      # outputs.overlays.modifications
+      # outputs.overlays.unstable-packages
 
       # You can also add overlays exported from other flakes:
       # neovim-nightly-overlay.overlays.default
@@ -31,7 +31,7 @@
       #     patches = [ ./change-hello-to-hi.patch ];
       #   });
       # })
-    ];
+    # ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -41,12 +41,12 @@
 
   nix = {
     # This will add each flake input as a registry
-    # To make nix3 commands consistent with your flake
-    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    # To make nix3 commands consistent with your flakeconf.nix
+    # registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
-    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    # nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
       # Enable flakes and new 'nix' command
@@ -56,23 +56,21 @@
     };
   };
 
-  # FIXME: Add the rest of your current configuration
-
   networking.hostName = "rodrigo-pc";
   networking.networkmanager.enable = true;
 
-  # TODO: This is just an example, be sure to use whatever bootloader you prefer
   boot.loader = {
     grub = {
       enable = true;
       efiSupport = true;
-      enableCryptodisk = true;
       device = "nodev";
       useOSProber = true;
+      efiInstallAsRemovable = true;
     };
-    efi.canTouchEfiVariables = true;
     efi.efiSysMountPoint = "/boot/efi";
+    # efi.canTouchEfiVariables = true;
   };
+
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -118,17 +116,52 @@
   #       '';
   #     }
   # ];
-  hardware.opengl.enable = true;
+
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.displayManager.gdm.wayland = false;
+  # services.xserver.desktopManager.gnome.enable = true;
+
   services.xserver = {
     enable = true;
     videoDrivers = [ "nvidia" ];
     displayManager = {
       autoLogin.user = "rmoretto";
-      lightdm.enable = true;
+      defaultSession = "none+i3";
     };
     windowManager.i3.enable = true;
     layout = "us";
-    xkbVariant = "altgr-intl";
+    xkbVariant = "intl";
+  };
+
+  services.xserver.displayManager.setupCommands = ''
+    LEFT='DP-2'
+    CENTER='DP-4'
+    RIGHT='DP-0'
+    ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
+           --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
+           --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
+  '';
+
+  boot.kernelPackages = pkgs.linuxPackages_6_5;
+  # boot.kernelParams = [ "amdgpu.dc=0" ];
+
+  # boot.initrd.kernelModules = [ "nvidia" ];
+  # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
+  # boot.kernelParams = [ "module_blacklist=amdgpu" ];
+
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+    # powerManagement.enable = false;
+    # powerManagement.finegrained = false;
+    open = false;
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable sound with pipewire.
@@ -147,6 +180,9 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  hardware.keyboard.qmk.enable = true;
+  environment.etc."ppp/options".text = "ipcp-accept-remote";
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

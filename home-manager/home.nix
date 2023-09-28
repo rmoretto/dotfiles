@@ -55,6 +55,9 @@
 
   home.packages = with pkgs; [
     # Very Fun and games
+    firefox
+    google-chrome
+    chromium
     spotify
     discord
     
@@ -72,9 +75,15 @@
     exa
     xcowsay
     xclip
+    gnome.gnome-disk-utility
+
+    # soundsss
+    pavucontrol
+    alsa-utils
 
     # networking
     openfortivpn
+    networkmanagerapplet
 
     # very cool code kid0
     vim
@@ -121,6 +130,7 @@
       s = "status";
       a = "add";
       p = "push";
+      c = "commit";
     };
   };
 
@@ -184,7 +194,10 @@
   programs.alacritty = {
     enable = true;
     settings = {
-      shell.program = (builtins.trace "${pkgs.zsh}/bin/zsh" "${pkgs.zsh}/bin/zsh");
+      env = {
+        TERM = "xterm-256color";
+      };
+      shell.program = "${pkgs.zsh}/bin/zsh";
       window.padding = {
         x = 5;
         y = 5;
@@ -213,9 +226,20 @@
     historyLimit = 10000;
     escapeTime = 10;
     mouse = true;
+    shell = "${pkgs.zsh}/bin/zsh";
+    tmuxinator.enable = true;
     plugins = with pkgs; [
       tmuxPlugins.tilish
     ];
+    extraConfig = ''
+    set-option -ga terminal-overrides ",*256col*:Tc:RGB"
+    '';
+  };
+
+  # ---- tmuxinator Configuration ---- #
+  home.file.".config/tmuxinator" = {
+    source = ../configs/tmuxinator;
+    recursive = true;
   };
 
   # ---- rofi Configuration ---- #
