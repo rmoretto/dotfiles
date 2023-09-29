@@ -17,20 +17,20 @@
   nixpkgs = {
     # You can add overlays here
     # overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      # outputs.overlays.additions
-      # outputs.overlays.modifications
-      # outputs.overlays.unstable-packages
+    # Add overlays your own flake exports (from overlays and pkgs dir):
+    # outputs.overlays.additions
+    # outputs.overlays.modifications
+    # outputs.overlays.unstable-packages
 
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
+    # You can also add overlays exported from other flakes:
+    # neovim-nightly-overlay.overlays.default
 
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
+    # Or define it inline, for example:
+    # (final: prev: {
+    #   hi = final.hello.overrideAttrs (oldAttrs: {
+    #     patches = [ ./change-hello-to-hi.patch ];
+    #   });
+    # })
     # ];
     # Configure your nixpkgs instance
     config = {
@@ -42,11 +42,11 @@
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flakeconf.nix
-    # registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
+    registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
 
     # This will additionally add your inputs to the system's legacy channels
     # Making legacy nix commands consistent as well, awesome!
-    # nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
+    nixPath = lib.mapAttrsToList (key: value: "${key}=${value.to.path}") config.nix.registry;
 
     settings = {
       # Enable flakes and new 'nix' command
@@ -60,17 +60,15 @@
   networking.networkmanager.enable = true;
 
   boot.loader = {
+    efi.canTouchEfiVariables = true;
     grub = {
       enable = true;
       efiSupport = true;
       device = "nodev";
       useOSProber = true;
-      efiInstallAsRemovable = true;
+      # efiInstallAsRemovable = true;
     };
-    efi.efiSysMountPoint = "/boot/efi";
-    # efi.canTouchEfiVariables = true;
   };
-
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -90,47 +88,23 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
+  security.pam.services.lightdm.enableGnomeKeyring = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  services.gnome3.gnome-keyring.enable = true;
+
   # Enable the X11 windowing system.
-  # services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm = {
-  #   enable = true;
-  #   wayland = false;
-  # };
-  # services.xserver.desktopManager.gnome.enable = true;
-
-  # services.xserver.displayManager.sessionCommands = ''
-  #   ${lib.getBin pkgs.dbus}/bin/dbus-update-activation-environment --systemd --all
-  # '';
-
-  # services.xserver.displayManager.autoLogin.user = "rmoretto";
-  # services.xserver.displayManager.lightdm.enable = true;
-  # services.xserver.windowManager.i3.enable = true;
-  # services.xserver.desktopManager.session = [
-  #   {
-  #       name = "xsession";
-  #       start = ''
-  #         ${pkgs.runtimeShell} $HOME/.xsession &
-  #         waitPID=$!
-  #       '';
-  #     }
-  # ];
-
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.displayManager.gdm.wayland = false;
-  # services.xserver.desktopManager.gnome.enable = true;
-
   services.xserver = {
     enable = true;
-    videoDrivers = [ "nvidia" ];
+    videoDrivers = ["nvidia"];
     displayManager = {
       autoLogin.user = "rmoretto";
+      lightdm.enable = true;
       defaultSession = "none+i3";
     };
     windowManager.i3.enable = true;
     layout = "us";
     xkbVariant = "intl";
+    exportConfiguration = true;
   };
 
   services.xserver.displayManager.setupCommands = ''
@@ -143,11 +117,6 @@
   '';
 
   boot.kernelPackages = pkgs.linuxPackages_6_5;
-  # boot.kernelParams = [ "amdgpu.dc=0" ];
-
-  # boot.initrd.kernelModules = [ "nvidia" ];
-  # boot.extraModulePackages = [ config.boot.kernelPackages.nvidia_x11 ];
-  # boot.kernelParams = [ "module_blacklist=amdgpu" ];
 
   hardware.opengl = {
     enable = true;
@@ -198,6 +167,7 @@
     neovim
     home-manager
     polkit_gnome
+    gnome.gnome-keyring
   ];
 
   users.users = {
@@ -205,11 +175,7 @@
       initialPassword = "1234";
       isNormalUser = true;
       description = "zequinha d vdd";
-      openssh.authorizedKeys.keys = [
-        # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
-      ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = [ "networkmanager" "wheel" "docker" ];
+      extraGroups = ["networkmanager" "wheel" "docker"];
       packages = with pkgs; [
         firefox
         git
@@ -219,37 +185,24 @@
         neovim
       ];
     };
-    teste = {
-      isNormalUser = true;
-      description = "teste";
-      extraGroups = [ "networkmanager" "wheel" ];
-      packages = with pkgs; [
-        firefox
-      #  thunderbird
-      ];
-    };
   };
 
   services.davfs2.enable = true;
 
-  # This setups a SSH server. Very important if you're setting up a headless system.
-  # Feel free to remove if you don't need it.
   services.openssh = {
     enable = true;
-    # Forbid root login through SSH.
     permitRootLogin = "no";
-    # Use keys only. Remove if you want to SSH using password (not recommended)
-    passwordAuthentication = false;
   };
 
   services.spice-vdagentd.enable = true;
+  virtualisation.docker.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
       description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
+      wantedBy = ["graphical-session.target"];
+      wants = ["graphical-session.target"];
+      after = ["graphical-session.target"];
       serviceConfig = {
         Type = "simple";
         ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -258,7 +211,20 @@
         TimeoutStopSec = 10;
       };
     };
+
+    # user.services.gnome-keyring = {
+    #   description = "GNOME Keyring";
+    #   wantedBy = [ "graphical-session-pre.target" ];
+    #   wants = ["graphical-session.target"];
+    #   after = ["graphical-session.target"];
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "${pkgs.gnome.gnome-keyring}/bin/gnome-keyring-daemon --start --foreground";
+    #     Restart = "on-abort";
+    #   };
+    # };
   };
+
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

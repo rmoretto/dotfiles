@@ -153,6 +153,7 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 # exec --no-startup-id wal -R
 exec --no-startup-id $HOME/.config/i3/scripts/mouse_accel.sh
+# exec --no-startup-id "dbus-update-activation-environment --all && gnome-keyring-daemon --start --components=pkcs11,secrets"
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.config/i3/scripts/picom_start.sh
 exec_always --no-startup-id xset +fp /home/rodrigo/.local/share/fonts/

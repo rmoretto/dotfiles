@@ -60,7 +60,7 @@
     chromium
     spotify
     discord
-    
+
     # System utilities
     htop
     ncdu
@@ -76,6 +76,12 @@
     xcowsay
     xclip
     gnome.gnome-disk-utility
+    sl
+    neofetch
+    cmatrix
+    libnotify
+    gnome.nautilus
+    gnome.seahorse
 
     # soundsss
     pavucontrol
@@ -96,12 +102,13 @@
     lua
     nodejs
     (let
-      python3-with-packages = pkgs.python3.withPackages(p: with p; [
-        pynvim
-        setuptools
-      ]);
+      python3-with-packages = pkgs.python3.withPackages (p:
+        with p; [
+          pynvim
+          setuptools
+        ]);
     in
-    python3-with-packages)
+      python3-with-packages)
     jetbrains.pycharm-professional
 
     # Fonts
@@ -150,6 +157,7 @@
         "mix"
         "tmuxinator"
         "docker-compose"
+        "docker"
       ];
     };
     sessionVariables = {
@@ -170,23 +178,35 @@
       ciasc-vpn = "sudo openfortivpn sslvpn01.ciasc.gov.br --username=granter_rmoretto@vpn.ciasc.gov.br";
     };
     initExtra = ''
-    _ssh_configfile()
-    {
-        set -- "''${words[@]}"
-        while [[ $# -gt 0 ]]; do
-            if [[ $1 == -F* ]]; then
-                if [[ ''${#1} -gt 2 ]]; then
-                    configfile="$(dequote "''${1:2}")"
-                else
-                    shift
-                    [[ $1 ]] && configfile="$(dequote "$1")"
-                fi
-                break
-            fi
-            shift
-        done
-    }
-    complete -F _ssh_configfile get-ssh-hostname
+      _ssh_configfile()
+      {
+          set -- "''${words[@]}"
+          while [[ $# -gt 0 ]]; do
+              if [[ $1 == -F* ]]; then
+                  if [[ ''${#1} -gt 2 ]]; then
+                      configfile="$(dequote "''${1:2}")"
+                  else
+                      shift
+                      [[ $1 ]] && configfile="$(dequote "$1")"
+                  fi
+                  break
+              fi
+              shift
+          done
+      }
+      complete -F _ssh_configfile get-ssh-hostname
+
+      ### Fix slowness of pastes with zsh-syntax-highlighting.zsh
+      pasteinit() {
+        OLD_SELF_INSERT=''${''${(s.:.)widgets[self-insert]}[2,3]}
+        zle -N self-insert url-quote-magic # I wonder if you'd need `.url-quote-magic`?
+      }
+
+      pastefinish() {
+        zle -N self-insert $OLD_SELF_INSERT
+      }
+      zstyle :bracketed-paste-magic paste-init pasteinit
+      zstyle :bracketed-paste-magic paste-finish pastefinis
     '';
   };
 
@@ -232,7 +252,7 @@
       tmuxPlugins.tilish
     ];
     extraConfig = ''
-    set-option -ga terminal-overrides ",*256col*:Tc:RGB"
+      set-option -ga terminal-overrides ",*256col*:Tc:RGB"
     '';
   };
 
@@ -288,20 +308,35 @@
   };
 
   # ---- Xresources colors :) ---- #
-  xresources.extraConfig = 
-    builtins.readFile (
-      pkgs.fetchFromGitHub {
-          owner = "rebelot";
-          repo = "kanagawa.nvim";
-          rev = "58cdce2cb666e6e946edec0145f177f89ca4a9ad";
-          sha256 = "sha256-TmuwIhjptegMcdwYToCTS9dyyndKzp5fJoahXF3F1K0=";
-      } + "/extras/.Xresources"
-    );
+  xresources.extraConfig = builtins.readFile (
+    pkgs.fetchFromGitHub {
+      owner = "rebelot";
+      repo = "kanagawa.nvim";
+      rev = "58cdce2cb666e6e946edec0145f177f89ca4a9ad";
+      sha256 = "sha256-TmuwIhjptegMcdwYToCTS9dyyndKzp5fJoahXF3F1K0=";
+    }
+    + "/extras/.Xresources"
+  );
+
+  # home.file.".XCompose" = {
+  #   text = ''
+  #   include "$H/.compose-cache/"
+  #
+  #   <dead_acute> <c> : "ç" ccedilla
+  #   <dead_acute> <Ç> : "Ç" ccedilla
+  #   '';
+  # };
 
   # ---- SSH Configs ---- #
   home.file.".ssh/config" = {
     source = ../configs/ssh/config;
   };
+
+  # ---- Gnome Keyring Configs ---- #
+  # services.gnome-keyring = {
+  #   enable = true;
+  #   components = ["pkcs11" "secrets"];
+  # };
 
   # ---- Secrets Management with SOPS ---- #
   sops = {

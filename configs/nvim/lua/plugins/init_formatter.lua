@@ -6,6 +6,10 @@ local function terraform()
 	return { exe = "terraform", args = { "fmt", "-write=false" }, stdin = true }
 end
 
+local function nix()
+	return { exe = "nix", args = { "fmt" }, stdin = true }
+end
+
 local stylua = require("formatter.filetypes.lua").stylua
 local prettier = require("formatter.filetypes.javascript").prettier
 local black = require("formatter.filetypes.python").black
@@ -32,6 +36,7 @@ require("formatter").setup({
 		python = { black },
 		rust = { rustfmt },
 		terraform = { terraform },
+		nix = { nix },
 	},
 })
 
