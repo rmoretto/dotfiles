@@ -72,7 +72,10 @@
     libnotify
     gnome.nautilus
     gnome.seahorse
-
+    gparted
+    flameshot
+    gzip
+    libsForQt5.ark
     
     # soundsss
     pavucontrol
@@ -358,6 +361,14 @@
       ];
       glx-no-stencil = true;
       shadow-radius = 7;
+    };
+  };
+
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Materia-dark";
+      package = pkgs.materia-theme;
     };
   };
 
