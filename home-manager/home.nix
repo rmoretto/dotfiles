@@ -77,6 +77,7 @@
     gzip
     libsForQt5.ark
     ntfs3g
+    feh
     
     # soundsss
     pavucontrol
@@ -213,6 +214,12 @@
     settings = {
       env = {
         TERM = "xterm-256color";
+      };
+      colors = {
+        primary = {
+          background = "#1f1f28";
+          foreground = "#dcd7ba";
+        };
       };
       shell.program = "${pkgs.zsh}/bin/zsh";
       window.padding = {

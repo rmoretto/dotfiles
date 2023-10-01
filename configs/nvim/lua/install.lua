@@ -63,7 +63,8 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	use("meain/vim-printer")
 	use("gbprod/yanky.nvim")
-    use("chentoast/marks.nvim")
+  use("chentoast/marks.nvim")
+  use("norcalli/nvim-colorizer.lua")
 
 	-- IDE Like
 	use("mfussenegger/nvim-dap")

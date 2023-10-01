@@ -24,5 +24,6 @@ require("mason-lspconfig").setup({
 		"terraformls",
 		"tsserver",
 		"volar",
+    "rnix-lsp"
 	},
 })

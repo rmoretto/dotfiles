@@ -70,6 +70,7 @@ setup_lsp_config("terraformls")
 setup_lsp_config("tsserver", { flags = { debounce_text_changes = 50 } })
 setup_lsp_config("volar")
 setup_lsp_config("arduino_language_server")
+setup_lsp_config("rnix")
 
 -- Override global border configration for the lsp floating window
 -- local global_border = "rounded"
