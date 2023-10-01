@@ -76,6 +76,7 @@
     flameshot
     gzip
     libsForQt5.ark
+    ntfs3g
     
     # soundsss
     pavucontrol

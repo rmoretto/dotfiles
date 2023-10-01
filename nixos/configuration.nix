@@ -70,6 +70,8 @@
     };
   };
 
+  boot.supportedFilesystems = [ "ntfs" ];
+
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
 
@@ -196,6 +198,8 @@
 
   services.spice-vdagentd.enable = true;
   virtualisation.docker.enable = true;
+
+  programs.dconf.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {

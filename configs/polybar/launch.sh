@@ -8,9 +8,9 @@ LEFT='DP-2'
 CENTER='DP-4'
 RIGHT='DP-0'
 
-polybar example 2>&1 | tee -a /tmp/polybar1.log & disown
-MONITOR=$LEFT polybar example 2>&1 | tee -a /tmp/polybar1.log & disown
-MONITOR=$RIGHT polybar example 2>&1 | tee -a /tmp/polybar1.log & disown
+polybar center 2>&1 | tee -a /tmp/polybar1.log & disown
+MONITOR=$LEFT polybar left 2>&1 | tee -a /tmp/polybar1.log & disown
+MONITOR=$RIGHT polybar right 2>&1 | tee -a /tmp/polybar1.log & disown
 
 # exit 0
 #

@@ -164,7 +164,7 @@ exec_always --no-startup-id xset fp rehash
 # Gaps
 # ===========================================
 gaps inner 8
-gaps outer -4
+gaps outer 0
 
 default_border pixel 1
 default_floating_border pixel 1
