@@ -101,6 +101,7 @@
     (let
       python3-with-packages = pkgs.python3.withPackages (p:
         with p; [
+          pip
           pynvim
           setuptools
         ]);
@@ -269,8 +270,10 @@
   };
 
   # ---- rofi Configuration ---- #
-  programs.rofi = {
-    enable = true;
+  programs.rofi.enable = true;
+  home.file.".config/rofi" = {
+    source = ../configs/rofi;
+    recursive = true;
   };
 
   # ---- nvim Configuration ---- #

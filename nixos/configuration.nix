@@ -201,6 +201,7 @@
   services.spice-vdagentd.enable = true;
   virtualisation.docker.enable = true;
 
+  programs.ssh.startAgent = true;
   programs.dconf.enable = true;
   programs.thunar = {
     enable = true;
