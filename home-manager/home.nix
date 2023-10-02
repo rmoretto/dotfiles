@@ -120,11 +120,12 @@
     termsyn
     material-icons
     material-design-icons
-    material-symbols
     terminus_font
     terminus-nerdfont
     fantasque-sans-mono
     noto-fonts
+    papirus-icon-theme
+    font-awesome
   ];
 
   # Enable home-manager and git
@@ -349,14 +350,16 @@
     ];
     inactiveOpacity = 0.9;
     wintypes = {
-      tooltip = { fade = true; shadow = true; opacity = 0.75; focus = true; full-shadow = false; };
+      tooltip = { fade = true; shadow = true; opacity = 1; focus = true; full-shadow = false; };
       dock = { shadow = false; clip-shadow-above = true; };
       dnd = { shadow = false; };
+      dropdown_menu = { opacity = 1; };
       popup_menu = { shadow = false; fade = false; };
     };
     backend = "glx";
     opacityRules = [
       "100:name = 'Picture-in-Picture'"
+      "100:name = 'Rofi'"
     ];
     settings = {
       inactive-opacity-override = false;
