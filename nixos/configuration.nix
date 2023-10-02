@@ -190,6 +190,8 @@
   };
 
   services.davfs2.enable = true;
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   services.openssh = {
     enable = true;
@@ -200,6 +202,14 @@
   virtualisation.docker.enable = true;
 
   programs.dconf.enable = true;
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {

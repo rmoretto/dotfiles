@@ -70,18 +70,19 @@
     neofetch
     cmatrix
     libnotify
-    gnome.nautilus
     gnome.seahorse
     gparted
     flameshot
     gzip
-    libsForQt5.ark
+    # gnome.nautilus
+    # libsForQt5.ark
     ntfs3g
     feh
     
-    # soundsss
+    # soundsss and VIDEOS
     pavucontrol
     alsa-utils
+    vlc
 
     # networking
     openfortivpn
