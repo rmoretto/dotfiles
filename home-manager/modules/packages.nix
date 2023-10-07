@@ -61,6 +61,10 @@
       python3-with-packages = pkgs.python3.withPackages (p:
         with p; [
           pip
+          black
+          pillow
+          dbus-python
+          pygobject3
           pynvim
           setuptools
         ]);
@@ -69,6 +73,8 @@
     jetbrains.pycharm-professional
     docker-compose
     postgresql_13
+    gdk-pixbuf
+    gtk3
 
     # Fonts
     nerdfonts

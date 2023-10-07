@@ -8,9 +8,11 @@
 }: {
   # You can import other home-manager modules here
   imports = [
+    ./modules/packages.nix
+
+    ./modules/eww.nix
     ./modules/git.nix
     ./modules/nvim.nix
-    ./modules/packages.nix
     ./modules/picom.nix
     ./modules/rofi.nix
     ./modules/ssh.nix

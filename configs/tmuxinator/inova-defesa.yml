@@ -7,7 +7,9 @@ windows:
   - frontend-editor:
       root: ~/programations/granter/inova-defesa/frontend/inova-frontend
       panes:
-        - nvim .
+        - nvim:
+          - nix develop
+          - nvim .
 
   - frontend-term:
       root: ~/programations/granter/inova-defesa/frontend/inova-frontend
@@ -23,7 +25,9 @@ windows:
   - backend-editor:
       root: ~/programations/granter/inova-defesa/backend/inova-backend
       panes:
-        - nvim .
+        - nvim:
+          - nix develop
+          - nvim .
 
   - backend-term:
       root: ~/programations/granter/inova-defesa/backend/inova-backend

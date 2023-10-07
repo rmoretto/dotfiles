@@ -1,0 +1,44 @@
+
+.noti-wrapper {
+  background: #090618;
+  padding: 6px 8px; 
+}
+
+.noti-box {
+  background: #1f1f28;
+  margin: 4px 0; 
+  padding: 6px 6px; 
+
+  border-radius: 12px;
+}
+
+.noti-img {
+  margin: 0 4px;
+}
+
+.noti-text-wrapper {
+  padding-left: 6px;
+}
+
+.noti-title {
+  font-size: 14px;
+}
+
+.noti-msg {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.noti-delete-btn {
+  background: transparent;
+  font-size: 14px;
+  color: #c34043;
+  border-radius: 100%;
+
+  &:hover {
+    color: #e82424;
+    background: #727169;
+  }
+}
+
+
