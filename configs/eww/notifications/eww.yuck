@@ -1,51 +1,61 @@
+(defvar show-notification false)
+
 (defpoll notifications 
-  :interval "300s"
+  :interval "1s"
   :initial "[]"
-  `/home/rmoretto/programations/misc/notify-icons/result/bin/notifdctl list | jq .data`)
+  `notifdctl list | jq .data`)
 
 (defwidget noti_box [entry]
-  (box :class "noti-box" :space-evenly false
+  (box :class "box" :space-evenly false
     (image :path "${entry.icon_path}" 
            :image-width 42
-           :class "noti-img")
+           :class "img")
     (box :orientation "vertical" 
          :height 64
          :hexpand true
          :space-evenly false
-         :class "noti-text-wrapper"
+         :class "text-wrapper"
       (box :space-evenly false
         (label :wrap true 
                :hexpand true
                :limit-width 48 
                :halign "start" 
-               :justify "left"
                :markup "${entry.summary}"
-               :class "noti-title")
+               :class "title")
         (button 
           :height 12
           :width 12
-          :class "noti-delete-btn"
-          :onclick `/home/rmoretto/programations/misc/notify-icons/result/bin/notifdctl pop ${entry.id}` 
+          :class "delete-btn"
+          :onclick `notifdctl pop ${entry.id}` 
           "")
       )
       (label :wrap true 
              :limit-width 128
              :halign "start" 
-             :justify "left"
              :vexpand false
              :text "${entry.body}"
-             :class "noti-msg")
+             :class "msg")
+    )
+  )
+)
+
+(defwidget nothist_top []
+  (box :space-evenly false :class "top"
+    (label :hexpand true :text "Notification Center" :class "top-title")
+    (button 
+      :onclick `notifdctl clear`
+      :class "delete-btn"
+      :style "font-weight: bold"
+      "Clear"
     )
   )
 )
 
 (defwidget nothist_layout []
-  (box :space-evenly false :orientation "vertical"
-    (button :onclick `/home/rmoretto/programations/misc/notify-icons/result/bin/notifdctl clear`
-      "Limpa TD"
-      )
+  (box :space-evenly false :orientation "vertical" :class "layout"
+    (nothist_top)
     (scroll :vexpand true
-      (box :orientation "vertical" :class "noti-wrapper" :vexpand false :space-evenly false
+      (box :orientation "vertical" :class "wrapper" :vexpand false :space-evenly false
         (for entry in notifications 
           (noti_box :entry entry)
         )
@@ -56,13 +66,14 @@
 
 (defwindow notification_history
   :stacking "fg"
-  :windowtype "normal"
-  :wm-ignore true
   :windowtype "dialog"
+  :wm-ignore true
   :geometry (geometry
               :anchor "top right" 
               :x "-12"
               :y "3%"
               :width "300px"
               :height "94%")
-  (nothist_layout))
+  
+  (nothist_layout)
+)

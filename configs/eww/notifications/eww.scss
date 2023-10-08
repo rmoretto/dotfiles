@@ -1,44 +1,65 @@
 
-.noti-wrapper {
-  background: #090618;
+$foreground: #dcd7ba;
+$background: #1f1f28;
+
+$black: #090618;
+$grey: #727169;
+
+$alert-1: #c34043;
+$alert-2: #e82424;
+
+.layout {
+  transition: all 250ms;
+}
+
+.wrapper {
+  background: $black;
   padding: 6px 8px; 
 }
 
-.noti-box {
-  background: #1f1f28;
+.box {
+  background: $background;
   margin: 4px 0; 
   padding: 6px 6px; 
 
   border-radius: 12px;
 }
 
-.noti-img {
+.img {
   margin: 0 4px;
 }
 
-.noti-text-wrapper {
+.text-wrapper {
   padding-left: 6px;
 }
 
-.noti-title {
+.title {
   font-size: 14px;
 }
 
-.noti-msg {
+.msg {
   font-size: 12px;
   margin-top: 6px;
 }
 
-.noti-delete-btn {
+.delete-btn {
   background: transparent;
   font-size: 14px;
-  color: #c34043;
+  color: $alert-1;
   border-radius: 100%;
 
   &:hover {
-    color: #e82424;
-    background: #727169;
+    color: $alert-2;
+    background: $grey;
   }
 }
 
+.top {
+  background: $black;
+  padding: 3px 3px;
+}
 
+.top-title {
+  font-size: 18px;
+  font-weight: bold;
+}
