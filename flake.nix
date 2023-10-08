@@ -18,6 +18,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs";
     };
+
+    notifd.url = "github:rmoretto/notifd";
   };
 
   outputs = {

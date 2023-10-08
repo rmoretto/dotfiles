@@ -37,6 +37,7 @@
     # libsForQt5.ark
     ntfs3g
     feh
+    notifd
     
     # soundsss and VIDEOS
     pavucontrol
