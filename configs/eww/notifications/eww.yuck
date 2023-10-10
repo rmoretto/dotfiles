@@ -1,7 +1,7 @@
 (defvar show-notification false)
 
 (defpoll notifications 
-  :interval "1s"
+  :interval "0.5s"
   :initial "[]"
   `notifdctl list | jq .data`)
 
@@ -51,16 +51,20 @@
   )
 )
 
-(defwidget nothist_layout []
-  (box :space-evenly false :orientation "vertical" :class "layout"
-    (nothist_top)
-    (scroll :vexpand true
-      (box :orientation "vertical" :class "wrapper" :vexpand false :space-evenly false
-        (for entry in notifications 
-          (noti_box :entry entry)
-        )
+(defwidget nothist_list []
+  (scroll :vexpand true :vscroll true :hscroll false :class "scroller"
+    (box :orientation "vertical" :class "wrapper" :vexpand false :space-evenly false
+      (for entry in notifications 
+        (noti_box :entry entry)
       )
     )
+  )
+)
+
+(defwidget nothist_layout []
+  (box :class "layout" :orientation "vertical" :vexpand true :space-evenly false
+    (nothist_top)
+    (nothist_list)
   )
 )
 

@@ -46,7 +46,9 @@ $alert-2: #e82424;
   background: transparent;
   font-size: 14px;
   color: $alert-1;
-  border-radius: 100%;
+  border-radius: 12px;
+
+  transition: all 150ms ease;
 
   &:hover {
     color: $alert-2;
@@ -62,4 +64,19 @@ $alert-2: #e82424;
 .top-title {
   font-size: 18px;
   font-weight: bold;
+}
+
+/*************
+ * overshoot *
+ *************/
+.scrolledwindow {
+  &.top { background-color: red; }
+  &.bottom { background-color: red; }
+}
+
+/**************
+ * undershoot *
+ **************/
+.undershoot {
+    background: red;
 }

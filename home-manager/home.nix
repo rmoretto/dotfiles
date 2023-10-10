@@ -39,6 +39,21 @@
     homeDirectory = "/home/rmoretto";
   };
 
+  systemd.user.services.notifd = {
+    Unit = {
+      Description = "NotifD - Notification Watcher Service";
+    };
+
+    Service = {
+      ExecStart = "${pkgs.notifd}/bin/notifd";
+      KillSignal = "SIGKILL";
+    };
+
+    Install = {
+      WantedBy = [ "default.target" ];
+    };
+  };
+
   # Enable home-manager and git
   programs.home-manager.enable = true;
   # Nicely reload system units when changing configs
