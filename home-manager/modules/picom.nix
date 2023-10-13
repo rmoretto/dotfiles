@@ -25,6 +25,7 @@
     opacityRules = [
       "100:name = 'Picture-in-Picture'"
       "100:class_g = 'Rofi'"
+      "100:class_g = 'discord'"
     ];
     settings = {
       inactive-opacity-override = false;

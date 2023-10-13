@@ -98,7 +98,7 @@ vim.o.omnifunc = "v:lua.vim.lsp.omnifunc"
 -- keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
 -- keymap.set("n", "<leader>a", vim.lsp.buf.code_action, opts)
 
-keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", opts)
+keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 keymap.set("n", "gr", "<cmd>Lspsaga finder<cr>", opts)
 keymap.set("n", "gi", "<cmd>Lspsaga peek_definition<cr>", opts)
 keymap.set("n", "gs", "<cmd>Lspsaga peek_type_definition<cr>", opts)

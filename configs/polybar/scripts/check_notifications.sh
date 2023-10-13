@@ -1,8 +1,8 @@
 #!/bin/bash
 
-NOTIFICATION_COUNT=$(notifdctl list | jq ".data" | jq length)
+NOTIFICATION_READ=$(notifdctl get-notifications-read | jq ".data.notifications_read")
 
-if [[ ${NOTIFICATION_COUNT} -eq 0 ]]
+if [[ "${NOTIFICATION_READ}" == "true" ]]
 then
     echo "󰍩"
 else

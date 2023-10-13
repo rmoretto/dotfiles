@@ -76,6 +76,7 @@
     postgresql_13
     gdk-pixbuf
     gtk3
+    terraform
 
     # Fonts
     nerdfonts

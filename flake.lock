@@ -13,9 +13,8 @@
         "type": "github"
       },
       "original": {
-        "owner": "numtide",
-        "repo": "flake-utils",
-        "type": "github"
+        "id": "flake-utils",
+        "type": "indirect"
       }
     },
     "home-manager": {
@@ -93,11 +92,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1696791035,
-        "narHash": "sha256-NRF9Igu+IF0AmqXjN8sEd6w5KYHt3ux+3mUeOjjdw78=",
+        "lastModified": 1697208657,
+        "narHash": "sha256-fFASoArVbjxWb7qh7sBUMYQVKaELkPLKj3OvGkjbXZs=",
         "owner": "rmoretto",
         "repo": "notifd",
-        "rev": "172ae914c4eddeee4d035aa9420d928fb5a792c8",
+        "rev": "9894a598525be40579b9e26939ebc32580df9aa5",
         "type": "github"
       },
       "original": {
