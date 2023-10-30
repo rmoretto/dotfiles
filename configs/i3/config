@@ -211,6 +211,7 @@ for_window [class="Gnome-calendar"] floating enable
 for_window [title="About Mozilla Firefox"] floating enable
 for_window [title="Android Emulator*"] floating enable
 for_window [class="battle.net.exe"] floating enable
+for_window [class="gnome-calendar"] floating enable
 
 
 # ===========================================

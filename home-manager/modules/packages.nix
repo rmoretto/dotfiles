@@ -9,6 +9,7 @@
     chromium
     spotify
     discord
+    steam
 
     # System utilities
     htop
@@ -38,6 +39,8 @@
     ntfs3g
     feh
     notifd
+    gnome.file-roller
+    gnome.gnome-calendar
     
     # soundsss and VIDEOS
     pavucontrol
