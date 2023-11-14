@@ -37,7 +37,7 @@ windows:
           - nix develop
           - MIX_ENV=dev mix phx.server
         - git:
-          - nix develop
+          - nix develop .#test
           - git status
 
   - infra-editor:

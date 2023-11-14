@@ -10,7 +10,7 @@
 
   services.polybar = {
     enable = true;
-    package = pkgs.polybar.override {
+    package = pkgs.unstable.polybar.override {
       alsaSupport = true;
       githubSupport = true;
       mpdSupport = true;

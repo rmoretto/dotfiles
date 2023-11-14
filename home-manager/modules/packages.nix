@@ -5,7 +5,7 @@
   home.packages = with pkgs; [
     # Very Fun and games
     firefox
-    google-chrome
+    unstable.google-chrome
     chromium
     spotify
     discord
@@ -41,6 +41,7 @@
     notifd
     gnome.file-roller
     gnome.gnome-calendar
+    btop
     
     # soundsss and VIDEOS
     pavucontrol

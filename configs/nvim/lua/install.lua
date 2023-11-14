@@ -40,10 +40,11 @@ return require("packer").startup(function(use)
 
 	-- Git Stuffs
 	use("https://github.com/lewis6991/gitsigns.nvim")
-	-- 🙏
-	use("tpope/vim-fugitive")
+  use("akinsho/git-conflict.nvim")
 
 	-- The one and only tpoe
+	-- 🙏
+	use("tpope/vim-fugitive")
 	use("https://github.com/tpope/vim-dispatch")
 
 	-- Windows Helpers

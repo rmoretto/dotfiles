@@ -45,7 +45,7 @@
     };
 
     Service = {
-      ExecStart = "${pkgs.notifd}/bin/notifd";
+      ExecStart = "${pkgs.notifd}/bin/notifd run";
       KillSignal = "SIGKILL";
     };
 
