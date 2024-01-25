@@ -70,10 +70,11 @@
     };
   };
 
-  boot.supportedFilesystems = [ "ntfs" ];
+  boot.supportedFilesystems = ["ntfs"];
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
+  time.hardwareClockInLocalTime = true;
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
@@ -189,6 +190,9 @@
     };
   };
 
+  xdg.portal.enable = true;
+  services.flatpak.enable = true;
+
   services.davfs2.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
@@ -210,7 +214,6 @@
       thunar-volman
     ];
   };
-
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
@@ -239,7 +242,6 @@
     #   };
     # };
   };
-
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "23.05";

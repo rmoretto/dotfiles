@@ -29,5 +29,6 @@ cmp.setup({
 		{ name = "path" },
 		{ name = "buffer" },
 		{ name = "emoji" },
+    { name = 'nvim_lsp', trigger_characters = { '-' } }
 	},
 })

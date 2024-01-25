@@ -2,9 +2,9 @@
   services.picom = {
     enable = true;
     fade = true;
-    fadeSteps = [ 0.1 0.1 ];
+    fadeSteps = [0.1 0.1];
     shadow = true;
-    shadowOffsets = [ (-7) (-7) ];
+    shadowOffsets = [(-7) (-7)];
     shadowExclude = [
       "name = 'Notification'"
       "class_g = 'Conky'"
@@ -15,11 +15,23 @@
     ];
     inactiveOpacity = 0.9;
     wintypes = {
-      tooltip = { fade = true; shadow = true; opacity = 1; focus = true; full-shadow = false; };
-      dock = { shadow = false; clip-shadow-above = true; };
-      dnd = { shadow = false; };
-      dropdown_menu = { opacity = 1; };
-      popup_menu = { shadow = false; fade = false; };
+      tooltip = {
+        fade = true;
+        shadow = true;
+        opacity = 1;
+        focus = true;
+        full-shadow = false;
+      };
+      dock = {
+        shadow = false;
+        clip-shadow-above = true;
+      };
+      dnd = {shadow = false;};
+      dropdown_menu = {opacity = 1;};
+      popup_menu = {
+        shadow = false;
+        fade = false;
+      };
     };
     backend = "glx";
     opacityRules = [

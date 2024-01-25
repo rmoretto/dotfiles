@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   ...
 }: {
@@ -10,6 +11,9 @@
     spotify
     discord
     steam
+    lutris
+    inputs.nix-gaming.packages.${pkgs.hostPlatform.system}.proton-ge
+    godot_4
 
     # System utilities
     htop
@@ -42,7 +46,12 @@
     gnome.file-roller
     gnome.gnome-calendar
     btop
-    
+    woeusb
+    efibootmgr
+    protontricks
+    steam-run
+    wine
+
     # soundsss and VIDEOS
     pavucontrol
     alsa-utils
@@ -56,8 +65,11 @@
     vim
     nano
     vscode
-    cargo
-    rustc
+    rustup
+    # cargo
+    # rustc
+    # rust-analyzer
+    marksman
     go
     gcc
     lua
@@ -72,6 +84,7 @@
           pygobject3
           pynvim
           setuptools
+          psycopg2
         ]);
     in
       python3-with-packages)
@@ -81,6 +94,7 @@
     gdk-pixbuf
     gtk3
     terraform
+    delta
 
     # Fonts
     nerdfonts
@@ -98,5 +112,4 @@
     papirus-icon-theme
     font-awesome
   ];
-
 }

@@ -2,4 +2,5 @@
 # You can build them using 'nix build .#example'
 pkgs: {
   forticlient = pkgs.callPackage ./forticlient {};
+  min-ed-launcher = pkgs.callPackage ./min-ed-launcher {};
 }

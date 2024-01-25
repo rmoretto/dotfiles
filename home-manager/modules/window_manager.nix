@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   xsession.windowManager.i3.enable = true;
   home.file.".config/i3" = {
     source = ../../configs/i3;
@@ -26,7 +23,7 @@
   };
 
   services.dunst = {
-    enable = true; 
+    enable = true;
     settings = {
       global = {
         monitor = 0;
@@ -124,5 +121,4 @@
       package = pkgs.materia-theme;
     };
   };
-
 }

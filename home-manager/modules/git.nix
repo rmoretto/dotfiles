@@ -6,7 +6,7 @@
       s = "status";
       a = "add";
       p = "push";
-      c = "commit";
+      c = "commit --verbose";
     };
   };
 }

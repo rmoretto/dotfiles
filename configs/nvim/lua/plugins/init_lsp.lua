@@ -5,7 +5,8 @@ local utils = require("utils")
 local mason_path = require("mason-core.path")
 
 local function base_capabilities()
-	return cmp.default_capabilities()
+  local cmp_capabilities = cmp.default_capabilities()
+	return utils.table_merge(cmp_capabilities, additional_capabilities)
 end
 
 local function base_on_attach()
@@ -14,16 +15,28 @@ local function base_on_attach()
 	end
 end
 
+local function base_cmd(lsp_default_config)
+  local bin_path = lsp_default_config.cmd[1]
+  return { mason_path.bin_prefix() .. "/" .. bin_path }
+
+end
+
+
 local function setup_lsp_config(lsp_name, opts)
 	if opts == nil then
 		opts = {}
 	end
 
-	local capabilities = opts.capabilities or base_capabilities()
-	opts.capabilities = capabilities
+  opts.capabilities = utils.table_merge(opts.capabilities or {}, base_capabilities())
 
 	local on_attach = opts.on_attach or base_on_attach()
 	opts.on_attach = on_attach
+
+  -- find mason LSP bin
+  -- local success, config = pcall(require, 'lspconfig.server_configurations.' .. lsp_name)
+  -- if success then
+  --   opts.cmd = opts.cmd or base_cmd(config.default_config)
+  -- end
 
 	lspconfig[lsp_name].setup(opts)
 end
@@ -68,10 +81,19 @@ setup_lsp_config("lua_ls")
 setup_lsp_config("tailwindcss")
 setup_lsp_config("terraformls")
 setup_lsp_config("tsserver", { flags = { debounce_text_changes = 50 } })
-setup_lsp_config("volar")
+setup_lsp_config("volar", {
+  capabilities = {
+    workspace = {
+      didChangeWatchedFiles = {
+        dynamicRegistration = true
+      }  
+    }
+  }
+})
 setup_lsp_config("arduino_language_server")
 setup_lsp_config("rnix")
 setup_lsp_config("unocss")
+setup_lsp_config("gdscript")
 
 -- Override global border configration for the lsp floating window
 -- local global_border = "rounded"
