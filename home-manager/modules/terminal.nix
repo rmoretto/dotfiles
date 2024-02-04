@@ -3,7 +3,7 @@
     enable = true;
     enableCompletion = true;
     enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
+    syntaxHighlighting.enable = true;
     historySubstringSearch.enable = true;
     oh-my-zsh = {
       enable = true;
@@ -29,8 +29,8 @@
       granter = "cd /home/rodrigo/programations/granter/";
       conecta = "txs inova-defesa";
       flowtify = "cd /home/rodrigo/programations/granter/flowtify/";
-      ls = "exa";
-      ll = "exa -la";
+      ls = "eza";
+      ll = "eza -la";
       ip = "ip -c";
       ciasc-vpn = "sudo openfortivpn sslvpn01.ciasc.gov.br --username=granter_rmoretto@vpn.ciasc.gov.br";
     };

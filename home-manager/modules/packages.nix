@@ -26,7 +26,7 @@
     killall
     pulseaudio
     fzf
-    exa
+    eza
     xcowsay
     xclip
     gnome.gnome-disk-utility
