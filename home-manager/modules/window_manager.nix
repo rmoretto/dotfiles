@@ -114,11 +114,11 @@
     + "/extras/.Xresources"
   );
 
-  gtk = {
-    enable = true;
-    theme = {
-      name = "Materia-dark";
-      package = pkgs.materia-theme;
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     name = "Materia-dark";
+  #     package = pkgs.materia-theme;
+  #   };
+  # };
 }

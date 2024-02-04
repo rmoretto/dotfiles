@@ -19,6 +19,7 @@
     ./modules/terminal.nix
     ./modules/tmux.nix
     ./modules/window_manager.nix
+    ./modules/hyprland.nix
   ];
 
   nixpkgs = {

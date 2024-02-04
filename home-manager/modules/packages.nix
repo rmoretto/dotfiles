@@ -12,8 +12,18 @@
     discord
     steam
     lutris
-    inputs.nix-gaming.packages.${pkgs.hostPlatform.system}.proton-ge
     godot_4
+
+    wl-gammactl
+    wl-clipboard
+    wf-recorder
+    hyprpicker
+    wayshot
+    swappy
+    slurp
+    imagemagick
+    brightnessctl
+    swww
 
     # System utilities
     htop
@@ -48,9 +58,9 @@
     btop
     woeusb
     efibootmgr
-    protontricks
     steam-run
     wine
+    xwaylandvideobridge
 
     # soundsss and VIDEOS
     pavucontrol
@@ -74,6 +84,7 @@
     gcc
     lua
     nodejs
+    sassc
     (let
       python3-with-packages = pkgs.python3.withPackages (p:
         with p; [
@@ -85,6 +96,7 @@
           pynvim
           setuptools
           psycopg2
+          python-pam
         ]);
     in
       python3-with-packages)

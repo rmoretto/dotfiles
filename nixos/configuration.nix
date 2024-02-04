@@ -96,28 +96,54 @@
   services.gnome3.gnome-keyring.enable = true;
 
   # Enable the X11 windowing system.
+  # services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.layout = "us";
+  # services.xserver.xkbVariant = "intl";
+
+  programs.hyprland = {
+    # Install the packages from nixpkgs
+    enable = true;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+  };
+
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
     displayManager = {
       autoLogin.user = "rmoretto";
-      lightdm.enable = true;
-      defaultSession = "none+i3";
+      gdm = {
+        enable = true;
+        wayland = true;
+      };
     };
-    windowManager.i3.enable = true;
     layout = "us";
     xkbVariant = "intl";
     exportConfiguration = true;
   };
 
-  services.xserver.displayManager.setupCommands = ''
-    LEFT='DP-2'
-    CENTER='DP-4'
-    RIGHT='DP-0'
-    ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
-           --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
-           --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
-  '';
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = ["nvidia"];
+  #   displayManager = {
+  #     autoLogin.user = "rmoretto";
+  #     lightdm.enable = true;
+  #     defaultSession = "none+i3";
+  #   };
+  #   windowManager.i3.enable = true;
+  #   layout = "us";
+  #   xkbVariant = "intl";
+  #   exportConfiguration = true;
+  # };
+
+  # services.xserver.displayManager.setupCommands = ''
+  #   LEFT='DP-2'
+  #   CENTER='DP-4'
+  #   RIGHT='DP-0'
+  #   ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
+  #          --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
+  #          --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
+  # '';
 
   boot.kernelPackages = pkgs.linuxPackages_6_5;
 
@@ -171,6 +197,7 @@
     home-manager
     polkit_gnome
     gnome.gnome-keyring
+    kitty
   ];
 
   users.users = {
