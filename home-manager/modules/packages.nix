@@ -14,12 +14,15 @@
     lutris
     godot_4
 
+    waybar
     wl-gammactl
     wl-clipboard
     wf-recorder
+    wlprop
     hyprpicker
     wayshot
     swappy
+    grim
     slurp
     imagemagick
     brightnessctl
@@ -124,4 +127,17 @@
     papirus-icon-theme
     font-awesome
   ];
+
+  xdg.desktopEntries = {
+    discord = {
+      categories = ["Application" "Network" "InstantMessaging"];
+      exec = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
+      genericName = "All-in-one cross-platform voice and text chat for gamers";
+      icon="discord";
+      mimeType = ["x-scheme-handler/discord"];
+      name = "Discord";
+      terminal = false;
+      type = "Application";
+    };
+  };
 }
