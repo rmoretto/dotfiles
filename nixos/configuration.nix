@@ -16,11 +16,13 @@
 
   nixpkgs = {
     # You can add overlays here
+    overlays = [
+      outputs.overlays.unstable-packages
+    ];
     # overlays = [
     # Add overlays your own flake exports (from overlays and pkgs dir):
     # outputs.overlays.additions
     # outputs.overlays.modifications
-    # outputs.overlays.unstable-packages
 
     # You can also add overlays exported from other flakes:
     # neovim-nightly-overlay.overlays.default
@@ -145,7 +147,7 @@
   #          --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
   # '';
 
-  boot.kernelPackages = pkgs.linuxPackages_6_5;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_6_7;
 
   hardware.opengl = {
     enable = true;
@@ -159,7 +161,15 @@
     # powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # package = config.boot.kernelPackages.nvidia_x11_beta;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs (old: {
+    #   postPatch = ''
+    #     substituteInPlace ./kernel/nvidia-drm/nvidia-drm-drv.c --replace \
+    #       '#if defined(NV_SYNC_FILE_GET_FENCE_PRESENT)' \
+    #       '#if 0'
+    #   '';
+    # });
   };
 
   # Enable sound with pipewire.

@@ -133,7 +133,7 @@
       categories = ["Application" "Network" "InstantMessaging"];
       exec = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
       genericName = "All-in-one cross-platform voice and text chat for gamers";
-      icon="discord";
+      icon = "discord";
       mimeType = ["x-scheme-handler/discord"];
       name = "Discord";
       terminal = false;
