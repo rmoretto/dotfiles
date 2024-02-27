@@ -8,27 +8,20 @@ cmp.setup({
 		end,
 	},
 	completion = { completeopt = "menu,menuone,noinsert" },
-	mapping = {
-		-- Nice
-		["<C-f>"] = cmp.mapping(
-			cmp.mapping.select_next_item({ behavior = types.cmp.SelectBehavior.Insert }),
-			{ "i", "c" }
-		),
-		["<C-b>"] = cmp.mapping(
-			cmp.mapping.select_prev_item({ behavior = types.cmp.SelectBehavior.Insert }),
-			{ "i", "c" }
-		),
-
-		["<C-Space>"] = cmp.mapping.complete(),
-		["<C-e>"] = cmp.mapping.close(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
-	},
-	sources = {
-		{ name = "vsnip" },
-		{ name = "nvim_lsp" },
+  mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+  }, {
 		{ name = "path" },
-		{ name = "buffer" },
+    { name = 'buffer' },
 		{ name = "emoji" },
     { name = 'nvim_lsp', trigger_characters = { '-' } }
-	},
+  })
 })

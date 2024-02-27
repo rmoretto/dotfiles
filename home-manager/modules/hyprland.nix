@@ -187,13 +187,6 @@
     };
   };
 
-  imports = [inputs.ags.homeManagerModules.default];
-
-  programs.ags = {
-    enable = true;
-    configDir = ../../configs/ags;
-  };
-
   home.file.".config/waybar" = {
     source = config.lib.file.mkOutOfStoreSymlink ../../configs/waybar;
     recursive = true;

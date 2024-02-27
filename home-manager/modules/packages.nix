@@ -10,9 +10,7 @@
     chromium
     spotify
     discord
-    steam
-    lutris
-    godot_4
+    warp-terminal
 
     waybar
     wl-gammactl
@@ -25,7 +23,6 @@
     grim
     slurp
     imagemagick
-    brightnessctl
     swww
 
     # System utilities

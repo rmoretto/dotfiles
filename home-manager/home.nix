@@ -10,10 +10,8 @@
   imports = [
     ./modules/packages.nix
 
-    ./modules/eww.nix
     ./modules/git.nix
     ./modules/nvim.nix
-    ./modules/picom.nix
     ./modules/rofi.nix
     ./modules/ssh.nix
     ./modules/terminal.nix
