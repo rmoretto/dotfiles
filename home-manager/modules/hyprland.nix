@@ -227,7 +227,7 @@
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
       "SUPER, Return, exec, alacritty"
       "SUPER_SHIFT,q,killactive"
-      "SUPER, D, exec, fuzzel"
+      "SUPER, D, exec, rofi -show drun"
 
       # "SUPER, M, exit, "
       # "SUPER, E, exec, dolphin"
@@ -280,7 +280,9 @@
       "SUPER_SHIFT, 0, movetoworkspace, 10"
 
       "SUPER, P, togglespecialworkspace"
-      "SUPER, O, movetoworkspace, special"
+      "SUPER, O, exec, [workspace special silent;float;noanim;size 1300 730;move 30 15] spotify"
+      "SUPER, O, exec, [workspace special silent;float;noanim;size 770 100;move 1120 960] alacritty -e bash -c 'watch -n1 df -h /'"
+      "SUPER, O, exec, [workspace special silent;float;noanim;size 635 155;move 35 910] alacritty -e 'htop'"
     ];
 
     bindm = [

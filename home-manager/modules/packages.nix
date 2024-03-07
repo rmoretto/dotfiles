@@ -10,8 +10,9 @@
     chromium
     spotify
     discord
-    warp-terminal
+    # warp-terminal
 
+    # rofi-wayland
     waybar
     wl-gammactl
     wl-clipboard
