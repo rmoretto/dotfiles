@@ -1,6 +1,7 @@
 require("toggleterm").setup({
   open_mapping = [[<C-\>]],
-  shade_terminals = false
+  shade_terminals = false,
+  direction = "float"
 })
 
 local keymap = vim.keymap

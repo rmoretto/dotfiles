@@ -8,5 +8,6 @@
       p = "push";
       c = "commit --verbose";
     };
+    difftastic.enable = true;
   };
 }

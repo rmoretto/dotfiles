@@ -12,6 +12,7 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./pipewire-rnn.nix
   ];
 
   nixpkgs = {
@@ -147,7 +148,7 @@
   #          --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
   # '';
 
-  boot.kernelPackages = pkgs.unstable.linuxPackages_6_7;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
 
   hardware.opengl = {
     enable = true;
@@ -188,6 +189,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  programs.noisetorch.enable = true;
 
   hardware.keyboard.qmk.enable = true;
   environment.etc."ppp/options".text = "ipcp-accept-remote";

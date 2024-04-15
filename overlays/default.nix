@@ -8,6 +8,17 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     notifd = inputs.notifd.packages.${prev.system}.default;
+    xwaylandvideobridge = prev.xwaylandvideobridge.overrideAttrs (oldAttrs: rec {
+      version = "0.4.0";
+
+      src = prev.fetchFromGitLab {
+        domain = "invent.kde.org";
+        owner = "system";
+        repo = "xwaylandvideobridge";
+        rev = "v${version}";
+        hash = "sha256-DzNJxZbSdhqdtIQvQ7ZKrKwu6zTcBjtsR9rv/uudZcw=";
+      };
+    });
     # godot_4 = prev.godot_4.overrideAttrs (oldAttrs: rec {
     #   version = "4.2.1-stable";
     #   commitHash = "b09f793f564a6c95dc76acc654b390e68441bd01";

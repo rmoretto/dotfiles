@@ -10,6 +10,8 @@
     chromium
     spotify
     discord
+    vesktop
+    bitwarden
     # warp-terminal
 
     # rofi-wayland
@@ -62,11 +64,13 @@
     steam-run
     wine
     xwaylandvideobridge
+    ffmpeg
 
     # soundsss and VIDEOS
     pavucontrol
     alsa-utils
     vlc
+    mpv
 
     # networking
     openfortivpn
@@ -80,7 +84,7 @@
     # cargo
     # rustc
     # rust-analyzer
-    marksman
+    # marksman
     go
     gcc
     lua
@@ -108,6 +112,7 @@
     gtk3
     terraform
     delta
+    difftastic
 
     # Fonts
     nerdfonts
@@ -137,5 +142,29 @@
       terminal = false;
       type = "Application";
     };
+    vencorddesktop = {
+      categories = ["Chat" "Network" "InstantMessaging"];
+      exec = "vencorddesktop --ozone-platform=wayland --disable-gpu %U";
+      genericName = "Internet Messenger";
+      icon = "vencorddesktop";
+      name = "Vesktop";
+      type = "Application";
+      mimeType = ["x-scheme-handler/discord"];
+      settings = {
+        StartupWMClass = "VencordDesktop";
+        Keywords = "discord;vencord;electron;chat";
+      };
+    };
   };
+
+# [Desktop Entry]
+# Categories=Network;InstantMessaging;Chat
+# Exec=vencorddesktop %U
+# GenericName=Internet Messenger
+# Icon=vencorddesktop
+# Keywords=discord;vencord;electron;chat
+# Name=Vesktop
+# StartupWMClass=VencordDesktop
+# Type=Application
+# Version=1.4
 }

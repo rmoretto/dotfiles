@@ -10,7 +10,6 @@ require("mason-lspconfig").setup({
 		"dockerls",
 		"efm",
 		"elixirls",
-		"erlangls",
 		"eslint",
 		"gopls",
 		"html",
@@ -24,7 +23,7 @@ require("mason-lspconfig").setup({
 		"terraformls",
 		"tsserver",
 		"volar",
-    "rnix-lsp",
+    "rnix",
     "unocss"
 	},
 })

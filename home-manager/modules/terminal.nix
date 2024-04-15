@@ -80,6 +80,7 @@
         };
       };
       shell.program = "${pkgs.zsh}/bin/zsh";
+      # window.opacity = 0.8;
       window.padding = {
         x = 5;
         y = 5;

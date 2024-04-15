@@ -199,6 +199,10 @@
     "$monitor_center" = "DP-4";
     "$monitor_right" = "DP-2";
 
+    # "$monitor_left" = "DP-2";
+    # "$monitor_center" = "DP-3";
+    # "$monitor_right" = "DP-1";
+
     env = [
       # "LIBVA_DRIVER_NAME,nvidia"
       "XDG_SESSION_TYPE,wayland"
@@ -209,7 +213,7 @@
 
     monitor = [
       "$monitor_left, 1920x1080, -1920x0, 1"
-      "$monitor_center, highrr, 0x0, 1"
+      "$monitor_center, 1920x1080@144, 0x0, 1"
       "$monitor_right, 1920x1080, 1920x-400, 1, transform, 3"
     ];
 
@@ -279,10 +283,11 @@
       "SUPER_SHIFT, 9, movetoworkspace, 9"
       "SUPER_SHIFT, 0, movetoworkspace, 10"
 
-      "SUPER, P, togglespecialworkspace"
-      "SUPER, O, exec, [workspace special silent;float;noanim;size 1300 730;move 30 15] spotify"
-      "SUPER, O, exec, [workspace special silent;float;noanim;size 770 100;move 1120 960] alacritty -e bash -c 'watch -n1 df -h /'"
-      "SUPER, O, exec, [workspace special silent;float;noanim;size 635 155;move 35 910] alacritty -e 'htop'"
+      "SUPER, P, togglespecialworkspace, dashboard"
+
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 1300 730;move 30 15] spotify"
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 770 100;move 1120 960] alacritty -e bash -c 'watch -n1 df -h /'"
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 635 155;move 35 910] alacritty -e 'htop'"
     ];
 
     bindm = [
@@ -323,6 +328,7 @@
         enabled = true;
         xray = true;
         special = false;
+        ignore_opacity = true;
         new_optimizations = "on";
         size = 5;
         passes = 4;
@@ -398,18 +404,18 @@
     ];
 
     windowrulev2 = [
-      "opacity 0.95 0.95,class:^(Alacritty|Discord|Spotify)$"
+      # "opacity 0.95 0.95,class:^(Alacritty|Discord|Spotify)$"
 
       "noblur,class:^(dash)$"
       "noborder,class:^(dash)$"
       "noshadow,class:^(dash)$"
 
       # XWaylandVideoBridge
-      "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
-      "noanim,class:^(xwaylandvideobridge)$"
-      "noinitialfocus,class:^(xwaylandvideobridge)$"
-      "maxsize 1 1,class:^(xwaylandvideobridge)$"
-      "noblur,class:^(xwaylandvideobridge)$"
+      # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
+      # "noanim,class:^(xwaylandvideobridge)$"
+      # "noinitialfocus,class:^(xwaylandvideobridge)$"
+      # "maxsize 1 1,class:^(xwaylandvideobridge)$"
+      # "noblur,class:^(xwaylandvideobridge)$"
     ];
   };
 

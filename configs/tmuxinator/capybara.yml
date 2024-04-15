@@ -1,0 +1,59 @@
+# /home/rodrigo/.config/tmuxinator/capybara.yml
+
+name: capybara
+root: ~/programations/granter/rbov/capybara/
+
+windows:
+  - frontend-editor:
+      root: ~/programations/granter/rbov/capybara/frontend
+      panes:
+        - nvim:
+          - nix develop
+          - nvim .
+
+  - backend-editor:
+      root: ~/programations/granter/rbov/capybara/backend
+      panes:
+        - nvim:
+          - nix develop .#test
+          - nvim .
+
+  - terms:
+      root: ~/programations/granter/rbov/capybara
+      layout: main-vertical
+      panes:
+        - term:
+          - git status
+        - backend:
+          - cd backend
+          - nix develop
+          - MIX_ENV=dev mix phx.server
+        - frontend: 
+          - cd frontend
+          - nix develop
+          - pnpm dev
+
+
+  # - frontend-term:
+  #     root: ~/programations/granter/rbov/capybara/frontend
+  #     layout: even-horizontal
+  #     panes:
+  #       - yarn: 
+  #         - nix develop
+  #         - pnpm dev
+  #       - git:
+  #         - nix develop
+  #         - git status
+  #
+  #
+  # - backend-term:
+  #     root: ~/programations/granter/rbov/capybara/backend
+  #     layout: even-horizontal
+  #     panes:
+  #       - phx_server:
+  #         - nix develop
+  #         - MIX_ENV=dev mix phx.server
+  #       - git:
+  #         - nix develop .#test
+  #         - git status
+

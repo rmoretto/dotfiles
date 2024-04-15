@@ -49,7 +49,6 @@ return require("packer").startup(function(use)
 
 	-- Windows Helpers
 	use("nvim-lualine/lualine.nvim")
-	use("edkolev/tmuxline.vim")
 	use("https://github.com/simeji/winresizer")
 
 	-- Misc
@@ -85,17 +84,19 @@ return require("packer").startup(function(use)
 	use("RRethy/vim-illuminate")
   use("https://github.com/pearofducks/ansible-vim")
   use("https://github.com/akinsho/toggleterm.nvim")
-  -- use("/home/rodrigo/programations/misc/LspUI-fork")
-  -- use("https://github.com/jinzhongjia/LspUI.nvim")
   use("https://github.com/nvimdev/lspsaga.nvim")
   use("https://github.com/folke/neodev.nvim")
 
-	-- use 'kyazdani42/nvim-tree.lua'
-	-- use("elixir-editors/vim-elixir")
+  use("https://github.com/MunifTanjim/nui.nvim")
+  use("https://github.com/rcarriga/nvim-notify")
+  use("https://github.com/folke/noice.nvim")
+
+  -- Langs
 	use("https://github.com/DingDean/wgsl.vim")
 	use("jansedivy/jai.vim")
   use("https://github.com/elkowar/yuck.vim")
 
+  -- Cmp
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/nvim-cmp")
