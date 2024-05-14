@@ -74,6 +74,11 @@
   };
 
   boot.supportedFilesystems = ["ntfs"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+  security.polkit.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -194,6 +199,13 @@
 
   hardware.keyboard.qmk.enable = true;
   environment.etc."ppp/options".text = "ipcp-accept-remote";
+
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+    }
+  ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;

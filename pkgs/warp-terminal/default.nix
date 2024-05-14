@@ -1,41 +1,38 @@
-{ lib
-, stdenv
-, fetchurl
-
-, autoPatchelfHook
-, dpkg
-, makeWrapper
-, undmg
-, wrapGAppsHook
-
-, gcc
-, libgcc
-, fontconfig
-, curl
-, libpng
-, zlib
-, xorg
-, libxkbcommon
-, wayland
-, libGL
+{
+  lib,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+  dpkg,
+  makeWrapper,
+  undmg,
+  wrapGAppsHook,
+  gcc,
+  libgcc,
+  fontconfig,
+  curl,
+  libpng,
+  zlib,
+  xorg,
+  libxkbcommon,
+  wayland,
+  libGL,
 }:
-
-  # meta = {
-  #   description = "An open source, cross-platform Spotify client compatible across multiple platforms";
-  #   longDescription = ''
-  #     Spotube is an open source, cross-platform Spotify client compatible across
-  #     multiple platforms utilizing Spotify's data API and YouTube (or Piped.video or JioSaavn)
-  #     as an audio source, eliminating the need for Spotify Premium
-  #   '';
-  #   downloadPage = "https://github.com/KRTirtho/spotube/releases";
-  #   homepage = "https://spotube.netlify.app/";
-  #   license = lib.licenses.bsdOriginal;
-  #   mainProgram = "spotube";
-  #   maintainers = with lib.maintainers; [ tomasajt ];
-  #   platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
-  #   sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-  # };
-
+# meta = {
+#   description = "An open source, cross-platform Spotify client compatible across multiple platforms";
+#   longDescription = ''
+#     Spotube is an open source, cross-platform Spotify client compatible across
+#     multiple platforms utilizing Spotify's data API and YouTube (or Piped.video or JioSaavn)
+#     as an audio source, eliminating the need for Spotify Premium
+#   '';
+#   downloadPage = "https://github.com/KRTirtho/spotube/releases";
+#   homepage = "https://spotube.netlify.app/";
+#   license = lib.licenses.bsdOriginal;
+#   mainProgram = "spotube";
+#   maintainers = with lib.maintainers; [ tomasajt ];
+#   platforms = [ "x86_64-linux" "x86_64-darwin" "aarch64-darwin" ];
+#   sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
+# };
 stdenv.mkDerivation rec {
   pname = "warp-terminal";
   version = "0.2024.02.20.08.01.stable_02";
@@ -105,4 +102,3 @@ stdenv.mkDerivation rec {
   #       # --prefix PATH : ${lib.makeBinPath [ xdg-user-dirs ]}
   # '';
 }
-

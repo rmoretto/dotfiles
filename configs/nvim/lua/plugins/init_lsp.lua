@@ -62,7 +62,7 @@ setup_lsp_config("efm", {
     languages = {
       elixir = {
         {
-          lintCommand = "mix credo suggest --format=flycheck ${INPUT}",
+          lintCommand = [[mix credo suggest --format=flycheck ${INPUT} | sed -e 's/\ D:\ /\ n:\ /g' -e 's/\ R:\ /\ i:\ /g' -e 's/\ C:\ /\ i:\ /g' -e 's/\ F:\ /\ w:\ /g']],
           lintStdin = false,
           lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
           rootMarkers = { "mix.lock", "mix.exs" }

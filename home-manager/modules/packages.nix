@@ -61,16 +61,22 @@
     btop
     woeusb
     efibootmgr
+    steam
     steam-run
-    wine
+    # wine
+    wineWowPackages.stable
+    winetricks
+    lutris
     xwaylandvideobridge
     ffmpeg
+    xdg-desktop-portal-hyprland
 
     # soundsss and VIDEOS
     pavucontrol
     alsa-utils
     vlc
     mpv
+    obs-studio
 
     # networking
     openfortivpn
@@ -157,14 +163,14 @@
     };
   };
 
-# [Desktop Entry]
-# Categories=Network;InstantMessaging;Chat
-# Exec=vencorddesktop %U
-# GenericName=Internet Messenger
-# Icon=vencorddesktop
-# Keywords=discord;vencord;electron;chat
-# Name=Vesktop
-# StartupWMClass=VencordDesktop
-# Type=Application
-# Version=1.4
+  # [Desktop Entry]
+  # Categories=Network;InstantMessaging;Chat
+  # Exec=vencorddesktop %U
+  # GenericName=Internet Messenger
+  # Icon=vencorddesktop
+  # Keywords=discord;vencord;electron;chat
+  # Name=Vesktop
+  # StartupWMClass=VencordDesktop
+  # Type=Application
+  # Version=1.4
 }

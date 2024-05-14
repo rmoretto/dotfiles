@@ -135,4 +135,9 @@ Host flowtify_bastion
     LocalForward 54133 flowtify-demo.c3yty0cpxryt.sa-east-1.rds.amazonaws.com:5432
     LocalForward 54134 flowtify-prod.c3yty0cpxryt.sa-east-1.rds.amazonaws.com:5432
 
+Host rbov_poc
+    HostName 18.228.26.81
+    User rmoretto
+    ServerAliveInterval 60
+    LocalForward 5466 localhost:5432
 

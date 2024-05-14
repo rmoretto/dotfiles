@@ -18,6 +18,13 @@ windows:
           - nix develop .#test
           - nvim .
 
+  - infra-editor:
+      root: ~/programations/granter/rbov/capybara/infra
+      panes:
+        - nvim:
+          - nix develop
+          - nvim .
+
   - terms:
       root: ~/programations/granter/rbov/capybara
       layout: main-vertical
