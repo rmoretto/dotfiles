@@ -220,6 +220,7 @@
     exec-once = [
       "swww init"
       "xwaylandvideobridge"
+      "lxqt-policykit-agent"
     ];
 
     input = {
