@@ -14,8 +14,7 @@
       {
         plugin = tmuxPlugins.dracula;
         extraConfig = ''
-          set -g @dracula-plugins "cpu-usage ram-usage network-bandwidth git time"
-          set -g "@dracula-network-bandwidth-colors" "light_purple dark_gray"
+          set -g @dracula-plugins "cpu-usage ram-usage git time"
           set -g @dracula-show-left-icon session
           set -g @dracula-show-powerline true
           set -g @dracula-refresh-rate 10
