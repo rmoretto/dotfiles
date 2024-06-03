@@ -73,6 +73,13 @@
       env = {
         TERM = "xterm-256color";
       };
+      font = {
+        size = 10.25;
+        normal = {
+          family = "JetBrainsMono Nerd Font";
+          style = "regular";
+        };
+      };
       colors = {
         primary = {
           background = "#1f1f28";
@@ -84,13 +91,6 @@
       window.padding = {
         x = 5;
         y = 5;
-      };
-      font = {
-        size = 10;
-        normal = {
-          font = "JetBrainsMono Nerd Font";
-          style = "regular";
-        };
       };
     };
   };

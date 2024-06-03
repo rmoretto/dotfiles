@@ -8,8 +8,21 @@
     mouse = true;
     shell = "${pkgs.zsh}/bin/zsh";
     tmuxinator.enable = true;
+    clock24 = true;
     plugins = with pkgs; [
       tmuxPlugins.tilish
+      {
+        plugin = tmuxPlugins.dracula;
+        extraConfig = ''
+          set -g @dracula-plugins "cpu-usage ram-usage network-bandwidth git time"
+          set -g "@dracula-network-bandwidth-colors" "light_purple dark_gray"
+          set -g @dracula-show-left-icon session
+          set -g @dracula-show-powerline true
+          set -g @dracula-refresh-rate 10
+          set -g @dracula-show-fahrenheit false
+          set -g @dracula-show-location false
+        '';
+      }
     ];
     extraConfig = ''
       set-option -ga terminal-overrides ",*256col*:Tc:RGB"

@@ -1,7 +1,4 @@
-{
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   services.pipewire.extraConfig.pipewire = {
     "99-input-denoising" = {
       "context.modules" = [
