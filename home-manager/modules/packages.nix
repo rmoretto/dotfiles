@@ -137,31 +137,31 @@
     font-awesome
   ];
 
-  xdg.desktopEntries = {
-    discord = {
-      categories = ["Application" "Network" "InstantMessaging"];
-      exec = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
-      genericName = "All-in-one cross-platform voice and text chat for gamers";
-      icon = "discord";
-      mimeType = ["x-scheme-handler/discord"];
-      name = "Discord";
-      terminal = false;
-      type = "Application";
-    };
-    vencorddesktop = {
-      categories = ["Chat" "Network" "InstantMessaging"];
-      exec = "vencorddesktop --ozone-platform=wayland --disable-gpu %U";
-      genericName = "Internet Messenger";
-      icon = "vencorddesktop";
-      name = "Vesktop";
-      type = "Application";
-      mimeType = ["x-scheme-handler/discord"];
-      settings = {
-        StartupWMClass = "VencordDesktop";
-        Keywords = "discord;vencord;electron;chat";
-      };
-    };
-  };
+  # xdg.desktopEntries = {
+  #   discord = {
+  #     categories = ["Application" "Network" "InstantMessaging"];
+  #     exec = "discord --enable-features=UseOzonePlatform --ozone-platform=wayland";
+  #     genericName = "All-in-one cross-platform voice and text chat for gamers";
+  #     icon = "discord";
+  #     mimeType = ["x-scheme-handler/discord"];
+  #     name = "Discord";
+  #     terminal = false;
+  #     type = "Application";
+  #   };
+  #   vencorddesktop = {
+  #     categories = ["Chat" "Network" "InstantMessaging"];
+  #     exec = "vencorddesktop --ozone-platform=wayland --disable-gpu %U";
+  #     genericName = "Internet Messenger";
+  #     icon = "vencorddesktop";
+  #     name = "Vesktop";
+  #     type = "Application";
+  #     mimeType = ["x-scheme-handler/discord"];
+  #     settings = {
+  #       StartupWMClass = "VencordDesktop";
+  #       Keywords = "discord;vencord;electron;chat";
+  #     };
+  #   };
+  # };
 
   # [Desktop Entry]
   # Categories=Network;InstantMessaging;Chat

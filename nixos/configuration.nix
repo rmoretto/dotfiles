@@ -74,7 +74,7 @@
   };
 
   boot.supportedFilesystems = ["ntfs"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ v4l2loopback ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
@@ -101,7 +101,7 @@
 
   security.pam.services.lightdm.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable the X11 windowing system.
   # services.xserver.videoDrivers = ["nvidia"];
@@ -115,19 +115,22 @@
     xwayland.enable = true;
   };
 
+  services.displayManager = {
+    autoLogin.user = "rmoretto";
+  };
+
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
-    displayManager = {
-      autoLogin.user = "rmoretto";
-      gdm = {
-        enable = true;
-        wayland = true;
-      };
-    };
-    layout = "us";
-    xkbVariant = "intl";
     exportConfiguration = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+    xkb = {
+      layout = "us";
+      variant = "intl";
+    };
   };
 
   # services.xserver = {
@@ -153,7 +156,8 @@
   #          --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
   # '';
 
-  boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
+  # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
 
   hardware.opengl = {
     enable = true;
@@ -252,7 +256,7 @@
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
+    settings.PermitRootLogin = "no";
   };
 
   services.spice-vdagentd.enable = true;
@@ -297,5 +301,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
