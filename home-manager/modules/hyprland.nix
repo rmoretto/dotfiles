@@ -14,7 +14,7 @@
 
       border = {
         radius = 10;
-        width = 2;
+        width = 4;
       };
     };
   };
@@ -117,9 +117,9 @@
 
       "SUPER, P, togglespecialworkspace, dashboard"
 
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 1300 730;move 30 15] spotify"
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 770 100;move 1120 960] alacritty -e bash -c 'watch -n1 df -h /'"
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 635 155;move 35 910] alacritty -e 'htop'"
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 1300 730;move 15 45] spotify"
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 770 100;move 1135 965] alacritty -e bash -c 'watch -n1 df -h /'"
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 635 155;move 15 910] alacritty -e 'htop'"
     ];
 
     bindm = [
@@ -140,11 +140,9 @@
     ];
 
     general = {
-      # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
-      gaps_in = 4;
+      gaps_in = 6;
       gaps_out = 12;
-      border_size = 1;
+      border_size = 2;
 
       "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
       "col.inactive_border" = "rgba(595959aa)";
@@ -153,16 +151,16 @@
     };
 
     decoration = {
-      # See https://wiki.hyprland.org/Configuring/Variables/ for more
-
       rounding = 10;
+      active_opacity = 1;
+      inactive_opacity = 0.85;
+
       blur = {
         enabled = true;
         xray = true;
         special = false;
-        ignore_opacity = true;
         new_optimizations = "on";
-        size = 5;
+        size = 8;
         passes = 4;
         brightness = 1;
         noise = 0.01;
@@ -199,6 +197,7 @@
       animation = [
         "windows, 1, 3, md3_decel, popin 60%"
         "border, 1, 10, default"
+        "borderangle, 1, 500, linear, loop"
         "fade, 1, 2.5, md3_decel"
         # "workspaces, 1, 3.5, md3_decel, slide"
         "workspaces, 1, 7, fluent_decel, slide"
@@ -236,12 +235,7 @@
     ];
 
     windowrulev2 = [
-      # "opacity 0.95 0.95,class:^(Alacritty|Discord|Spotify)$"
-
-      "noblur,class:^(dash)$"
-      "noborder,class:^(dash)$"
-      "noshadow,class:^(dash)$"
-
+      "opacity 1 1 1,class:^(vesktop)$"
       # XWaylandVideoBridge
       # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
       # "noanim,class:^(xwaylandvideobridge)$"
