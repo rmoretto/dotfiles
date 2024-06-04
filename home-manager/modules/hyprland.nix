@@ -19,10 +19,10 @@
     };
   };
 
-  # home.file.".config/waybar" = {
-  #   source = config.lib.file.mkOutOfStoreSymlink ../../configs/waybar;
-  #   recursive = true;
-  # };
+  home.file.".config/waybar" = {
+    source = ../../configs/waybar;
+    recursive = true;
+  };
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.package = pkgs.unstable.hyprland;
@@ -51,6 +51,7 @@
       "lxqt-policykit-agent"
       "swww img ~/Pictures/Wallpapers/right.jpg --transition-type=grow -o DP-2"
       "swww img ~/Pictures/Wallpapers/center.jpg --transition-type=grow"
+      "waybar"
     ];
 
     input = {
@@ -142,7 +143,7 @@
       # See https://wiki.hyprland.org/Configuring/Variables/ for more
 
       gaps_in = 4;
-      gaps_out = 5;
+      gaps_out = 12;
       border_size = 1;
 
       "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";

@@ -14,7 +14,7 @@
       {
         plugin = tmuxPlugins.dracula;
         extraConfig = ''
-          set -g @dracula-plugins "cpu-usage ram-usage git time"
+          set -g @dracula-plugins "cpu-usage ram-usage git"
           set -g @dracula-show-left-icon session
           set -g @dracula-show-powerline true
           set -g @dracula-refresh-rate 10
