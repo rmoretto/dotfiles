@@ -235,7 +235,9 @@
     ];
 
     windowrulev2 = [
-      "opacity 1 1 1,class:^(vesktop)$"
+      "opacity 1 override 1 override,class:^(vesktop)$"
+      "opacity 1 override 1 override,class:^(firefox)$"
+
       # XWaylandVideoBridge
       # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
       # "noanim,class:^(xwaylandvideobridge)$"
