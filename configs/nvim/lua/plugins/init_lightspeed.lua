@@ -10,3 +10,5 @@ keymap.set("v", "<leader>S", "<Plug>Lightspeed_S", opts)
 
 vim.cmd("silent! unmap s")
 vim.cmd("silent! unmap S")
+
+vim.api.nvim_set_hl(0, "LightspeedCursor", { bg="#af0f0f", fg="#f0f0ff", bold=true, underline=true })

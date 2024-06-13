@@ -77,4 +77,4 @@ vim.o.completeopt = "menuone,noinsert,noselect"
 vim.o.mouse = "a"
 
 -- Setup color scheme
-vim.cmd("colorscheme kanagawa")
+-- vim.cmd("colorscheme kanagawa")
