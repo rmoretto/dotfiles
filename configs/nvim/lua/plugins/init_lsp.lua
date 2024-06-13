@@ -3,6 +3,7 @@ local cmp = require("cmp_nvim_lsp")
 local illuminate = require("illuminate")
 local utils = require("utils")
 local mason_path = require("mason-core.path")
+local lsp_location = require("lsp_location")
 
 local function base_capabilities()
   local cmp_capabilities = cmp.default_capabilities()
@@ -32,11 +33,9 @@ local function setup_lsp_config(lsp_name, opts)
 	local on_attach = opts.on_attach or base_on_attach()
 	opts.on_attach = on_attach
 
-  -- find mason LSP bin
-  -- local success, config = pcall(require, 'lspconfig.server_configurations.' .. lsp_name)
-  -- if success then
-  --   opts.cmd = opts.cmd or base_cmd(config.default_config)
-  -- end
+  if lsp_location[lsp_name] then
+    opts.cmd = lsp_location[lsp_name]
+  end
 
 	lspconfig[lsp_name].setup(opts)
 end
@@ -58,6 +57,19 @@ setup_lsp_config("cssls", {
 -- setup_lsp_config("denols")
 setup_lsp_config("dockerls")
 setup_lsp_config("efm", {
+  init_options = { documentFormatting = true },
+  settings = {
+    languages = {
+      elixir = {
+        {
+          lintCommand = [[mix credo suggest --format=flycheck ${INPUT} | sed -e 's/\ D:\ /\ n:\ /g' -e 's/\ R:\ /\ i:\ /g' -e 's/\ C:\ /\ i:\ /g' -e 's/\ F:\ /\ w:\ /g']],
+          lintStdin = false,
+          lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
+          rootMarkers = { "mix.lock", "mix.exs" }
+        }
+      },
+    }
+  },
 	filetypes = {
 		"javascript",
 		"javascriptreact",
@@ -91,7 +103,7 @@ setup_lsp_config("volar", {
   }
 })
 setup_lsp_config("arduino_language_server")
-setup_lsp_config("rnix")
+setup_lsp_config("nil_ls")
 setup_lsp_config("unocss")
 setup_lsp_config("gdscript")
 

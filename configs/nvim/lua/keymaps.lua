@@ -34,6 +34,9 @@ keymap.set("n", "N", "Nzzzv", opts)
 -- Maintain the cursor on BIG J
 keymap.set("n", "J", "mzJ`z", opts)
 
+-- BIG BUCKS Testing
+keymap.set("n", "<C-w><C-f>", ":vert winc f<cr>", { silent = true })
+
 -- Undo break points BIG COCONUT OIL
 keymap.set("i", '"', '"<c-g>u', opts)
 keymap.set("i", "'", "'<c-g>u", opts)

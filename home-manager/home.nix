@@ -10,15 +10,14 @@
   imports = [
     ./modules/packages.nix
 
-    ./modules/eww.nix
     ./modules/git.nix
     ./modules/nvim.nix
-    ./modules/picom.nix
     ./modules/rofi.nix
     ./modules/ssh.nix
     ./modules/terminal.nix
     ./modules/tmux.nix
     ./modules/window_manager.nix
+    ./modules/hyprland.nix
   ];
 
   nixpkgs = {
@@ -59,5 +58,5 @@
   # Nicely reload system units when changing configs
   systemd.user.startServices = "sd-switch";
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 }

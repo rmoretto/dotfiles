@@ -10,10 +10,23 @@
     chromium
     spotify
     discord
-    steam
-    lutris
-    inputs.nix-gaming.packages.${pkgs.hostPlatform.system}.proton-ge
-    godot_4
+    vesktop
+    bitwarden
+    # warp-terminal
+
+    # rofi-wayland
+    waybar
+    wl-gammactl
+    wl-clipboard
+    wf-recorder
+    wlprop
+    hyprpicker
+    wayshot
+    swappy
+    grim
+    slurp
+    imagemagick
+    swww
 
     # System utilities
     htop
@@ -48,14 +61,22 @@
     btop
     woeusb
     efibootmgr
-    protontricks
+    steam
     steam-run
-    wine
+    # wine
+    wineWowPackages.stable
+    winetricks
+    lutris
+    xwaylandvideobridge
+    ffmpeg
+    xdg-desktop-portal-hyprland
 
     # soundsss and VIDEOS
     pavucontrol
     alsa-utils
     vlc
+    mpv
+    obs-studio
 
     # networking
     openfortivpn
@@ -69,11 +90,12 @@
     # cargo
     # rustc
     # rust-analyzer
-    marksman
+    # marksman
     go
     gcc
     lua
     nodejs
+    sassc
     (let
       python3-with-packages = pkgs.python3.withPackages (p:
         with p; [
@@ -85,6 +107,7 @@
           pynvim
           setuptools
           psycopg2
+          python-pam
         ]);
     in
       python3-with-packages)
@@ -95,6 +118,7 @@
     gtk3
     terraform
     delta
+    difftastic
 
     # Fonts
     nerdfonts

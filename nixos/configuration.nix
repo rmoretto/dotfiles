@@ -12,15 +12,18 @@
   imports = [
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
+    ./pipewire-rnn.nix
   ];
 
   nixpkgs = {
     # You can add overlays here
+    overlays = [
+      outputs.overlays.unstable-packages
+    ];
     # overlays = [
     # Add overlays your own flake exports (from overlays and pkgs dir):
     # outputs.overlays.additions
     # outputs.overlays.modifications
-    # outputs.overlays.unstable-packages
 
     # You can also add overlays exported from other flakes:
     # neovim-nightly-overlay.overlays.default
@@ -71,6 +74,11 @@
   };
 
   boot.supportedFilesystems = ["ntfs"];
+  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
+  '';
+  security.polkit.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -93,33 +101,63 @@
 
   security.pam.services.lightdm.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
-  services.gnome3.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
 
   # Enable the X11 windowing system.
+  # services.xserver.videoDrivers = ["nvidia"];
+  # services.xserver.layout = "us";
+  # services.xserver.xkbVariant = "intl";
+
+  programs.hyprland = {
+    # Install the packages from nixpkgs
+    enable = true;
+    # Whether to enable XWayland
+    xwayland.enable = true;
+  };
+
+  services.displayManager = {
+    autoLogin.user = "rmoretto";
+  };
+
   services.xserver = {
     enable = true;
     videoDrivers = ["nvidia"];
-    displayManager = {
-      autoLogin.user = "rmoretto";
-      lightdm.enable = true;
-      defaultSession = "none+i3";
-    };
-    windowManager.i3.enable = true;
-    layout = "us";
-    xkbVariant = "intl";
     exportConfiguration = true;
+    displayManager.gdm = {
+      enable = true;
+      wayland = true;
+    };
+    xkb = {
+      layout = "us";
+      variant = "intl";
+    };
   };
 
-  services.xserver.displayManager.setupCommands = ''
-    LEFT='DP-2'
-    CENTER='DP-4'
-    RIGHT='DP-0'
-    ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
-           --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
-           --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
-  '';
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = ["nvidia"];
+  #   displayManager = {
+  #     autoLogin.user = "rmoretto";
+  #     lightdm.enable = true;
+  #     defaultSession = "none+i3";
+  #   };
+  #   windowManager.i3.enable = true;
+  #   layout = "us";
+  #   xkbVariant = "intl";
+  #   exportConfiguration = true;
+  # };
 
-  boot.kernelPackages = pkgs.linuxPackages_6_5;
+  # services.xserver.displayManager.setupCommands = ''
+  #   LEFT='DP-2'
+  #   CENTER='DP-4'
+  #   RIGHT='DP-0'
+  #   ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
+  #          --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
+  #          --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
+  # '';
+
+  # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
+  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
 
   hardware.opengl = {
     enable = true;
@@ -133,7 +171,15 @@
     # powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    # package = config.boot.kernelPackages.nvidia_x11_beta;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    # package = config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs (old: {
+    #   postPatch = ''
+    #     substituteInPlace ./kernel/nvidia-drm/nvidia-drm-drv.c --replace \
+    #       '#if defined(NV_SYNC_FILE_GET_FENCE_PRESENT)' \
+    #       '#if 0'
+    #   '';
+    # });
   };
 
   # Enable sound with pipewire.
@@ -153,8 +199,17 @@
     #media-session.enable = true;
   };
 
+  programs.noisetorch.enable = true;
+
   hardware.keyboard.qmk.enable = true;
   environment.etc."ppp/options".text = "ipcp-accept-remote";
+
+  swapDevices = [
+    {
+      device = "/var/lib/swapfile";
+      size = 8 * 1024;
+    }
+  ];
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -167,10 +222,11 @@
     wget
     curl
     vim
-    neovim
     home-manager
     polkit_gnome
     gnome.gnome-keyring
+    kitty
+    lxqt.lxqt-policykit
   ];
 
   users.users = {
@@ -185,7 +241,6 @@
         wget
         curl
         vim
-        neovim
       ];
     };
   };
@@ -199,7 +254,7 @@
 
   services.openssh = {
     enable = true;
-    permitRootLogin = "no";
+    settings.PermitRootLogin = "no";
   };
 
   services.spice-vdagentd.enable = true;
@@ -216,19 +271,19 @@
   };
 
   systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = ["graphical-session.target"];
-      wants = ["graphical-session.target"];
-      after = ["graphical-session.target"];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-        Restart = "on-failure";
-        RestartSec = 1;
-        TimeoutStopSec = 10;
-      };
-    };
+    # user.services.polkit-gnome-authentication-agent-1 = {
+    #   description = "polkit-gnome-authentication-agent-1";
+    #   wantedBy = ["graphical-session.target"];
+    #   wants = ["graphical-session.target"];
+    #   after = ["graphical-session.target"];
+    #   serviceConfig = {
+    #     Type = "simple";
+    #     ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    #     Restart = "on-failure";
+    #     RestartSec = 1;
+    #     TimeoutStopSec = 10;
+    #   };
+    # };
 
     # user.services.gnome-keyring = {
     #   description = "GNOME Keyring";
@@ -244,5 +299,5 @@
   };
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "23.11";
+  system.stateVersion = "24.05";
 }
