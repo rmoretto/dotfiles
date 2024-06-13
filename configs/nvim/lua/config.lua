@@ -44,7 +44,7 @@ local HOME = vim.fn.expand("$HOME")
 vim.g.mapleader = "\\"
 
 vim.o.encoding = "UTF-8"
-vim.o.pastetoggle = "<F3>"
+-- vim.o.pastetoggle = "<F3>"
 
 vim.o.tabstop = 4
 vim.o.softtabstop = 4

@@ -222,7 +222,6 @@
     wget
     curl
     vim
-    neovim
     home-manager
     polkit_gnome
     gnome.gnome-keyring
@@ -242,7 +241,6 @@
         wget
         curl
         vim
-        neovim
       ];
     };
   };

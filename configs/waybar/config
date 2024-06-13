@@ -12,8 +12,8 @@
     },
 
     "clock": {
-        "format": "󰥔   {:%I:%M %p}",
-        "format-alt": "󰥔   {:%a, %d. %b  %I:%M %p}",
+        "format": "󰥔   {:%H:%M %p}",
+        "format-alt": "󰥔   {:%a, %d. %b  %H:%M %p}",
     },
 
     "pulseaudio": {

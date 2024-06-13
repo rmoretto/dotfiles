@@ -76,6 +76,7 @@ window#waybar.empty {
 }
 
 #battery,
+#tray,
 #pulseaudio,
 #backlight {
     color: @light-blue;

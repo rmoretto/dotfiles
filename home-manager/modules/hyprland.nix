@@ -237,6 +237,7 @@
     windowrulev2 = [
       "opacity 1 override 1 override,class:^(vesktop)$"
       "opacity 1 override 1 override,class:^(firefox)$"
+      "float,title:^(.*)(Extension:)(.*)(- Bitwarden)(.*)$"
 
       # XWaylandVideoBridge
       # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"

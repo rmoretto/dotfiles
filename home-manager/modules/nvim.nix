@@ -1,5 +1,7 @@
 {pkgs, ...}: {
   programs.neovim.enable = true;
+  programs.neovim.package = pkgs.unstable.neovim-unwrapped;
+
   home.file.".config/nvim" = {
     source = ../../configs/nvim;
     recursive = true;

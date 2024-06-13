@@ -68,6 +68,7 @@ return require("packer").startup(function(use)
 
 	-- IDE Like
 	use("mfussenegger/nvim-dap")
+  use("nvim-neotest/nvim-nio")
 	use("rcarriga/nvim-dap-ui")
 	use("neovim/nvim-lspconfig")
 	use("RishabhRD/popfix")
