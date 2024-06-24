@@ -13,6 +13,7 @@
     vesktop
     bitwarden
     # warp-terminal
+    unstable.terminaltexteffects
 
     # rofi-wayland
     waybar
