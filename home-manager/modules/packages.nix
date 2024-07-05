@@ -14,6 +14,7 @@
     bitwarden
     # warp-terminal
     unstable.terminaltexteffects
+    joplin-desktop
 
     # rofi-wayland
     waybar
@@ -71,6 +72,7 @@
     xwaylandvideobridge
     ffmpeg
     xdg-desktop-portal-hyprland
+    lolcat
 
     # soundsss and VIDEOS
     pavucontrol

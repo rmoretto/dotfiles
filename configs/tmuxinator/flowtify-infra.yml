@@ -7,7 +7,7 @@ windows:
   - infra-editor:
       root: ~/programations/granter/flowtify/infra/
       panes:
-        - nvim .
+        - nvim
 
   - infra-term:
       root: ~/programations/granter/flowtify/infra/

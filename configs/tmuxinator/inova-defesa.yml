@@ -9,7 +9,7 @@ windows:
       panes:
         - nvim:
           - nix develop
-          - nvim .
+          - nvim
 
   - frontend-term:
       root: ~/programations/granter/inova-defesa/frontend/inova-frontend
@@ -27,7 +27,7 @@ windows:
       panes:
         - nvim:
           - nix develop
-          - nvim .
+          - nvim
 
   - backend-term:
       root: ~/programations/granter/inova-defesa/backend/inova-backend
@@ -43,7 +43,7 @@ windows:
   - infra-editor:
       root: ~/programations/granter/inova-defesa/infra/inova-infra
       panes:
-        - nvim .
+        - nvim
 
   - infra-term:
       root: ~/programations/granter/inova-defesa/infra/inova-infra

@@ -9,7 +9,7 @@ windows:
       panes:
         - nvim:
           - nix develop
-          - nvim .
+          - nvim
 
   - frontend-term:
       root: ~/programations/granter/flowtify/frontend/flowtify-frontend
@@ -27,7 +27,7 @@ windows:
       panes:
         - nvim:
           - nix develop .#test
-          - nvim .
+          - nvim
 
   - backend-term:
       root: ~/programations/granter/flowtify/backend/flowtify-backend
@@ -43,7 +43,7 @@ windows:
   - granter-tools-editor:
       root: ~/programations/granter/flowtify/frontend/granter-tools
       panes:
-        - nvim .
+        - nvim
 
   - granter-tools-term:
       root: ~/programations/granter/flowtify/frontend/granter-tools
@@ -56,7 +56,7 @@ windows:
       root: ~/programations/granter/flowtify/infra/
       panes:
         - nix develop
-        - nvim .
+        - nvim
 
   - infra-term:
       root: ~/programations/granter/flowtify/infra/

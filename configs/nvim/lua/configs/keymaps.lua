@@ -76,7 +76,7 @@ keymap.set("n", "<Leader>c", ":let @+=expand('%:p')<CR>")
 -- ]],
 --   opts
 -- )
--- 
+--
 -- keymap.set(
 --   "v",
 --   "#",

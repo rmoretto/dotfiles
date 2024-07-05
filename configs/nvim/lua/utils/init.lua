@@ -76,22 +76,22 @@ _M.set_timeout = function(timeout, callback)
 end
 
 _M.table_merge = function(t1, t2)
-    if not t2 then
-      return t1
-    end
+	if not t2 then
+		return t1
+	end
 
-    for k,v in pairs(t2) do
-        if type(v) == "table" then
-            if type(t1[k] or false) == "table" then
-                _M.table_merge(t1[k] or {}, t2[k] or {})
-            else
-                t1[k] = v
-            end
-        else
-            t1[k] = v
-        end
-    end
-    return t1
+	for k, v in pairs(t2) do
+		if type(v) == "table" then
+			if type(t1[k] or false) == "table" then
+				_M.table_merge(t1[k] or {}, t2[k] or {})
+			else
+				t1[k] = v
+			end
+		else
+			t1[k] = v
+		end
+	end
+	return t1
 end
 
 return _M

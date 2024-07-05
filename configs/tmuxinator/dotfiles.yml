@@ -7,7 +7,7 @@ windows:
   - editor:
       root: ~/programations/dotfiles-verdadeiro/
       panes:
-        - nvim .
+        - nvim
 
   - term:
       root: ~/programations/dotfiles-verdadeiro/

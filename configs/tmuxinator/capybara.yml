@@ -9,21 +9,21 @@ windows:
       panes:
         - nvim:
           - nix develop
-          - nvim .
+          - nvim
 
   - backend-editor:
       root: ~/programations/granter/rbov/capybara/backend
       panes:
         - nvim:
           - nix develop .#test
-          - nvim .
+          - nvim
 
   - infra-editor:
       root: ~/programations/granter/rbov/capybara/infra
       panes:
         - nvim:
           - nix develop
-          - nvim .
+          - nvim
 
   - terms:
       root: ~/programations/granter/rbov/capybara
