@@ -225,6 +225,12 @@ return {
         end
     },
 
+    {
+        "dmmulroy/ts-error-translator.nvim",
+        config = true,
+        ft = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
+    },
+
     -- Vim exchange
     { "tommcdo/vim-exchange" },
 }

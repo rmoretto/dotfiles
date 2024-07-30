@@ -20,27 +20,30 @@
         cssls = { "${unstable.vscode-langservers-extracted}/bin/vscode-css-language-server", "--stdio" },
         marksman = { "${unstable.marksman}/bin/marksman", "server" },
         tsserver = { "${unstable.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" },
-        volar = { "${nodePackages.volar}/bin/vue-language-server", "--stdio" },
+        volar = { "${unstable.vue-language-server}/bin/vue-language-server", "--stdio" },
         nil_ls = { "${unstable.nil}/bin/nil" },
         lua_ls = { "${unstable.lua-language-server}/bin/lua-language-server" },
-        tailwindcss = { "${unstable.tailwindcss-language-server}/bin/tailwindcss-language-server" }
+        tailwindcss = { "${unstable.tailwindcss-language-server}/bin/tailwindcss-language-server" },
+        vue_ts_plugin = "${unstable.vue-language-server}/lib/node_modules/@vue/language-server/node_modules/@vue/typescript-plugin"
       }
     '';
   };
 
+  # vue_ts_plugin = "${vue-typescript-plugin}/lib/node_modules/@vue/typescript-plugin"
   # nil = "${unstable.nil}/bin/nil"
 
   home.packages = with pkgs; [
     unstable.elixir-ls
     unstable.nodePackages.bash-language-server
+    unstable.nodePackages.typescript-language-server
     unstable.dockerfile-language-server-nodejs
     unstable.efm-langserver
     unstable.vscode-langservers-extracted
     unstable.marksman
-    unstable.nodePackages.typescript-language-server
-    nodePackages.volar
+    unstable.vue-language-server
     unstable.nil
     unstable.lua-language-server
     unstable.tailwindcss-language-server
+    # vue-typescript-plugin
   ];
 }

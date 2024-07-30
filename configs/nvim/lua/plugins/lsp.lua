@@ -1,4 +1,5 @@
 local utils = require("utils")
+local lsp_location = require("lsp_location")
 
 local function keymaps()
 	local keymap = vim.keymap
@@ -17,6 +18,10 @@ local function keymaps()
 	keymap.set("n", "<leader>rn", "<cmd>Lspsaga rename<cr>", opts)
 	keymap.set("n", "<leader>o", "<cmd>Lspsaga outline<cr>", opts)
 	-- keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
+end
+
+local tsdk = function()
+    return vim.fn.getcwd() .. "/node_modules/typescript/lib"
 end
 
 return {
@@ -72,15 +77,37 @@ return {
 				lua_ls = true,
 				tailwindcss = true,
 				terraformls = true,
-				tsserver = { flags = { debounce_text_changes = 50 } },
+				tsserver = {
+                    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+                    init_options = {
+                        plugins = {
+                            {
+                                name = "@vue/typescript-plugin",
+                                location = lsp_location.vue_ts_plugin,
+                                languages = {"javascript", "typescript", "vue"},
+                            },
+                        },
+                    },
+                    flags = { debounce_text_changes = 50 }
+                },
 				volar = {
-					capabilities = {
-						workspace = {
-							didChangeWatchedFiles = {
-								dynamicRegistration = true,
-							},
-						},
-					},
+                    -- filetypes = { "vue" },
+                    -- -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+                    -- init_options = {
+                    --     vue = {
+                    --         hybridMode = false,
+                    --     },
+                    --     typescript = {
+                    --         tsdk = tsdk()
+                    --     },
+                    -- },
+                    capabilities = {
+                        workspace = {
+                            didChangeWatchedFiles = {
+                                dynamicRegistration = true,
+                            },
+                        },
+                    },
 				},
 				arduino_language_server = true,
 				nil_ls = true,
@@ -92,13 +119,14 @@ return {
 			local lspconfig = require("lspconfig")
 			local cmp = require("cmp_nvim_lsp")
 			-- local illuminate = require("illuminate")
-			-- See nvim.nix modules for the lsp_location file generation
-			local lsp_location = require("lsp_location")
-
 			-- Get base capabilities
-			local function base_capabilities()
+			local function base_capabilities(additional_capabilities)
+                if additional_capabilities == nil then
+                    additional_capabilities = {}
+                end
 				local cmp_capabilities = cmp.default_capabilities()
-				return utils.table_merge(cmp_capabilities, additional_capabilities)
+                return vim.tbl_deep_extend('force', additional_capabilities, cmp_capabilities)
+				-- return utils.table_merge(cmp_capabilities, additional_capabilities)
 			end
 
 			-- Get base on attach
@@ -109,21 +137,22 @@ return {
 			end
 
 			-- Server setup main function
-			local function setup_server(lsp_name, opts)
-				if opts == nil then
-					opts = {}
+			local function setup_server(lsp_name, server_opts)
+				if server_opts == nil then
+					server_opts = {}
 				end
 
-				opts.capabilities = utils.table_merge(opts.capabilities or {}, base_capabilities())
+				server_opts.capabilities = vim.tbl_deep_extend("force", server_opts.capabilities or {}, base_capabilities())
 
-				local on_attach = opts.on_attach or base_on_attach()
-				opts.on_attach = on_attach
+				local on_attach = server_opts.on_attach or base_on_attach()
+				server_opts.on_attach = on_attach
 
+			    -- See nvim.nix modules for the lsp_location file generation
 				if lsp_location[lsp_name] then
-					opts.cmd = lsp_location[lsp_name]
+					server_opts.cmd = lsp_location[lsp_name]
 				end
 
-				lspconfig[lsp_name].setup(opts)
+				lspconfig[lsp_name].setup(server_opts)
 			end
 
 			for server, server_opts in pairs(opts.servers) do

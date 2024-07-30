@@ -1,7 +1,7 @@
 # This file defines overlays
 {inputs, ...}: {
   # This one brings our custom packages from the 'pkgs' directory
-  additions = final: _prev: import ../pkgs {pkgs = final;};
+  additions = final: prev: import ../pkgs {pkgs = inputs.nixpkgs-unstable.legacyPackages.${prev.system};};
 
   # This one contains whatever you want to overlay
   # You can change versions, add patches, set compilation flags, anything really.
