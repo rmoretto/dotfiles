@@ -49,19 +49,59 @@ return {
 	},
 
 	-- Ranger
-	{
-		"kevinhwang91/rnvimr",
-		config = function(_, _)
-			vim.g.rnvimr_draw_border = 1
-			vim.g.rnvimr_ranger_cmd = { "ranger", '--cmd="set draw_borders both"' }
-			vim.g.rnvimr_enable_picker = 1
-			vim.g.rnvimr_hide_gitignore = 0
-			vim.g.rnvimr_enable_bw = 1
+	-- {
+	-- 	"kevinhwang91/rnvimr",
+	-- 	config = function(_, _)
+	-- 		vim.g.rnvimr_draw_border = 1
+	-- 		vim.g.rnvimr_ranger_cmd = { "ranger", '--cmd="set draw_borders both"' }
+	-- 		vim.g.rnvimr_enable_picker = 1
+	-- 		vim.g.rnvimr_hide_gitignore = 0
+	-- 		vim.g.rnvimr_enable_bw = 1
+	--
+	-- 		local opts = { noremap = true, silent = true }
+	-- 		keymap.set("t", "<M-i>", "<C-\\><C-n>:RnvimrResize<CR>", opts)
+	-- 		keymap.set("n", "<A-q>", ":RnvimrToggle<CR>", opts)
+	-- 		keymap.set("t", "<A-q>", "<C-\\><C-n>:RnvimrToggle<CR>", opts)
+	-- 	end,
+	-- },
 
-			local opts = { noremap = true, silent = true }
-			keymap.set("t", "<M-i>", "<C-\\><C-n>:RnvimrResize<CR>", opts)
-			keymap.set("n", "<A-q>", ":RnvimrToggle<CR>", opts)
-			keymap.set("t", "<A-q>", "<C-\\><C-n>:RnvimrToggle<CR>", opts)
-		end,
-	},
+    -- Oil
+    {
+        'stevearc/oil.nvim',
+        opts = {
+            keymaps = {
+                ["g?"] = "actions.show_help",
+                ["<CR>"] = "actions.select",
+                ["<C-s>"] = { "actions.select", opts = { vertical = true }, desc = "Open the entry in a vertical split" },
+                ["<C-h>"] = { "actions.select", opts = { horizontal = true }, desc = "Open the entry in a horizontal split" },
+                ["<C-t>"] = { "actions.select", opts = { tab = true }, desc = "Open the entry in new tab" },
+                ["<C-p>"] = "actions.preview",
+                ["<C-c>"] = "actions.close",
+                ["<C-l>"] = "actions.refresh",
+                ["-"] = "actions.parent",
+                ["_"] = "actions.open_cwd",
+                ["`"] = "actions.cd",
+                ["~"] = { "actions.cd", opts = { scope = "tab" }, desc = ":tcd to the current oil directory" },
+                ["gs"] = "actions.change_sort",
+                ["gx"] = "actions.open_external",
+                ["g."] = "actions.toggle_hidden",
+                ["g\\"] = "actions.toggle_trash",
+            },
+            columns = {
+                "permissions",
+                "size",
+                "mtime",
+                "icon",
+            },
+        },
+        config = function(_, opts)
+            require("oil").setup(opts)
+
+			local key_opts = { noremap = true, silent = true }
+			keymap.set("n", "<A-q>", ":Oil<CR>", key_opts)
+        end,
+        -- Optional dependencies
+        -- dependencies = { { "echasnovski/mini.icons", opts = {} } },
+        dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+    }
 }

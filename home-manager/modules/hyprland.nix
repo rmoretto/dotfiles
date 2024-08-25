@@ -1,4 +1,5 @@
 {
+  inputs,
   pkgs,
   config,
   ...
@@ -26,6 +27,8 @@
 
   wayland.windowManager.hyprland.enable = true;
   wayland.windowManager.hyprland.package = pkgs.unstable.hyprland;
+  # wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.default;
+
   wayland.windowManager.hyprland.settings = {
     "$monitor_left" = "DP-3";
     "$monitor_center" = "DP-4";
@@ -235,9 +238,10 @@
     ];
 
     windowrulev2 = [
+      "float,class:^(firefox)$,title:(.*)(Extension:)(.*)(- Bitwarden)(.*)$"
+      "size 340 680 override,title:(.*)(Extension:)(.*)(- Bitwarden)(.*)$"
       "opacity 1 override 1 override,class:^(vesktop)$"
       "opacity 1 override 1 override,class:^(firefox)$"
-      "float,title:^(.*)(Extension:)(.*)(- Bitwarden)(.*)$"
 
       # XWaylandVideoBridge
       # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"

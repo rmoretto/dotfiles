@@ -15,6 +15,7 @@
     # warp-terminal
     unstable.terminaltexteffects
     joplin-desktop
+    inputs.zen-browser.packages."${system}".default
 
     # rofi-wayland
     waybar
@@ -73,6 +74,7 @@
     ffmpeg
     xdg-desktop-portal-hyprland
     lolcat
+    unetbootin
 
     # soundsss and VIDEOS
     pavucontrol

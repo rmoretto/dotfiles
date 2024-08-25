@@ -22,6 +22,10 @@
     notifd.url = "github:rmoretto/notifd";
 
     nix-gaming.url = "github:fufexan/nix-gaming";
+    pnpm2nix.url = "github:nzbr/pnpm2nix-nzbr";
+
+    # hyprland.url = "git+https://github.com/hyprwm/Hyprland/?ref=explicit-sync&submodules=1";
+    zen-browser.url = "github:MarceColl/zen-browser-flake";
   };
 
   outputs = {
