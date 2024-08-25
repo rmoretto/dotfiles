@@ -4,9 +4,8 @@
   importNpmLock,
   pnpm,
   nodejs,
-  stdenv
+  stdenv,
 }:
-
 stdenv.mkDerivation (finalAttrs: rec {
   pname = "language-tools";
   version = "2.0.26";
@@ -30,18 +29,17 @@ stdenv.mkDerivation (finalAttrs: rec {
   };
 
   buildPhase = ''
-  # pnpm run build
-  pnpm install @lerna-lite/run -D
-  pnpm lerna run build -w
+    # pnpm run build
+    pnpm install @lerna-lite/run -D
+    pnpm lerna run build -w
   '';
 
   installPhase = ''
-  mkdir -p $out/lib/node_modules/@vue/
-  cp -r ./packages/typescript-plugin $out/lib/node_modules/@vue/
-  rm -rf $out/lib/node_modules/@vue/typescript-plugin/node_modules
+    mkdir -p $out/lib/node_modules/@vue/
+    cp -r ./packages/typescript-plugin $out/lib/node_modules/@vue/
+    rm -rf $out/lib/node_modules/@vue/typescript-plugin/node_modules
   '';
 })
-
 # buildNpmPackage rec {
 #   pname = "language-tools";
 #   version = "2.0.26";
@@ -54,8 +52,8 @@ stdenv.mkDerivation (finalAttrs: rec {
 #   };
 #
 #   pnpmDeps = pnpm.fetchDeps {
-#     pname = pname; 
-#     version = version; 
+#     pname = pname;
+#     version = version;
 #     src = src;
 #
 #     hash = "";
@@ -71,3 +69,4 @@ stdenv.mkDerivation (finalAttrs: rec {
 #   };
 # }
 #
+

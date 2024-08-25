@@ -124,6 +124,7 @@
     terraform
     delta
     difftastic
+    stylua
 
     # Fonts
     nerdfonts
