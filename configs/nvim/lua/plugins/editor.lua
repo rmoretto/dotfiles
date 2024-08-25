@@ -1,23 +1,33 @@
 local keymap = vim.keymap
 
 return {
+	-- {
+	-- 	"ggandor/lightspeed.nvim",
+	-- 	config = function(_, _)
+	-- 		local opts = { noremap = true, silent = true }
+	-- 		keymap.set("n", "<leader>s", "<Plug>Lightspeed_s", opts)
+	-- 		keymap.set("n", "<leader>S", "<Plug>Lightspeed_S", opts)
+	-- 		keymap.set("v", "<leader>s", "<Plug>Lightspeed_s", opts)
+	-- 		keymap.set("v", "<leader>S", "<Plug>Lightspeed_S", opts)
+	--
+	-- 		vim.cmd("silent! unmap s")
+	-- 		vim.cmd("silent! unmap S")
+	--
+	-- 		vim.api.nvim_set_hl(
+	-- 			0,
+	-- 			"LightspeedCursor",
+	-- 			{ bg = "#af0f0f", fg = "#f0f0ff", bold = true, underline = true }
+	-- 		)
+	-- 	end,
+	-- },
+
 	{
-		"ggandor/lightspeed.nvim",
-		config = function(_, _)
-			local opts = { noremap = true, silent = true }
-			keymap.set("n", "<leader>s", "<Plug>Lightspeed_s", opts)
-			keymap.set("n", "<leader>S", "<Plug>Lightspeed_S", opts)
-			keymap.set("v", "<leader>s", "<Plug>Lightspeed_s", opts)
-			keymap.set("v", "<leader>S", "<Plug>Lightspeed_S", opts)
-
-			vim.cmd("silent! unmap s")
-			vim.cmd("silent! unmap S")
-
-			vim.api.nvim_set_hl(
-				0,
-				"LightspeedCursor",
-				{ bg = "#af0f0f", fg = "#f0f0ff", bold = true, underline = true }
-			)
+		"ggandor/leap.nvim",
+		config = function()
+			vim.keymap.set("n", "<leader>s", "<Plug>(leap)")
+			vim.keymap.set("n", "<leader>S", "<Plug>(leap-from-window)")
+			vim.keymap.set({ "x", "o" }, "<leader>s", "<Plug>(leap-forward)")
+			vim.keymap.set({ "x", "o" }, "<leader>S", "<Plug>(leap-backward)")
 		end,
 	},
 
@@ -31,4 +41,11 @@ return {
 			},
 		},
 	},
+    {
+        "m4xshen/hardtime.nvim",
+        dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
+        opts = {
+            max_count = 5;
+        }
+    },
 }

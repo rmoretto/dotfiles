@@ -20,10 +20,6 @@ local function keymaps()
 	-- keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 end
 
-local tsdk = function()
-	return vim.fn.getcwd() .. "/node_modules/typescript/lib"
-end
-
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -91,16 +87,6 @@ return {
 					flags = { debounce_text_changes = 50 },
 				},
 				volar = {
-					-- filetypes = { "vue" },
-					-- -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-					-- init_options = {
-					--     vue = {
-					--         hybridMode = false,
-					--     },
-					--     typescript = {
-					--         tsdk = tsdk()
-					--     },
-					-- },
 					capabilities = {
 						workspace = {
 							didChangeWatchedFiles = {
@@ -118,7 +104,6 @@ return {
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")
 			local cmp = require("cmp_nvim_lsp")
-			-- local illuminate = require("illuminate")
 			-- Get base capabilities
 			local function base_capabilities(additional_capabilities)
 				if additional_capabilities == nil then
@@ -126,14 +111,6 @@ return {
 				end
 				local cmp_capabilities = cmp.default_capabilities()
 				return vim.tbl_deep_extend("force", additional_capabilities, cmp_capabilities)
-				-- return utils.table_merge(cmp_capabilities, additional_capabilities)
-			end
-
-			-- Get base on attach
-			local function base_on_attach()
-				return function(c)
-					-- illuminate.on_attach(c)
-				end
 			end
 
 			-- Server setup main function
@@ -144,9 +121,6 @@ return {
 
 				server_opts.capabilities =
 					vim.tbl_deep_extend("force", server_opts.capabilities or {}, base_capabilities())
-
-				local on_attach = server_opts.on_attach or base_on_attach()
-				server_opts.on_attach = on_attach
 
 				-- See nvim.nix modules for the lsp_location file generation
 				if lsp_location[lsp_name] then
