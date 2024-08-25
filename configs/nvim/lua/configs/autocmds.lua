@@ -50,32 +50,32 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 -- Configure ts, sts and sw for langs
 local lang_opts = {
-    {"elixir", ts = 2, sts = 2, sw = 2},
-    {"javascript", ts = 2, sts = 2, sw = 2},
-    {"typescript", ts = 2, sts = 2, sw = 2},
-    {"vue", ts = 2, sts = 2, sw = 2},
-    {"html", ts = 2, sts = 2, sw = 2},
-    {"css", ts = 2, sts = 2, sw = 2},
-    {"scss", ts = 2, sts = 2, sw = 2},
-    {"dart", ts = 2, sts = 2, sw = 2},
-    {"hcl", ts = 2, sts = 2, sw = 2},
-    {"terraform", ts = 2, sts = 2, sw = 2},
-    {"json", ts = 2, sts = 2, sw = 2},
-    {"nix", ts = 2, sts = 2, sw = 2},
+	{ "elixir", ts = 2, sts = 2, sw = 2 },
+	{ "javascript", ts = 2, sts = 2, sw = 2 },
+	{ "typescript", ts = 2, sts = 2, sw = 2 },
+	{ "vue", ts = 2, sts = 2, sw = 2 },
+	{ "html", ts = 2, sts = 2, sw = 2 },
+	{ "css", ts = 2, sts = 2, sw = 2 },
+	{ "scss", ts = 2, sts = 2, sw = 2 },
+	{ "dart", ts = 2, sts = 2, sw = 2 },
+	{ "hcl", ts = 2, sts = 2, sw = 2 },
+	{ "terraform", ts = 2, sts = 2, sw = 2 },
+	{ "json", ts = 2, sts = 2, sw = 2 },
+	{ "nix", ts = 2, sts = 2, sw = 2 },
 }
 
 for _, opt in pairs(lang_opts) do
-    local lang = opt[1]
-    local ts = opt.ts
-    local sts = opt.sts
-    local sw = opt.sts
+	local lang = opt[1]
+	local ts = opt.ts
+	local sts = opt.sts
+	local sw = opt.sts
 
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = lang,
-        callback = function(_event)
-            vim.opt_local.tabstop = ts
-            vim.opt_local.softtabstop = sts
-            vim.opt_local.shiftwidth = sw
-        end,
-    })
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = lang,
+		callback = function(_event)
+			vim.opt_local.tabstop = ts
+			vim.opt_local.softtabstop = sts
+			vim.opt_local.shiftwidth = sw
+		end,
+	})
 end

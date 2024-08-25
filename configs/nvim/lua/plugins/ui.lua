@@ -193,11 +193,11 @@ return {
 			},
 		},
 		config = function(_, opts)
-            require("indentmini").setup(opts)
+			require("indentmini").setup(opts)
 
 			vim.api.nvim_set_hl(0, "IndentLine", { fg = "#302f3d" })
 			vim.api.nvim_set_hl(0, "IndentLineCurrent", { fg = "#4a6141" })
-		end
+		end,
 	},
 
 	-- pls just work
@@ -283,5 +283,5 @@ return {
 		end,
 	},
 
-    { "simeji/winresizer" }
+	{ "simeji/winresizer" },
 }

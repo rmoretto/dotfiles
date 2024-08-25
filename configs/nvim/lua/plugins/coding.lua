@@ -108,7 +108,7 @@ return {
 			}
 		end,
 		config = function(_, opts)
-            require("formatter").setup(opts)
+			require("formatter").setup(opts)
 
 			local key_opts = { noremap = true, silent = true }
 			keymap.set("n", "<leader>f", ":Format<CR> :w<CR>", key_opts)
@@ -124,9 +124,9 @@ return {
 			direction = "float",
 		},
 		config = function(_, opts)
-            require("toggleterm").setup(opts)
+			require("toggleterm").setup(opts)
 			keymap.set("t", "<C-N>", [[<C-\><C-N>]], { noremap = true, silent = true })
-		end
+		end,
 	},
 
 	-- vim test
@@ -169,118 +169,118 @@ return {
 		},
 	},
 
-    -- Mini Surround
-    {
-        "echasnovski/mini.surround",
-        version = false,
-        opts = {
-            -- Add custom surroundings to be used on top of builtin ones. For more
-            -- information with examples, see `:h MiniSurround.config`.
-            custom_surroundings = nil,
+	-- Mini Surround
+	{
+		"echasnovski/mini.surround",
+		version = false,
+		opts = {
+			-- Add custom surroundings to be used on top of builtin ones. For more
+			-- information with examples, see `:h MiniSurround.config`.
+			custom_surroundings = nil,
 
-            -- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
-            highlight_duration = 500,
+			-- Duration (in ms) of highlight when calling `MiniSurround.highlight()`
+			highlight_duration = 500,
 
-            -- Module mappings. Use `''` (empty string) to disable ne.
-            mappings = {
-                add = '<leader>aa', -- Add surrunding in Normal and Visual modes
-                delete = '<leader>ad', -- Delete surrounding
-                find = '<leader>af', -- Find surrounding (to the right)
-                find_left = '<leader>aF', -- Find surrounding (to the left)
-                highlight = '<leader>ah', -- Highlight surrounding
-                replace = '<leader>ar', -- Replace surrounding
-                update_n_lines = '<leader>an', -- Update `n_lines`
+			-- Module mappings. Use `''` (empty string) to disable ne.
+			mappings = {
+				add = "<leader>aa", -- Add surrunding in Normal and Visual modes
+				delete = "<leader>ad", -- Delete surrounding
+				find = "<leader>af", -- Find surrounding (to the right)
+				find_left = "<leader>aF", -- Find surrounding (to the left)
+				highlight = "<leader>ah", -- Highlight surrounding
+				replace = "<leader>ar", -- Replace surrounding
+				update_n_lines = "<leader>an", -- Update `n_lines`
 
-                suffix_last = 'l', -- Suffix to search with "prev" method
-                suffix_next = 'n', -- Suffix to search with "next" method
-            },
+				suffix_last = "l", -- Suffix to search with "prev" method
+				suffix_next = "n", -- Suffix to search with "next" method
+			},
 
-            -- Number of lines within which surrounding is searched
-            n_lines = 20,
+			-- Number of lines within which surrounding is searched
+			n_lines = 20,
 
-            -- Whether to respect selection type:
-            -- - Place surroundings on separate lines in linewise mode.
-            -- - Place surroundings on each line in blockwise mode.
-            respect_selection_type = false,
+			-- Whether to respect selection type:
+			-- - Place surroundings on separate lines in linewise mode.
+			-- - Place surroundings on each line in blockwise mode.
+			respect_selection_type = false,
 
-            -- How to search for surrounding (first inside current line, then inside
-            -- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
-            -- 'cover_or_nearest', 'next', 'prev', 'nearest'. For more details,
-            -- see `:h MiniSurround.config`.
-            search_method = 'cover',
+			-- How to search for surrounding (first inside current line, then inside
+			-- neighborhood). One of 'cover', 'cover_or_next', 'cover_or_prev',
+			-- 'cover_or_nearest', 'next', 'prev', 'nearest'. For more details,
+			-- see `:h MiniSurround.config`.
+			search_method = "cover",
 
-            -- Whether to disable showing non-error feedback
-            silent = false,
-        }
-    },
+			-- Whether to disable showing non-error feedback
+			silent = false,
+		},
+	},
 
-    -- Vim Printer
-    {
-        "meain/vim-printer",
-        config = function()
-            vim.g.vim_printer_items = {
-                elixir = 'IO.inspect({$}, label: "{$}")',
-                vue = 'console.log("{$}", {$})',
-            }
-        end
-    },
+	-- Vim Printer
+	{
+		"meain/vim-printer",
+		config = function()
+			vim.g.vim_printer_items = {
+				elixir = 'IO.inspect({$}, label: "{$}")',
+				vue = 'console.log("{$}", {$})',
+			}
+		end,
+	},
 
-    {
-        "dmmulroy/ts-error-translator.nvim",
-        config = true,
-        ft = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
-    },
+	{
+		"dmmulroy/ts-error-translator.nvim",
+		config = true,
+		ft = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
+	},
 
-    -- Vim exchange
-    { "tommcdo/vim-exchange" },
+	-- Vim exchange
+	{ "tommcdo/vim-exchange" },
 
-    -- pobrema
-    {
-        "folke/trouble.nvim",
-        opts = {}, -- for default options, refer to the configuration section for custom setup.
-        cmd = "Trouble",
-        keys = {
-            {
-            "<leader>xx",
-            "<cmd>Trouble diagnostics toggle<cr>",
-            desc = "Diagnostics (Trouble)",
-            },
-            {
-            "<leader>xX",
-            "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-            desc = "Buffer Diagnostics (Trouble)",
-            },
-            {
-            "<leader>cs",
-            "<cmd>Trouble symbols toggle focus=false<cr>",
-            desc = "Symbols (Trouble)",
-            },
-            {
-            "<leader>cl",
-            "<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-            desc = "LSP Definitions / references / ... (Trouble)",
-            },
-            {
-            "<leader>xL",
-            "<cmd>Trouble loclist toggle<cr>",
-            desc = "Location List (Trouble)",
-            },
-            {
-            "<leader>xQ",
-            "<cmd>Trouble qflist toggle<cr>",
-            desc = "Quickfix List (Trouble)",
-            },
-        },
-    },
+	-- pobrema
+	{
+		"folke/trouble.nvim",
+		opts = {}, -- for default options, refer to the configuration section for custom setup.
+		cmd = "Trouble",
+		keys = {
+			{
+				"<leader>xx",
+				"<cmd>Trouble diagnostics toggle<cr>",
+				desc = "Diagnostics (Trouble)",
+			},
+			{
+				"<leader>xX",
+				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+				desc = "Buffer Diagnostics (Trouble)",
+			},
+			{
+				"<leader>cs",
+				"<cmd>Trouble symbols toggle focus=false<cr>",
+				desc = "Symbols (Trouble)",
+			},
+			{
+				"<leader>cl",
+				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+				desc = "LSP Definitions / references / ... (Trouble)",
+			},
+			{
+				"<leader>xL",
+				"<cmd>Trouble loclist toggle<cr>",
+				desc = "Location List (Trouble)",
+			},
+			{
+				"<leader>xQ",
+				"<cmd>Trouble qflist toggle<cr>",
+				desc = "Quickfix List (Trouble)",
+			},
+		},
+	},
 
-    -- typescript me salva
-    {
-        "dmmulroy/tsc.nvim",
-        opts = {
-            bin_path = "vue-tsc"
-        },
-        config = function(_, opts)
-            require("tsc").setup(opts)
-        end
-    }
+	-- typescript me salva
+	{
+		"dmmulroy/tsc.nvim",
+		opts = {
+			bin_path = "vue-tsc",
+		},
+		config = function(_, opts)
+			require("tsc").setup(opts)
+		end,
+	},
 }

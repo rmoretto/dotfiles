@@ -21,7 +21,7 @@ local function keymaps()
 end
 
 local tsdk = function()
-    return vim.fn.getcwd() .. "/node_modules/typescript/lib"
+	return vim.fn.getcwd() .. "/node_modules/typescript/lib"
 end
 
 return {
@@ -78,36 +78,36 @@ return {
 				tailwindcss = true,
 				terraformls = true,
 				tsserver = {
-                    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-                    init_options = {
-                        plugins = {
-                            {
-                                name = "@vue/typescript-plugin",
-                                location = lsp_location.vue_ts_plugin,
-                                languages = {"javascript", "typescript", "vue"},
-                            },
-                        },
-                    },
-                    flags = { debounce_text_changes = 50 }
-                },
+					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+					init_options = {
+						plugins = {
+							{
+								name = "@vue/typescript-plugin",
+								location = lsp_location.vue_ts_plugin,
+								languages = { "javascript", "typescript", "vue" },
+							},
+						},
+					},
+					flags = { debounce_text_changes = 50 },
+				},
 				volar = {
-                    -- filetypes = { "vue" },
-                    -- -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
-                    -- init_options = {
-                    --     vue = {
-                    --         hybridMode = false,
-                    --     },
-                    --     typescript = {
-                    --         tsdk = tsdk()
-                    --     },
-                    -- },
-                    capabilities = {
-                        workspace = {
-                            didChangeWatchedFiles = {
-                                dynamicRegistration = true,
-                            },
-                        },
-                    },
+					-- filetypes = { "vue" },
+					-- -- filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue", "json" },
+					-- init_options = {
+					--     vue = {
+					--         hybridMode = false,
+					--     },
+					--     typescript = {
+					--         tsdk = tsdk()
+					--     },
+					-- },
+					capabilities = {
+						workspace = {
+							didChangeWatchedFiles = {
+								dynamicRegistration = true,
+							},
+						},
+					},
 				},
 				arduino_language_server = true,
 				nil_ls = true,
@@ -121,11 +121,11 @@ return {
 			-- local illuminate = require("illuminate")
 			-- Get base capabilities
 			local function base_capabilities(additional_capabilities)
-                if additional_capabilities == nil then
-                    additional_capabilities = {}
-                end
+				if additional_capabilities == nil then
+					additional_capabilities = {}
+				end
 				local cmp_capabilities = cmp.default_capabilities()
-                return vim.tbl_deep_extend('force', additional_capabilities, cmp_capabilities)
+				return vim.tbl_deep_extend("force", additional_capabilities, cmp_capabilities)
 				-- return utils.table_merge(cmp_capabilities, additional_capabilities)
 			end
 
@@ -142,12 +142,13 @@ return {
 					server_opts = {}
 				end
 
-				server_opts.capabilities = vim.tbl_deep_extend("force", server_opts.capabilities or {}, base_capabilities())
+				server_opts.capabilities =
+					vim.tbl_deep_extend("force", server_opts.capabilities or {}, base_capabilities())
 
 				local on_attach = server_opts.on_attach or base_on_attach()
 				server_opts.on_attach = on_attach
 
-			    -- See nvim.nix modules for the lsp_location file generation
+				-- See nvim.nix modules for the lsp_location file generation
 				if lsp_location[lsp_name] then
 					server_opts.cmd = lsp_location[lsp_name]
 				end
@@ -164,21 +165,21 @@ return {
 		end,
 	},
 
-    -- Lsp Saga
-    {
-        'nvimdev/lspsaga.nvim',
-        opts = {
-            symbol_in_winbar = {
-                enable = true,
-		        folder_level = 4,
-            }
-        },
-        config = function(_, opts)
-            require('lspsaga').setup(opts)
-        end,
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-            'nvim-tree/nvim-web-devicons',
-        }
-    }
+	-- Lsp Saga
+	{
+		"nvimdev/lspsaga.nvim",
+		opts = {
+			symbol_in_winbar = {
+				enable = true,
+				folder_level = 4,
+			},
+		},
+		config = function(_, opts)
+			require("lspsaga").setup(opts)
+		end,
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons",
+		},
+	},
 }

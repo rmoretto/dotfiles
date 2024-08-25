@@ -23,5 +23,5 @@ return {
 
 	{ "psliwka/vim-smoothie" },
 
-    { "tpope/vim-repeat" },
+	{ "tpope/vim-repeat" },
 }

@@ -4,7 +4,7 @@ return {
 		build = ":TSUpdate",
 		config = function()
 			local configs = require("nvim-treesitter.configs")
-            --- @diagnostic disable-next-line: missing-fields
+			--- @diagnostic disable-next-line: missing-fields
 			configs.setup({
 				ensure_installed = {
 					"lua",
@@ -23,9 +23,9 @@ return {
 					"scss",
 					"markdown",
 					"markdown_inline",
-                    "regex",
+					"regex",
 				},
-                auto_install = false,
+				auto_install = false,
 				sync_install = false,
 				incremental_selection = { enable = true },
 				highlight = { enable = true },
