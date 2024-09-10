@@ -60,6 +60,8 @@
     input = {
       kb_layout = "us";
       kb_variant = "intl";
+
+      kb_options = "caps:escape";
     };
 
     bind = [

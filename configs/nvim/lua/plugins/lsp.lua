@@ -73,8 +73,14 @@ return {
 				lua_ls = true,
 				tailwindcss = true,
 				terraformls = true,
-				tsserver = {
-					filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+				ts_ls = {
+					filetypes = {
+						"javascript",
+						"javascriptreact",
+						"typescript",
+						"typescriptreact",
+						"vue",
+					},
 					init_options = {
 						plugins = {
 							{

@@ -99,9 +99,10 @@
     LC_TIME = "pt_BR.UTF-8";
   };
 
-  security.pam.services.lightdm.enableGnomeKeyring = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  services.gnome.gnome-keyring.enable = true;
+  # security.pam.services.lightdm.enableGnomeKeyring = true;
+  # security.pam.services.gdm.enableGnomeKeyring = true;
+  # security.pam.services.login.enableGnomeKeyring = true;
+  # services.gnome.gnome-keyring.enable = true;
 
   # Enable the X11 windowing system.
   # services.xserver.videoDrivers = ["nvidia"];
@@ -116,23 +117,34 @@
     # package = inputs.hyprland.packages.${pkgs.system}.default;
   };
 
-  services.displayManager = {
-    autoLogin.user = "rmoretto";
+  services.xserver.videoDrivers = ["nvidia"];
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/Hyprland";
+        user = "rmoretto";
+      };
+      default_session = initial_session;
+    };
   };
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"];
-    exportConfiguration = true;
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
-    xkb = {
-      layout = "us";
-      variant = "intl";
-    };
-  };
+  # services.displayManager = {
+  #   autoLogin.user = "rmoretto";
+  # };
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = ["nvidia"];
+  #   exportConfiguration = true;
+  #   displayManager.gdm = {
+  #     enable = true;
+  #     wayland = true;
+  #   };
+  #   xkb = {
+  #     layout = "us";
+  #     variant = "intl";
+  #   };
+  # };
 
   # services.xserver = {
   #   enable = true;
@@ -285,7 +297,7 @@
     #     TimeoutStopSec = 10;
     #   };
     # };
-
+    #
     # user.services.gnome-keyring = {
     #   description = "GNOME Keyring";
     #   wantedBy = [ "graphical-session-pre.target" ];

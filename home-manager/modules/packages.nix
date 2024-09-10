@@ -5,7 +5,7 @@
 }: {
   home.packages = with pkgs; [
     # Very Fun and games
-    firefox
+    unstable.firefox
     unstable.google-chrome
     chromium
     spotify
@@ -75,6 +75,8 @@
     xdg-desktop-portal-hyprland
     lolcat
     unetbootin
+    sd
+    sad
 
     # soundsss and VIDEOS
     pavucontrol

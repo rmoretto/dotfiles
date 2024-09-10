@@ -28,6 +28,10 @@ return {
 			vim.keymap.set("n", "<leader>S", "<Plug>(leap-from-window)")
 			vim.keymap.set({ "x", "o" }, "<leader>s", "<Plug>(leap-forward)")
 			vim.keymap.set({ "x", "o" }, "<leader>S", "<Plug>(leap-backward)")
+
+            vim.keymap.set({'n', 'x', 'o'}, 'ga',  function ()
+                require('leap.treesitter').select()
+            end)
 		end,
 	},
 
@@ -48,4 +52,18 @@ return {
             max_count = 5;
         }
     },
+
+    {
+        "mistricky/codesnap.nvim",
+        build = "make",
+        keys = {
+            { "<leader>cc", "<cmd>CodeSnap<cr>", mode = "x", desc = "Save selected code snapshot into clipboard" },
+            { "<leader>cs", "<cmd>CodeSnapSave<cr>", mode = "x", desc = "Save selected code snapshot in ~/Pictures" },
+        },
+        opts = {
+            save_path = "~/Pictures",
+            has_breadcrumbs = true,
+            bg_theme = "bamboo",
+        },
+    }
 }

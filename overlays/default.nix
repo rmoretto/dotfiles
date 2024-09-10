@@ -19,22 +19,11 @@
         hash = "sha256-DzNJxZbSdhqdtIQvQ7ZKrKwu6zTcBjtsR9rv/uudZcw=";
       };
     });
-    # godot_4 = prev.godot_4.overrideAttrs (oldAttrs: rec {
-    #   version = "4.2.1-stable";
-    #   commitHash = "b09f793f564a6c95dc76acc654b390e68441bd01";
-    #
-    #   src = prev.fetchFromGitHub {
-    #     owner = "godotengine";
-    #     repo = "godot";
-    #     rev = commitHash;
-    #     hash = "sha256-Q6Og1H4H2ygOryMPyjm6kzUB6Su6T9mJIp0alNAxvjQ=";
-    #   };
-    # });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
   # be accessible through 'pkgs.unstable'
-  unstable-packages = final: _prev: {
+  unstable-packages = final: prev: {
     unstable = import inputs.nixpkgs-unstable {
       system = final.system;
       config.allowUnfree = true;

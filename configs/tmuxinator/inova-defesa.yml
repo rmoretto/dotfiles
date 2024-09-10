@@ -26,7 +26,7 @@ windows:
       root: ~/programations/granter/inova-defesa/backend/inova-backend
       panes:
         - nvim:
-          - nix develop
+          - nix develop .#test
           - nvim
 
   - backend-term:
