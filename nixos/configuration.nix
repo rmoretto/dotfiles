@@ -18,6 +18,7 @@
   nixpkgs = {
     # You can add overlays here
     overlays = [
+      outputs.overlays.modifications
       outputs.overlays.unstable-packages
     ];
     # overlays = [
@@ -78,7 +79,6 @@
   boot.extraModprobeConfig = ''
     options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
   '';
-  security.polkit.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -102,7 +102,11 @@
   # security.pam.services.lightdm.enableGnomeKeyring = true;
   # security.pam.services.gdm.enableGnomeKeyring = true;
   # security.pam.services.login.enableGnomeKeyring = true;
-  # services.gnome.gnome-keyring.enable = true;
+  services.gnome.gnome-keyring.enable = true;
+  security = {
+    polkit.enable = true;
+    pam.services.login.enableGnomeKeyring = true;
+  };
 
   # Enable the X11 windowing system.
   # services.xserver.videoDrivers = ["nvidia"];
@@ -273,6 +277,7 @@
   services.spice-vdagentd.enable = true;
   virtualisation.docker.enable = true;
 
+  programs.openvpn3.enable = true;
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
   programs.thunar = {

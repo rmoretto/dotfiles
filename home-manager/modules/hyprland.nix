@@ -26,7 +26,7 @@
   };
 
   wayland.windowManager.hyprland.enable = true;
-  wayland.windowManager.hyprland.package = pkgs.unstable.hyprland;
+  # wayland.windowManager.hyprland.package = pkgs.unstable.hyprland;
   # wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.default;
 
   wayland.windowManager.hyprland.settings = {
@@ -40,6 +40,8 @@
       "GBM_BACKEND,nvidia-drm"
       "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       "WLR_NO_HARDWARE_CURSORS,1"
+      "XCURSOR_SIZE,24"
+      "HYPRCURSOR_SIZE,24"
     ];
 
     monitor = [
@@ -62,6 +64,8 @@
       kb_variant = "intl";
 
       kb_options = "caps:escape";
+
+      sensitivity = "-0.65";
     };
 
     bind = [

@@ -8,6 +8,7 @@
   # https://nixos.wiki/wiki/Overlays
   modifications = final: prev: {
     notifd = inputs.notifd.packages.${prev.system}.default;
+    # hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
     xwaylandvideobridge = prev.xwaylandvideobridge.overrideAttrs (oldAttrs: rec {
       version = "0.4.0";
 

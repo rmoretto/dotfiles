@@ -12,7 +12,7 @@ return {
 				defaults = {
 					vimgrep_arguments = {
 						"rg",
-						"--hidden",
+						"--no-hidden",
 						"--color=never",
 						"--no-heading",
 						"--with-filename",
@@ -47,23 +47,6 @@ return {
 			keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", keyopts)
 		end,
 	},
-
-	-- Ranger
-	-- {
-	-- 	"kevinhwang91/rnvimr",
-	-- 	config = function(_, _)
-	-- 		vim.g.rnvimr_draw_border = 1
-	-- 		vim.g.rnvimr_ranger_cmd = { "ranger", '--cmd="set draw_borders both"' }
-	-- 		vim.g.rnvimr_enable_picker = 1
-	-- 		vim.g.rnvimr_hide_gitignore = 0
-	-- 		vim.g.rnvimr_enable_bw = 1
-	--
-	-- 		local opts = { noremap = true, silent = true }
-	-- 		keymap.set("t", "<M-i>", "<C-\\><C-n>:RnvimrResize<CR>", opts)
-	-- 		keymap.set("n", "<A-q>", ":RnvimrToggle<CR>", opts)
-	-- 		keymap.set("t", "<A-q>", "<C-\\><C-n>:RnvimrToggle<CR>", opts)
-	-- 	end,
-	-- },
 
 	-- Oil
 	{

@@ -77,6 +77,7 @@
     unetbootin
     sd
     sad
+    openvpn3
 
     # soundsss and VIDEOS
     pavucontrol
@@ -95,7 +96,7 @@
     vscode
     rustup
     # cargo
-    # rustc
+    rustc
     # rust-analyzer
     # marksman
     go
@@ -127,6 +128,7 @@
     delta
     difftastic
     stylua
+    gnumake
 
     # Fonts
     nerdfonts
