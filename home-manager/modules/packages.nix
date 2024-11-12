@@ -73,7 +73,6 @@
     lutris
     xwaylandvideobridge
     ffmpeg
-    xdg-desktop-portal-hyprland
     lolcat
     unetbootin
     sd

@@ -113,29 +113,27 @@
   # services.xserver.layout = "us";
   # services.xserver.xkbVariant = "intl";
 
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    # package = pkgs.hyprland.override { debug = true; };
-  };
-
-  services.xserver.videoDrivers = ["nvidia"];
-  services.greetd = {
-    enable = true;
-    settings = rec {
-      initial_session = {
-        command = "${pkgs.hyprland}/bin/Hyprland";
-        # command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
-        user = "rmoretto";
-      };
-      default_session = initial_session;
-    };
-  };
-
-  # services.displayManager = {
-  #   autoLogin.user = "rmoretto";
+  # programs.hyprland = {
+  #   enable = true;
+  #   xwayland.enable = true;
+  #   # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  #   # package = pkgs.hyprland.override { debug = true; };
   # };
+  #
+
+  # services.xserver.videoDrivers = ["nvidia"];
+  # services.greetd = {
+  #   enable = true;
+  #   settings = rec {
+  #     initial_session = {
+  #       command = "${pkgs.hyprland}/bin/Hyprland";
+  #       # command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
+  #       user = "rmoretto";
+  #     };
+  #     default_session = initial_session;
+  #   };
+  # };
+
   # services.xserver = {
   #   enable = true;
   #   videoDrivers = ["nvidia"];
@@ -150,19 +148,24 @@
   #   };
   # };
 
-  # services.xserver = {
-  #   enable = true;
-  #   videoDrivers = ["nvidia"];
-  #   displayManager = {
-  #     autoLogin.user = "rmoretto";
-  #     lightdm.enable = true;
-  #     defaultSession = "none+i3";
-  #   };
-  #   windowManager.i3.enable = true;
-  #   layout = "us";
-  #   xkbVariant = "intl";
-  #   exportConfiguration = true;
-  # };
+  services.displayManager = {
+    autoLogin.user = "rmoretto";
+    defaultSession = "none+i3";
+  };
+
+  services.xserver = {
+    enable = true;
+    videoDrivers = ["nvidia"];
+    displayManager = {
+      lightdm.enable = true;
+    };
+    windowManager.i3.enable = true;
+    xkb = {
+      layout = "us";
+      variant = "intl";
+    };
+    exportConfiguration = true;
+  };
 
   # services.xserver.displayManager.setupCommands = ''
   #   LEFT='DP-2'

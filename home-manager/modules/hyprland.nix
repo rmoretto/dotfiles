@@ -25,6 +25,10 @@
     recursive = true;
   };
 
+  home.packages = with pkgs; [
+    xdg-desktop-portal-hyprland
+  ]
+
   wayland.windowManager.hyprland.enable = true;
   # wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
