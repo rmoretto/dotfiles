@@ -16,6 +16,7 @@
     unstable.terminaltexteffects
     joplin-desktop
     inputs.zen-browser.packages."${system}".default
+    unstable.cmake
 
     # rofi-wayland
     waybar

@@ -1,3 +1,9 @@
+Host cbti
+    HostName 93.127.210.171
+    User root
+    ServerAliveInterval 60
+    IdentityFile ~/.ssh/cbti
+
 Host meu_lote_hom
     HostName 52.67.216.214
     User rodrigo

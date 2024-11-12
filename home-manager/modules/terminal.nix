@@ -65,7 +65,7 @@
       zstyle :bracketed-paste-magic paste-init pasteinit
       zstyle :bracketed-paste-magic paste-finish pastefinis
 
-      ### Add ssh key to ssh-agent 
+      ### Add ssh key to ssh-agent
       eval $(ssh-agent) && ssh-add ~/.ssh/id_ed25519 > /dev/null
     '';
   };

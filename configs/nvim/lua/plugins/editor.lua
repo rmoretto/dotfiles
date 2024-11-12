@@ -1,6 +1,13 @@
 return {
 	{
 		"ggandor/leap.nvim",
+		opts = {
+            highlight_unlabeled_phase_one_targets = true,
+			substitute_chars = {
+				[" "] = "␣",
+				["\r"] = "¬",
+			},
+		},
 		config = function()
 			vim.keymap.set("n", "<leader>s", "<Plug>(leap)")
 			vim.keymap.set("n", "<leader>S", "<Plug>(leap-from-window)")

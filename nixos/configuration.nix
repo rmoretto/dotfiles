@@ -114,11 +114,10 @@
   # services.xserver.xkbVariant = "intl";
 
   programs.hyprland = {
-    # Install the packages from nixpkgs
     enable = true;
-    # Whether to enable XWayland
     xwayland.enable = true;
-    # package = inputs.hyprland.packages.${pkgs.system}.default;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # package = pkgs.hyprland.override { debug = true; };
   };
 
   services.xserver.videoDrivers = ["nvidia"];
@@ -127,6 +126,7 @@
     settings = rec {
       initial_session = {
         command = "${pkgs.hyprland}/bin/Hyprland";
+        # command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
         user = "rmoretto";
       };
       default_session = initial_session;

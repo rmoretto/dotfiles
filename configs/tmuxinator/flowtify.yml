@@ -11,17 +11,6 @@ windows:
           - nix develop
           - nvim
 
-  - frontend-term:
-      root: ~/programations/granter/flowtify/frontend/flowtify-frontend
-      layout: even-horizontal
-      panes:
-        - yarn: 
-          - nix develop
-          - yarn dev --port 3001
-        - git:
-          - nix develop
-          - git status
-
   - backend-editor:
       root: ~/programations/granter/flowtify/backend/flowtify-backend
       panes:
@@ -29,16 +18,25 @@ windows:
           - nix develop .#test
           - nvim
 
-  - backend-term:
-      root: ~/programations/granter/flowtify/backend/flowtify-backend
-      layout: even-horizontal
+  - terminals:
+      layout: tiled
       panes:
-        - phx_server:
+        - frontend-git:
+          - cd ./frontend/flowtify-frontend
           - nix develop
-          - MIX_ENV=dev mix phx.server
-        - git:
+          - git status
+        - frontend-yarn: 
+          - cd ./frontend/flowtify-frontend
+          - nix develop
+          - yarn dev --port 3001
+        - backend-git:
+          - cd ./backend/flowtify-backend
           - nix develop .#test
           - git status
+        - backend-phx:
+          - cd ./backend/flowtify-backend
+          - nix develop
+          - MIX_ENV=dev mix phx.server
 
   - granter-tools-editor:
       root: ~/programations/granter/flowtify/frontend/granter-tools
@@ -55,8 +53,9 @@ windows:
   - infra-editor:
       root: ~/programations/granter/flowtify/infra/
       panes:
-        - nix develop
-        - nvim
+        - nvim:
+          - nix develop
+          - nvim
 
   - infra-term:
       root: ~/programations/granter/flowtify/infra/

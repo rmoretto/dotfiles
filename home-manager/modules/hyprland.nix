@@ -26,13 +26,16 @@
   };
 
   wayland.windowManager.hyprland.enable = true;
-  # wayland.windowManager.hyprland.package = pkgs.unstable.hyprland;
-  # wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.default;
+  # wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
 
   wayland.windowManager.hyprland.settings = {
     "$monitor_left" = "DP-3";
     "$monitor_center" = "DP-4";
     "$monitor_right" = "DP-2";
+
+    debug = {
+      disable_logs = false;
+    };
 
     env = [
       # "LIBVA_DRIVER_NAME,nvidia"
