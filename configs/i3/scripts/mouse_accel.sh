@@ -4,5 +4,5 @@
 # Using xinput --list --short
 #  then xinput --list-props 16
 
-xinput --set-prop 16 300 -0.9
+xinput --set-prop 14 300 -0.9
 

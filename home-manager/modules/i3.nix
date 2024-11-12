@@ -1,5 +1,6 @@
 {pkgs, ...}: {
   xsession.windowManager.i3.enable = true;
+  
   home.file.".config/i3" = {
     source = ../../configs/i3;
     recursive = true;

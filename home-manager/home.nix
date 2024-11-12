@@ -19,6 +19,7 @@
     ./modules/window_manager.nix
     # ./modules/hyprland.nix
     ./modules/i3.nix
+    ./modules/picom.nix
   ];
 
   nixpkgs = {
