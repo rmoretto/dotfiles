@@ -4,9 +4,9 @@ polybar-msg cmd quit
 
 echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
 
-LEFT='DP-3'
+LEFT='DP-2'
 CENTER='DP-4'
-RIGHT='DP-2'
+RIGHT='DP-0'
 
 polybar center 2>&1 | tee -a /tmp/polybar1.log & disown
 MONITOR=$LEFT polybar left 2>&1 | tee -a /tmp/polybar1.log & disown

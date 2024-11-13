@@ -167,14 +167,14 @@
     exportConfiguration = true;
   };
 
-  # services.xserver.displayManager.setupCommands = ''
-  #   LEFT='DP-2'
-  #   CENTER='DP-4'
-  #   RIGHT='DP-0'
-  #   ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
-  #          --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
-  #          --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
-  # '';
+  services.xserver.displayManager.setupCommands = ''
+    LEFT='DP-2'
+    CENTER='DP-4'
+    RIGHT='DP-0'
+    ${pkgs.xorg.xrandr}/bin/xrandr --output $RIGHT --mode 1920x1080 --pos 3840x0 --rotate right \
+           --output $LEFT --mode 1920x1080 --pos 0x478 --rotate normal \
+           --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
+  '';
 
   # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
