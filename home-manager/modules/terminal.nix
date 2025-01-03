@@ -89,7 +89,7 @@
           foreground = "#dcd7ba";
         };
       };
-      shell.program = "${pkgs.zsh}/bin/zsh";
+      terminal.shell = "${pkgs.zsh}/bin/zsh";
       # window.opacity = 0.8;
       window.padding = {
         x = 5;

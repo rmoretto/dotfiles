@@ -16,6 +16,7 @@
     unstable.terminaltexteffects
     joplin-desktop
     inputs.zen-browser.packages."${system}".default
+    inputs.ghostty.packages."${system}".default
     unstable.cmake
 
     # rofi-wayland
@@ -129,6 +130,7 @@
     difftastic
     stylua
     gnumake
+    awscli2
 
     # Fonts
     nerdfonts

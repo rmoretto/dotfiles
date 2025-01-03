@@ -10,9 +10,17 @@ return {
 
 			return {
 				defaults = {
+                    find_command = {
+                        "rg",
+                        "--hidden",
+                        "--glob", "!.git/",
+                        "--color=never",
+                        "--files"
+                    },
 					vimgrep_arguments = {
 						"rg",
-						"--no-hidden",
+						"--hidden",
+                        "--glob", "!.git/",
 						"--color=never",
 						"--no-heading",
 						"--with-filename",
