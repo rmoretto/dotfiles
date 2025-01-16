@@ -131,6 +131,8 @@
     stylua
     gnumake
     awscli2
+    git-filter-repo
+    nix-your-shell
 
     # Fonts
     nerdfonts

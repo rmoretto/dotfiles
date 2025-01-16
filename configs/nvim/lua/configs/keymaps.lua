@@ -53,6 +53,7 @@ keymap.set("i", "]", "]<c-g>u", opts)
 keymap.set("i", "{", "{<c-g>u", opts)
 keymap.set("i", "}", "}<c-g>u", opts)
 keymap.set("i", "-", "-<c-g>u", opts)
+keymap.set("i", " ", "-<c-g>u", opts)
 
 -- Close quickfix
 keymap.set("n", "<leader>x", ":ccl <CR>", opts)

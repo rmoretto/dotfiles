@@ -67,6 +67,10 @@
 
       ### Add ssh key to ssh-agent
       eval $(ssh-agent) && ssh-add ~/.ssh/id_ed25519 > /dev/null
+
+      if command -v nix-your-shell > /dev/null; then
+        nix-your-shell zsh | source /dev/stdin
+      fi
     '';
   };
 
