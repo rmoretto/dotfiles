@@ -15,8 +15,6 @@
     # warp-terminal
     unstable.terminaltexteffects
     joplin-desktop
-    inputs.zen-browser.packages."${system}".default
-    inputs.ghostty.packages."${system}".default
     unstable.cmake
 
     # rofi-wayland
@@ -32,6 +30,7 @@
     slurp
     imagemagick
     swww
+    easyeffects
 
     # System utilities
     htop
@@ -47,22 +46,22 @@
     eza
     xcowsay
     xclip
-    gnome.gnome-disk-utility
+    gnome-disk-utility
     sl
     neofetch
     cmatrix
     libnotify
-    gnome.seahorse
+    seahorse
     gparted
-    flameshot
+    unstable.flameshot
     gzip
     # gnome.nautilus
     # libsForQt5.ark
     ntfs3g
     feh
     notifd
-    gnome.file-roller
-    gnome.gnome-calendar
+    file-roller
+    gnome-calendar
     btop
     woeusb
     efibootmgr
@@ -78,7 +77,7 @@
     unetbootin
     sd
     sad
-    openvpn3
+    dig
 
     # soundsss and VIDEOS
     pavucontrol

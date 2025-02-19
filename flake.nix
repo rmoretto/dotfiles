@@ -13,20 +13,10 @@
     home-manager.url = "github:nix-community/home-manager/release-24.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
-    sops-nix = {
-      url = "github:mic92/sops-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.nixpkgs-stable.follows = "nixpkgs";
-    };
-
+    sops-nix.url = "github:mic92/sops-nix";
     notifd.url = "github:rmoretto/notifd";
-
     nix-gaming.url = "github:fufexan/nix-gaming";
     pnpm2nix.url = "github:nzbr/pnpm2nix-nzbr";
-
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?ref=refs/tags/v0.41.2&submodules=1";
-    zen-browser.url = "github:MarceColl/zen-browser-flake";
-    ghostty.url = "github:ghostty-org/ghostty";
   };
 
   outputs = {

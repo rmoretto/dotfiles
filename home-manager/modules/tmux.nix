@@ -6,9 +6,10 @@
     historyLimit = 10000;
     escapeTime = 10;
     mouse = true;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "${pkgs.fish}/bin/fish";
     tmuxinator.enable = true;
     clock24 = true;
+    keyMode = "vi";
     plugins = with pkgs; [
       tmuxPlugins.tilish
       {
@@ -25,6 +26,16 @@
     ];
     extraConfig = ''
       set-option -ga terminal-overrides ",*256col*:Tc:RGB"
+
+      # Remap copy mode
+      bind-key -n 'C-M-\' copy-mode
+
+      # Vi mappings for copy-mode: https://unix.stackexchange.com/a/585672/410321
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi y send-keys -X copy-selection
+      bind-key -T copy-mode-vi r send-keys -X rectangle-toggle
+      # Also copy to system clipboard
+      bind-key -T copy-mode-vi y send-keys -X copy-pipe-and-cancel 'xclip -sel clip -i'
     '';
   };
 

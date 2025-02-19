@@ -10,6 +10,9 @@ keymap.set("n", "<F12>", utils.reload_nvim, opts)
 keymap.set("n", "<Leader>y", '"+y', opts)
 keymap.set("v", "<Leader>y", '"+y', opts)
 
+-- Save 
+keymap.set("n", "<Leader><Space>", ":w<CR>", opts)
+
 -- Move lines
 keymap.set("n", "<C-A-j>", ":m .+1<CR>==", opts)
 keymap.set("n", "<C-A-k>", ":m .-2<CR>==", opts)
@@ -53,7 +56,7 @@ keymap.set("i", "]", "]<c-g>u", opts)
 keymap.set("i", "{", "{<c-g>u", opts)
 keymap.set("i", "}", "}<c-g>u", opts)
 keymap.set("i", "-", "-<c-g>u", opts)
-keymap.set("i", " ", "-<c-g>u", opts)
+keymap.set("i", " ", " <c-g>u", opts)
 
 -- Close quickfix
 keymap.set("n", "<leader>x", ":ccl <CR>", opts)

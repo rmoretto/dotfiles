@@ -8,7 +8,7 @@
     enable = true;
     settings = {
       main = {
-        terminal = "alacritty -e";
+        terminal = "kitty -e";
         prompt = ">> ";
         layer = "overlay";
       };
@@ -25,17 +25,16 @@
     recursive = true;
   };
 
-  home.packages = with pkgs; [
-    xdg-desktop-portal-hyprland
-  ]
+  # home.packages = with pkgs; [
+  #   xdg-desktop-portal-hyprland
+  # ];
 
   wayland.windowManager.hyprland.enable = true;
-  # wayland.windowManager.hyprland.package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  wayland.windowManager.hyprland.package = pkgs.unstable.hyprland;
 
   wayland.windowManager.hyprland.settings = {
     "$monitor_left" = "DP-3";
-    "$monitor_center" = "DP-4";
-    "$monitor_right" = "DP-2";
+    "$monitor_right" = "DP-4";
 
     debug = {
       disable_logs = false;
@@ -52,9 +51,9 @@
     ];
 
     monitor = [
-      "$monitor_left, 1920x1080, -1920x0, 1"
-      "$monitor_center, 1920x1080@144, 0x0, 1"
-      "$monitor_right, 1920x1080, 1920x-400, 1, transform, 3"
+      "$monitor_left, 1920x1080@144, -1920x360, 1"
+      # "$monitor_center, 1920x1080@144, 0x0, 1"
+      "$monitor_right, 3440x1440@165, 0x0, 1"
     ];
 
     exec-once = [
@@ -77,7 +76,7 @@
 
     bind = [
       # Example binds, see https://wiki.hyprland.org/Configuring/Binds/ for more
-      "SUPER, Return, exec, alacritty"
+      "SUPER, Return, exec, kitty"
       "SUPER_SHIFT,q,killactive"
       "SUPER, D, exec, rofi -show drun"
 
@@ -88,7 +87,8 @@
       "SUPER, V, togglefloating, "
       # "SUPER, P, pseudo, # dwindle"
       # "SUPER, J, togglesplit, # dwindle"
-      "SUPER, Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+      "SUPER, code:35, exec, grim -g \"$(slurp -d)\" - | wl-copy"
+      # "SUPER, Print, exec, XDG_CURRENT_DESKTOP=sway flameshot gui"
 
       # Sound control
       ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +2%"
@@ -149,10 +149,10 @@
       "1, monitor:$monitor_left"
       "3, monitor:$monitor_left"
 
-      "2, monitor:$monitor_center"
-      "4, monitor:$monitor_center"
+      "2, monitor:$monitor_right"
+      "4, monitor:$monitor_right"
 
-      "6, monitor:$monitor_right"
+      # "6, monitor:$monitor_right"
     ];
 
     general = {
@@ -183,10 +183,12 @@
         contrast = 1;
       };
 
-      drop_shadow = "yes";
-      shadow_range = 4;
-      shadow_render_power = 3;
-      "col.shadow" = "rgba(1a1a1aee)";
+      shadow = {
+        enabled = true;
+        range = 4;
+        render_power = 3;
+        color = "rgba(1a1a1aee)";
+      };
 
       dim_inactive = false;
       dim_strength = 0.1;
@@ -213,7 +215,7 @@
       animation = [
         "windows, 1, 3, md3_decel, popin 60%"
         "border, 1, 10, default"
-        "borderangle, 1, 500, linear, loop"
+        "borderangle, 1, 250, linear, loop"
         "fade, 1, 2.5, md3_decel"
         # "workspaces, 1, 3.5, md3_decel, slide"
         "workspaces, 1, 7, fluent_decel, slide"
@@ -256,6 +258,15 @@
       "opacity 1 override 1 override,class:^(vesktop)$"
       "opacity 1 override 1 override,class:^(firefox)$"
 
+      "noanim, class:^(flameshot)$"
+      "float, class:^(flameshot)$"
+      "move 0 -400, class:^(flameshot)$"
+      "pin, class:^(flameshot)$"
+      "monitor 1, class:^(flameshot)$"
+
+      "bordersize 0, class:^(flameshot)$"
+      "rounding 0, class:^(flameshot)$"
+
       # XWaylandVideoBridge
       # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"
       # "noanim,class:^(xwaylandvideobridge)$"
@@ -286,21 +297,21 @@
     size = 16;
   };
 
-  gtk = {
-    enable = true;
-    theme = {
-      package = pkgs.flat-remix-gtk;
-      name = "Flat-Remix-GTK-Grey-Darkest";
-    };
-
-    iconTheme = {
-      package = pkgs.gnome.adwaita-icon-theme;
-      name = "Adwaita";
-    };
-
-    font = {
-      name = "Sans";
-      size = 10;
-    };
-  };
+  # gtk = {
+  #   enable = true;
+  #   theme = {
+  #     package = pkgs.flat-remix-gtk;
+  #     name = "Flat-Remix-GTK-Grey-Darkest";
+  #   };
+  #
+  #   iconTheme = {
+  #     package = pkgs.gnome.adwaita-icon-theme;
+  #     name = "Adwaita";
+  #   };
+  #
+  #   font = {
+  #     name = "Sans";
+  #     size = 10;
+  #   };
+  # };
 }

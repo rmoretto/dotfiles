@@ -1,4 +1,4 @@
-# This is your system's configuration file.
+# This is your system's configuration file.configura
 # Use this to configure your system environment (it replaces /etc/nixos/configuration.nix)
 {
   inputs,
@@ -113,26 +113,27 @@
   # services.xserver.layout = "us";
   # services.xserver.xkbVariant = "intl";
 
-  # programs.hyprland = {
-  #   enable = true;
-  #   xwayland.enable = true;
-  #   # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  #   # package = pkgs.hyprland.override { debug = true; };
-  # };
-  #
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+    package = pkgs.unstable.hyprland;
+    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    # package = pkgs.hyprland.override { debug = true; };
+  };
 
-  # services.xserver.videoDrivers = ["nvidia"];
-  # services.greetd = {
-  #   enable = true;
-  #   settings = rec {
-  #     initial_session = {
-  #       command = "${pkgs.hyprland}/bin/Hyprland";
-  #       # command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
-  #       user = "rmoretto";
-  #     };
-  #     default_session = initial_session;
-  #   };
-  # };
+
+  services.xserver.videoDrivers = ["nvidia"];
+  services.greetd = {
+    enable = true;
+    settings = rec {
+      initial_session = {
+        command = "${pkgs.hyprland}/bin/Hyprland";
+        # command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
+        user = "rmoretto";
+      };
+      default_session = initial_session;
+    };
+  };
 
   # services.xserver = {
   #   enable = true;
@@ -148,24 +149,24 @@
   #   };
   # };
 
-  services.displayManager = {
-    autoLogin.user = "rmoretto";
-    defaultSession = "none+i3";
-  };
+  # services.displayManager = {
+  #   autoLogin.user = "rmoretto";
+  #   defaultSession = "none+i3";
+  # };
 
-  services.xserver = {
-    enable = true;
-    videoDrivers = ["nvidia"];
-    displayManager = {
-      lightdm.enable = true;
-    };
-    windowManager.i3.enable = true;
-    xkb = {
-      layout = "us";
-      variant = "intl";
-    };
-    exportConfiguration = true;
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   videoDrivers = ["nvidia"];
+  #   displayManager = {
+  #     lightdm.enable = true;
+  #   };
+  #   windowManager.i3.enable = true;
+  #   xkb = {
+  #     layout = "us";
+  #     variant = "intl";
+  #   };
+  #   exportConfiguration = true;
+  # };
 
   services.xserver.displayManager.setupCommands = ''
     LEFT='DP-2'
@@ -179,9 +180,9 @@
   # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
 
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport32Bit = true;
+    enable32Bit = true;
   };
 
   hardware.nvidia = {
@@ -203,6 +204,8 @@
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
+  hardware.bluetooth.enable = true;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -216,6 +219,8 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+
+  services.blueman.enable = true;
 
   programs.noisetorch.enable = true;
 
@@ -232,6 +237,10 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
+  environment.variables = {
+    SHELL = "fish";
+  };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -242,16 +251,19 @@
     vim
     home-manager
     polkit_gnome
-    gnome.gnome-keyring
+    gnome-keyring
     kitty
     lxqt.lxqt-policykit
   ];
+
+  programs.fish.enable = true;
 
   users.users = {
     rmoretto = {
       initialPassword = "1234";
       isNormalUser = true;
       description = "zequinha d vdd";
+      shell = pkgs.fish;
       extraGroups = ["networkmanager" "wheel" "docker"];
       packages = with pkgs; [
         firefox
@@ -263,7 +275,18 @@
     };
   };
 
-  xdg.portal.enable = true;
+  # xdg.portal = {
+  #   enable = true;
+  #   extraPortals = [pkgs.xdg-desktop-portal-gtk];
+  #   config.common.default = "gtk";
+  # };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = [pkgs.xdg-desktop-portal-gtk];
+    config.common.default = "hyprland";
+  };
+
   services.flatpak.enable = true;
 
   services.davfs2.enable = true;

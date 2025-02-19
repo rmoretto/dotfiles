@@ -296,4 +296,11 @@ return {
 			require("tsc").setup(opts)
 		end,
 	},
+
+    {
+        "windwp/nvim-ts-autotag",
+        config = function(_, _)
+            require("nvim-ts-autotag").setup()
+        end
+    },
 }

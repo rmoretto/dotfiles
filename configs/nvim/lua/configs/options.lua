@@ -65,3 +65,4 @@ opt.smoothscroll = true
 opt.foldmethod = "expr"
 opt.foldtext = ""
 vim.g.markdown_recommended_style = 0
+opt.shell = "fish"
