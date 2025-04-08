@@ -1,4 +1,5 @@
 return {
+    -- go fast
 	{
 		"ggandor/leap.nvim",
 		opts = {
@@ -20,8 +21,21 @@ return {
 		end,
 	},
 
+    -- restore the f/F/t/T lightspeed behaviour with leap.nvim
+    {
+		"ggandor/flit.nvim",
+		config = function()
+			require("flit").setup()
+		end,
+	},
+
+    -- Smoothersons scroll
 	{ "psliwka/vim-smoothie" },
+
+    -- all hail tpope
 	{ "tpope/vim-repeat" },
+
+    -- fix some colors
 	{
 		"NvChad/nvim-colorizer.lua",
 		opts = {
@@ -30,14 +44,8 @@ return {
 			},
 		},
 	},
-	{
-		"m4xshen/hardtime.nvim",
-		dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-		opts = {
-			max_count = 5,
-		},
-	},
 
+    -- code screenshots
 	{
 		"mistricky/codesnap.nvim",
 		build = "make",
@@ -53,6 +61,7 @@ return {
 		},
 	},
 
+    -- add live commands like :Norm
 	{
 		"smjonas/live-command.nvim",
 		-- live-command supports semantic versioning via Git tags
@@ -66,10 +75,13 @@ return {
 		end,
 	},
 
-	-- {
-	-- 	"lewis6991/satellite.nvim",
-	-- 	config = function()
-	-- 		require("satellite").setup()
-	-- 	end,
-	-- },
+    -- kill old unused buffers
+    {
+		"chrisgrieser/nvim-early-retirement",
+		opts = {
+			notificationOnAutoClose = true,
+			deleteBufferWhenFileDeleted = true,
+		},
+		event = "VeryLazy",
+	},
 }

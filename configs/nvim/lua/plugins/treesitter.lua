@@ -24,6 +24,7 @@ return {
 					"markdown",
 					"markdown_inline",
 					"regex",
+                    "query"
 				},
 				auto_install = false,
 				sync_install = false,

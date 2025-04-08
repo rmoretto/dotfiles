@@ -216,12 +216,28 @@ return {
 
 	-- Vim Printer
 	{
-		"meain/vim-printer",
+		"rareitems/printer.nvim",
 		config = function()
-			vim.g.vim_printer_items = {
-				elixir = 'IO.inspect({$}, label: "{$}")',
-				vue = 'console.log("{$}", {$})',
-			}
+			require("printer").setup({
+				keymap = "<leader>p",
+				behavior = "insert_below",
+				formatters = {
+					elixir = function(text_inside, text_var)
+						return string.format('IO.inspect(%s, label: "%s")', text_var, text_inside)
+					end,
+					vue = function(text_inside, text_var)
+						return string.format('console.log("%s = ", %s)', text_inside, text_var)
+					end,
+				},
+				add_to_inside = function(text)
+                    local filename = vim.fn.expand("%:t")
+                    local line_nr = vim.fn.line(".")
+					return string.format("[%s:%s] %s", filename, line_nr, text)
+				end,
+			})
+
+			keymap.set({ "n", "v" }, "<leader>p", "<Plug>(printer_below)")
+            keymap.set("n", "<leader>P", "<Plug>(printer_print)iw")
 		end,
 	},
 
@@ -266,41 +282,4 @@ return {
 			},
 		},
 	},
-
-	-- Cantinho merda do ts
-	-- {
-	-- 	"dmmulroy/ts-error-translator.nvim",
-	-- 	config = true,
-	-- 	ft = { "typescript", "typescriptreact", "javascript", "javascriptreact", "vue" },
-	-- },
-
-	-- maybe?
-	{
-		"OlegGulevskyy/better-ts-errors.nvim",
-		dependencies = { "MunifTanjim/nui.nvim" },
-		config = {
-			keymaps = {
-				toggle = "<leader>dd", -- default '<leader>dd'
-				go_to_definition = "<leader>dx", -- default '<leader>dx'
-			},
-		},
-	},
-
-	-- typescript me salva
-	{
-		"dmmulroy/tsc.nvim",
-		opts = {
-			bin_path = "vue-tsc",
-		},
-		config = function(_, opts)
-			require("tsc").setup(opts)
-		end,
-	},
-
-    {
-        "windwp/nvim-ts-autotag",
-        config = function(_, _)
-            require("nvim-ts-autotag").setup()
-        end
-    },
 }

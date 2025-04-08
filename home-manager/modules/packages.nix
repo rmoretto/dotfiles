@@ -16,6 +16,7 @@
     unstable.terminaltexteffects
     joplin-desktop
     unstable.cmake
+    libreoffice
 
     # rofi-wayland
     waybar
@@ -132,6 +133,7 @@
     awscli2
     git-filter-repo
     nix-your-shell
+    gh
 
     # Fonts
     nerdfonts

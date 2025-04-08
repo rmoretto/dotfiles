@@ -42,9 +42,8 @@
 
     env = [
       # "LIBVA_DRIVER_NAME,nvidia"
+      # "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       "XDG_SESSION_TYPE,wayland"
-      "GBM_BACKEND,nvidia-drm"
-      "__GLX_VENDOR_LIBRARY_NAME,nvidia"
       "WLR_NO_HARDWARE_CURSORS,1"
       "XCURSOR_SIZE,24"
       "HYPRCURSOR_SIZE,24"
@@ -133,9 +132,7 @@
 
       "SUPER, P, togglespecialworkspace, dashboard"
 
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 1300 730;move 15 45] spotify"
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 770 100;move 1135 965] alacritty -e bash -c 'watch -n1 df -h /'"
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 635 155;move 15 910] alacritty -e 'htop'"
+      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 2500 1200;move 15 45] spotify"
     ];
 
     bindm = [
