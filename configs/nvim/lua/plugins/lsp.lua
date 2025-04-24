@@ -61,13 +61,13 @@ return {
 						"typescriptreact",
 						"vue",
 					},
-                    typescript = {
-                        tsserver = {
-                            log = "verbose"
-                        }
-                    },
+					typescript = {
+						tsserver = {
+							log = "verbose",
+						},
+					},
 					init_options = {
-                        log = "verbose",
+						log = "verbose",
 						plugins = {
 							{
 								name = "@vue/typescript-plugin",
@@ -84,23 +84,20 @@ return {
 			},
 		},
 		config = function(_, opts)
-			local lsp_zero = require("lsp-zero")
 			local lspconfig = require("lspconfig")
 
-			local lsp_attach = function(_, bufnr)
-				keymaps()
-			end
-
-			lsp_zero.extend_lspconfig({
-				sign_text = true,
-				lsp_attach = lsp_attach,
-				capabilities = require("cmp_nvim_lsp").default_capabilities(),
+			vim.api.nvim_create_autocmd("LspAttach", {
+				callback = function(_)
+					keymaps()
+				end,
 			})
 
 			local function setup_server(lsp_name, server_opts)
 				if server_opts == nil then
 					server_opts = {}
 				end
+
+				server_opts.capabilities = require("blink.cmp").get_lsp_capabilities(server_opts.capabilities)
 
 				if lsp_location[lsp_name] then
 					server_opts.cmd = lsp_location[lsp_name]
@@ -113,41 +110,6 @@ return {
 				opts = server_opts == true and {} or server_opts
 				setup_server(server, opts)
 			end
-
-			-- local lspconfig = require("lspconfig")
-			-- local cmp = require("cmp_nvim_lsp")
-			-- -- Get base capabilities
-			-- local function base_capabilities(additional_capabilities)
-			-- 	if additional_capabilities == nil then
-			-- 		additional_capabilities = {}
-			-- 	end
-			-- 	local cmp_capabilities = cmp.default_capabilities()
-			-- 	return vim.tbl_deep_extend("force", additional_capabilities, cmp_capabilities)
-			-- end
-			--
-			-- -- Server setup main function
-			-- local function setup_server(lsp_name, server_opts)
-			-- 	if server_opts == nil then
-			-- 		server_opts = {}
-			-- 	end
-			--
-			-- 	server_opts.capabilities =
-			-- 		vim.tbl_deep_extend("force", server_opts.capabilities or {}, base_capabilities())
-			--
-			-- 	-- See nvim.nix modules for the lsp_location file generation
-			-- 	if lsp_location[lsp_name] then
-			-- 		server_opts.cmd = lsp_location[lsp_name]
-			-- 	end
-			--
-			-- 	lspconfig[lsp_name].setup(server_opts)
-			-- end
-			--
-			-- for server, server_opts in pairs(opts.servers) do
-			-- 	server_opts = server_opts == true and {} or server_opts
-			-- 	setup_server(server, server_opts)
-			-- end
-			--
-			-- keymaps()
 		end,
 	},
 

@@ -3,63 +3,120 @@ local utils_cmp = require("utils.cmp")
 
 return {
 	-- Nvim Cmp
-	{
-		"hrsh7th/nvim-cmp",
-		version = false,
-		event = "InsertEnter",
-		dependencies = {
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-emoji",
-			"hrsh7th/cmp-vsnip",
-			"hrsh7th/vim-vsnip",
-			"hrsh7th/vim-vsnip-integ",
-			"rafamadriz/friendly-snippets",
-		},
-		opts = function()
-			vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-			local cmp = require("cmp")
-			local defaults = require("cmp.config.default")()
-			local auto_select = true
+	--  ANTIGO SAI DAQUI
+	-- {
+	-- 	"hrsh7th/nvim-cmp",
+	-- 	version = false,
+	-- 	event = "InsertEnter",
+	-- 	dependencies = {
+	-- 		"hrsh7th/cmp-nvim-lsp",
+	-- 		"hrsh7th/cmp-buffer",
+	-- 		"hrsh7th/cmp-path",
+	-- 		"hrsh7th/cmp-emoji",
+	-- 		"hrsh7th/cmp-vsnip",
+	-- 		"hrsh7th/vim-vsnip",
+	-- 		"hrsh7th/vim-vsnip-integ",
+	-- 		"rafamadriz/friendly-snippets",
+	-- 	},
+	-- 	opts = function()
+	-- 		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
+	-- 		local cmp = require("cmp")
+	-- 		local defaults = require("cmp.config.default")()
+	-- 		local auto_select = true
+	--
+	-- 		return {
+	-- 			completion = { completeopt = "menu,menuone,noinsert" },
+	-- 			preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
+	-- 			snippet = {
+	-- 				expand = function(args)
+	-- 					vim.fn["vsnip#anonymous"](args.body)
+	-- 				end,
+	-- 			},
+	-- 			mapping = cmp.mapping.preset.insert({
+	-- 				["<C-g>"] = cmp.mapping.scroll_docs(-4),
+	-- 				["<C-f>"] = cmp.mapping.scroll_docs(4),
+	-- 				["<C-Space>"] = cmp.mapping.complete(),
+	-- 				["<CR>"] = utils_cmp.confirm({ select = auto_select }),
+	-- 				["<C-y>"] = utils_cmp.confirm({ select = true }),
+	-- 				["<S-CR>"] = utils_cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
+	-- 				["<C-CR>"] = function(fallback)
+	-- 					cmp.abort()
+	-- 					fallback()
+	-- 				end,
+	-- 			}),
+	-- 			sources = cmp.config.sources({
+	-- 				{ name = "nvim_lsp" },
+	-- 				{ name = "vsnip" },
+	-- 			}, {
+	-- 				{ name = "path" },
+	-- 				{ name = "buffer" },
+	-- 				{ name = "emoji" },
+	-- 				{ name = "nvim_lsp", trigger_characters = { "-" } },
+	-- 			}),
+	-- 			experimental = {
+	-- 				ghost_text = {
+	-- 					hl_group = "CmpGhostText",
+	-- 				},
+	-- 			},
+	-- 			sorting = defaults.sorting,
+	-- 		}
+	-- 	end,
+	-- },
 
-			return {
-				completion = { completeopt = "menu,menuone,noinsert" },
-				preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
-				snippet = {
-					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body)
+	-- Uhull novo bonitinho legal UHUL
+	{
+		"saghen/blink.cmp",
+		dependencies = {
+			{ "rafamadriz/friendly-snippets" },
+			{ "moyiz/blink-emoji.nvim" },
+		},
+		version = "1.*",
+		opts = {
+			keymap = {
+				preset = "none",
+				["<C-space>"] = { "show", "hide_documentation" },
+				["<C-e>"] = { "hide" },
+				["<CR>"] = { "select_and_accept", "fallback" },
+
+				["<Up>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
+				["<C-p>"] = { "select_prev", "fallback_to_mappings" },
+				["<C-n>"] = { "select_next", "fallback_to_mappings" },
+
+				["<C-g>"] = { "scroll_documentation_down", "fallback" },
+				["<C-f>"] = { "scroll_documentation_up", "fallback" },
+
+				["<C-K>"] = {
+					function(cmp)
+						cmp.show({ providers = { "snippets" } })
 					end,
 				},
-				mapping = cmp.mapping.preset.insert({
-					["<C-g>"] = cmp.mapping.scroll_docs(-4),
-					["<C-f>"] = cmp.mapping.scroll_docs(4),
-					["<C-Space>"] = cmp.mapping.complete(),
-					["<CR>"] = utils_cmp.confirm({ select = auto_select }),
-					["<C-y>"] = utils_cmp.confirm({ select = true }),
-					["<S-CR>"] = utils_cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
-					["<C-CR>"] = function(fallback)
-						cmp.abort()
-						fallback()
-					end,
-				}),
-				sources = cmp.config.sources({
-					{ name = "nvim_lsp" },
-					{ name = "vsnip" },
-				}, {
-					{ name = "path" },
-					{ name = "buffer" },
-					{ name = "emoji" },
-					{ name = "nvim_lsp", trigger_characters = { "-" } },
-				}),
-				experimental = {
-					ghost_text = {
-						hl_group = "CmpGhostText",
-					},
-				},
-				sorting = defaults.sorting,
-			}
-		end,
+
+				["<Tab>"] = { "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "fallback" },
+
+				["<C-k>"] = { "show_signature", "hide_signature", "fallback" },
+			},
+			signature = { enabled = true },
+			appearance = {
+				nerd_font_variant = "mono",
+			},
+			completion = { documentation = { auto_show = true } },
+			snippets = { preset = "default" },
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer", "emoji" },
+                providers = {
+                    emoji = {
+                        module = "blink-emoji",
+                        name = "Emoji",
+                        score_offset = 15, -- Tune by preference
+                        opts = { insert = true }, -- Insert emoji (default) or complete its name
+                    },
+                },
+			},
+			fuzzy = { implementation = "prefer_rust_with_warning" },
+		},
+		opts_extend = { "sources.default" },
 	},
 
 	{
@@ -230,14 +287,14 @@ return {
 					end,
 				},
 				add_to_inside = function(text)
-                    local filename = vim.fn.expand("%:t")
-                    local line_nr = vim.fn.line(".")
+					local filename = vim.fn.expand("%:t")
+					local line_nr = vim.fn.line(".")
 					return string.format("[%s:%s] %s", filename, line_nr, text)
 				end,
 			})
 
 			keymap.set({ "n", "v" }, "<leader>p", "<Plug>(printer_below)")
-            keymap.set("n", "<leader>P", "<Plug>(printer_print)iw")
+			keymap.set("n", "<leader>P", "<Plug>(printer_print)iw")
 		end,
 	},
 
