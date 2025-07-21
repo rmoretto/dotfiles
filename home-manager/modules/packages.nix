@@ -1,5 +1,5 @@
 {
-  inputs,
+  config,
   pkgs,
   ...
 }: {
@@ -17,6 +17,7 @@
     joplin-desktop
     unstable.cmake
     libreoffice
+    github-desktop
 
     # rofi-wayland
     waybar
@@ -54,7 +55,8 @@
     libnotify
     seahorse
     gparted
-    unstable.flameshot
+    # unstable.flameshot
+    (unstable.flameshot.override { enableWlrSupport = true; })
     gzip
     # gnome.nautilus
     # libsForQt5.ark
@@ -72,7 +74,6 @@
     wineWowPackages.stable
     winetricks
     lutris
-    xwaylandvideobridge
     ffmpeg
     lolcat
     unetbootin
@@ -85,7 +86,6 @@
     alsa-utils
     vlc
     mpv
-    obs-studio
 
     # networking
     openfortivpn
@@ -134,9 +134,11 @@
     git-filter-repo
     nix-your-shell
     gh
+    qemu
+    quickemu
 
     # Fonts
-    nerdfonts
+    # nerdfonts
     jetbrains-mono
     iosevka
     iosevka-bin
@@ -150,5 +152,5 @@
     noto-fonts
     papirus-icon-theme
     font-awesome
-  ];
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 }

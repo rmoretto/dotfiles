@@ -2,7 +2,7 @@ Host cbti
     HostName 93.127.210.171
     User root
     ServerAliveInterval 60
-    IdentityFile ~/.ssh/cbti
+    IdentityFile ~/.ssh/id_ed25519
 
 Host meu_lote_hom
     HostName 52.67.216.214

@@ -53,6 +53,7 @@ return {
 				-- tailwindcss = true,
 				terraformls = true,
 				pylsp = true,
+				zls = true,
 				ts_ls = {
 					filetypes = {
 						"javascript",

@@ -13,16 +13,14 @@ return {
 					find_command = {
 						"rg",
 						"--hidden",
-						"--glob",
-						"!.git/",
+						"--glob", "!.git/",
 						"--color=never",
 						"--files",
 					},
 					vimgrep_arguments = {
 						"rg",
 						"--hidden",
-						"--glob",
-						"!.git/",
+						"--glob", "!.git/",
 						"--color=never",
 						"--no-heading",
 						"--with-filename",

@@ -24,7 +24,8 @@
         nil_ls = { "${unstable.nil}/bin/nil" },
         lua_ls = { "${unstable.lua-language-server}/bin/lua-language-server" },
         tailwindcss = { "${unstable.tailwindcss-language-server}/bin/tailwindcss-language-server" },
-        vue_ts_plugin = "${unstable.vue-language-server}/lib/node_modules/@vue/language-server"
+        zls = { "${unstable.zls}/bin/zls" },
+        vue_ts_plugin = "${unstable.vue-language-server}/lib/node_modules/@vue/language-server",
       }
     '';
   };
@@ -44,6 +45,7 @@
     unstable.nil
     unstable.lua-language-server
     unstable.tailwindcss-language-server
+    unstable.zls
     # vue-typescript-plugin
   ];
 }

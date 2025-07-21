@@ -1,0 +1,36 @@
+# /home/rodrigo/.config/tmuxinator/otter.yml
+
+name: otter
+root: ~/programations/granter/conecta_favu/otter
+
+windows:
+  - otter-frontend:
+      root: ~/programations/granter/conecta_favu/otter/frontend/otter
+      panes:
+        - nvim:
+          - nix develop
+          - nvim
+
+  - otter-backend:
+      root: ~/programations/granter/conecta_favu/otter/backend/otter
+      panes:
+        - nvim:
+          - nix develop .#test
+          - nvim
+
+  - terms:
+      root: ~/programations/granter/conecta_favu/otter
+      layout: main-vertical
+      panes:
+        - term:
+          - git status
+
+        - backend:
+          - cd backend/otter
+          - nix develop
+          - MIX_ENV=dev mix phx.server
+
+        - frontend: 
+          - cd frontend/otter
+          - nix develop
+          - yarn dev

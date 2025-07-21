@@ -20,6 +20,18 @@
         hash = "sha256-DzNJxZbSdhqdtIQvQ7ZKrKwu6zTcBjtsR9rv/uudZcw=";
       };
     });
+
+    obs-studio = prev.obs-studio.overrideAttrs (oldAttrs: rec {
+      version = "31.1.0-beta2";
+
+      src = prev.fetchFromGitHub {
+        owner = "obsproject";
+        repo = "obs-studio";
+        rev = version;
+        hash = "sha256-HqiEIyi3lUUwkBUHgI0spXvwnXEg0V9XObGd58mfQXM=";
+        fetchSubmodules = true;
+      };
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will

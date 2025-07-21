@@ -153,6 +153,7 @@
       dotfiles = "cd /home/rodrigo/programations/misc/dotfiles/ && nvim .";
       granter = "cd /home/rodrigo/programations/granter/";
       conecta = "txs inova-defesa";
+      otter = "txs otter";
       flowtify = "cd /home/rodrigo/programations/granter/flowtify/";
       ls = "eza";
       ll = "eza -la";

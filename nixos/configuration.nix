@@ -13,29 +13,20 @@
     # Import your generated (nixos-generate-config) hardware configuration
     ./hardware-configuration.nix
     ./pipewire-rnn.nix
+
+    ./../modules/nixos/hyprland.nix
+    ./../modules/nixos/cosmic.nix
+    ./../modules/nixos/boot.nix
+    ./../modules/nixos/networking.nix
   ];
 
   nixpkgs = {
     # You can add overlays here
     overlays = [
-      outputs.overlays.modifications
       outputs.overlays.unstable-packages
+      outputs.overlays.modifications
     ];
-    # overlays = [
-    # Add overlays your own flake exports (from overlays and pkgs dir):
-    # outputs.overlays.additions
-    # outputs.overlays.modifications
 
-    # You can also add overlays exported from other flakes:
-    # neovim-nightly-overlay.overlays.default
-
-    # Or define it inline, for example:
-    # (final: prev: {
-    #   hi = final.hello.overrideAttrs (oldAttrs: {
-    #     patches = [ ./change-hello-to-hi.patch ];
-    #   });
-    # })
-    # ];
     # Configure your nixpkgs instance
     config = {
       # Disable if you don't want unfree packages
@@ -60,25 +51,18 @@
     };
   };
 
-  networking.hostName = "rodrigo-pc";
-  networking.networkmanager.enable = true;
-
-  boot.loader = {
-    efi.canTouchEfiVariables = true;
-    grub = {
-      enable = true;
-      efiSupport = true;
-      device = "nodev";
-      useOSProber = true;
-      # efiInstallAsRemovable = true;
-    };
+  services.myhypr = {
+    enable = true;
+    loginUser = "rmoretto";
   };
 
-  boot.supportedFilesystems = ["ntfs"];
-  boot.extraModulePackages = with config.boot.kernelPackages; [v4l2loopback];
-  boot.extraModprobeConfig = ''
-    options v4l2loopback devices=1 video_nr=1 card_label="OBS Cam" exclusive_caps=1
-  '';
+  services.mycosmic = {
+    enable = false;
+    loginUser = "rmoretto";
+  };
+
+  # networking.hostName = "rodrigo-pc";
+  # networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
@@ -108,66 +92,6 @@
     pam.services.login.enableGnomeKeyring = true;
   };
 
-  # Enable the X11 windowing system.
-  # services.xserver.videoDrivers = ["nvidia"];
-  # services.xserver.layout = "us";
-  # services.xserver.xkbVariant = "intl";
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-    package = pkgs.unstable.hyprland;
-    # package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-    # package = pkgs.hyprland.override { debug = true; };
-  };
-
-
-  # services.xserver.videoDrivers = ["nvidia"];
-  services.greetd = {
-    enable = true;
-    settings = rec {
-      initial_session = {
-        command = "${pkgs.hyprland}/bin/Hyprland";
-        # command = "${inputs.hyprland.packages.${pkgs.system}.hyprland}/bin/Hyprland";
-        user = "rmoretto";
-      };
-      default_session = initial_session;
-    };
-  };
-
-  # services.xserver = {
-  #   enable = true;
-  #   videoDrivers = ["nvidia"];
-  #   exportConfiguration = true;
-  #   displayManager.gdm = {
-  #     enable = true;
-  #     wayland = true;
-  #   };
-  #   xkb = {
-  #     layout = "us";
-  #     variant = "intl";
-  #   };
-  # };
-
-  # services.displayManager = {
-  #   autoLogin.user = "rmoretto";
-  #   defaultSession = "none+i3";
-  # };
-
-  # services.xserver = {
-  #   enable = true;
-  #   videoDrivers = ["nvidia"];
-  #   displayManager = {
-  #     lightdm.enable = true;
-  #   };
-  #   windowManager.i3.enable = true;
-  #   xkb = {
-  #     layout = "us";
-  #     variant = "intl";
-  #   };
-  #   exportConfiguration = true;
-  # };
-
   services.xserver.displayManager.setupCommands = ''
     LEFT='DP-2'
     CENTER='DP-4'
@@ -177,29 +101,10 @@
            --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
   '';
 
-  # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
-  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
-
+  hardware.nvidia.open = true;
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
-  };
-
-  hardware.nvidia = {
-    modesetting.enable = true;
-    # powerManagement.enable = false;
-    # powerManagement.finegrained = false;
-    open = false;
-    nvidiaSettings = true;
-    # package = config.boot.kernelPackages.nvidia_x11_beta;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
-    # package = config.boot.kernelPackages.nvidiaPackages.stable.overrideAttrs (old: {
-    #   postPatch = ''
-    #     substituteInPlace ./kernel/nvidia-drm/nvidia-drm-drv.c --replace \
-    #       '#if defined(NV_SYNC_FILE_GET_FENCE_PRESENT)' \
-    #       '#if 0'
-    #   '';
-    # });
   };
 
   # Enable sound with pipewire.
@@ -213,7 +118,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    jack.enable = true;
 
     # use the example session manager (no others are packaged yet so this is enabled by default,
     # no need to redefine it in your config for now)
@@ -221,7 +126,6 @@
   };
 
   services.blueman.enable = true;
-
   programs.noisetorch.enable = true;
 
   hardware.keyboard.qmk.enable = true;
@@ -264,7 +168,7 @@
       isNormalUser = true;
       description = "zequinha d vdd";
       shell = pkgs.fish;
-      extraGroups = ["networkmanager" "wheel" "docker"];
+      extraGroups = ["networkmanager" "wheel" "docker" "libvirtd"];
       packages = with pkgs; [
         firefox
         git
@@ -281,14 +185,7 @@
   #   config.common.default = "gtk";
   # };
 
-  xdg.portal = {
-    enable = true;
-    extraPortals = [pkgs.xdg-desktop-portal-gtk];
-    config.common.default = "hyprland";
-  };
-
   services.flatpak.enable = true;
-
   services.davfs2.enable = true;
   services.gvfs.enable = true;
   services.tumbler.enable = true;
@@ -298,19 +195,18 @@
     settings.PermitRootLogin = "no";
   };
 
-  services.spice-vdagentd.enable = true;
   virtualisation.docker.enable = true;
+  services.spice-vdagentd.enable = true;
+
+  # virtualisation.virtualbox.host.enable = true;
+  # users.extraGroups.vboxusers.members = [ "rmoretto" ];
+  
+  virtualisation.libvirtd.enable = true;
+  programs.virt-manager.enable = true;
 
   programs.openvpn3.enable = true;
   programs.ssh.startAgent = true;
   programs.dconf.enable = true;
-  programs.thunar = {
-    enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
-  };
 
   systemd = {
     # user.services.polkit-gnome-authentication-agent-1 = {
@@ -340,11 +236,6 @@
     # };
   };
 
-  services.ollama = {
-    enable = true;
-    acceleration = "cuda";
-  };
-
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
-  system.stateVersion = "24.11";
+  system.stateVersion = "25.05";
 }
