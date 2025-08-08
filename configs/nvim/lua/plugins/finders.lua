@@ -13,14 +13,16 @@ return {
 					find_command = {
 						"rg",
 						"--hidden",
-						"--glob", "!.git/",
+						"--glob",
+						"!.git/",
 						"--color=never",
 						"--files",
 					},
 					vimgrep_arguments = {
 						"rg",
 						"--hidden",
-						"--glob", "!.git/",
+						"--glob",
+						"!.git/",
 						"--color=never",
 						"--no-heading",
 						"--with-filename",
@@ -85,6 +87,17 @@ return {
 				["gx"] = "actions.open_external",
 				["g."] = "actions.toggle_hidden",
 				["g\\"] = "actions.toggle_trash",
+			},
+			git = {
+				add = function(path)
+					return true
+				end,
+				mv = function(src_path, dest_path)
+					return true
+				end,
+				rm = function(path)
+					return true
+				end,
 			},
 			columns = {
 				"permissions",

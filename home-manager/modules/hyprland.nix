@@ -1,7 +1,5 @@
 {
-  inputs,
   pkgs,
-  config,
   ...
 }: {
   programs.fuzzel = {
@@ -190,6 +188,11 @@
       dim_inactive = false;
       dim_strength = 0.1;
       dim_special = 0;
+    };
+
+    cursor = {
+      no_hardware_cursors = 1;
+      inactive_timeout = 30;
     };
 
     animations = {

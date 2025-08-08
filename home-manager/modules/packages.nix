@@ -147,7 +147,7 @@
     material-icons
     material-design-icons
     terminus_font
-    terminus-nerdfont
+    nerd-fonts.terminess-ttf
     fantasque-sans-mono
     noto-fonts
     papirus-icon-theme

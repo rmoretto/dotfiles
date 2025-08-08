@@ -34,7 +34,7 @@
       ip = "ip -c";
       ciasc-vpn = "sudo openfortivpn sslvpn01.ciasc.gov.br --username=granter_rmoretto@vpn.ciasc.gov.br";
     };
-    initExtra = ''
+    initContent = ''
       _ssh_configfile()
       {
           set -- "''${words[@]}"
