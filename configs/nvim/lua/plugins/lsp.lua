@@ -1,4 +1,3 @@
-local utils = require("utils")
 local lsp_location = require("lsp_location")
 
 local function keymaps()
@@ -23,6 +22,7 @@ end
 return {
 	{
 		"neovim/nvim-lspconfig",
+		branch = "master",
 		dependencies = {
 			{ "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
 		},
@@ -78,15 +78,30 @@ return {
 						},
 					},
 				},
-				volar = true,
+				vtsls = {
+					settings = {
+						vtsls = {
+							tsserver = {
+								globalPlugins = {
+									{
+                                        name = "@vue/typescript-plugin",
+                                        location = lsp_location.vue_ts_plugin,
+                                        languages = { "javascript", "typescript", "vue" },
+										configNamespace = "typescript",
+									},
+								},
+							},
+						},
+					},
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
+				},
+				vue_ls = true,
 				arduino_language_server = true,
 				nil_ls = true,
 				gdscript = true,
 			},
 		},
 		config = function(_, opts)
-			local lspconfig = require("lspconfig")
-
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(_)
 					keymaps()
@@ -104,7 +119,8 @@ return {
 					server_opts.cmd = lsp_location[lsp_name]
 				end
 
-				lspconfig[lsp_name].setup(server_opts)
+				vim.lsp.config(lsp_name, server_opts)
+                vim.lsp.enable(lsp_name)
 			end
 
 			for server, server_opts in pairs(opts.servers) do

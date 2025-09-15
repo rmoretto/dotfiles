@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, config, inputs, ... }:
 {
   # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
   boot.kernelPackages = pkgs.unstable.linuxPackages_zen;

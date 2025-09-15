@@ -1,0 +1,7 @@
+# vi: ft=sshconfig
+Host sigen_ssh
+    HostName 200.135.218.254 
+    Port 10422
+    User rodrigo
+    IdentityFile ~/.ssh/id_rsa
+    ServerAliveInterval 60

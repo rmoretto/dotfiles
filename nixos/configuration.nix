@@ -101,11 +101,29 @@
            --output $CENTER --primary --mode 1920x1080 --pos 1920x478 --rotate normal --rate 143.98
   '';
 
-  hardware.nvidia.open = true;
+  # services.xserver.videoDrivers = ["nvidia"];
+  # hardware.nvidia.open = true;
+  # hardware.nvidia-container-toolkit.enable = true;
+  # hardware.nvidia.nvidiaSettings = true;
+
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
   };
+
+  hardware.opengl.enable = true;
+  services.xserver.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
+  
+  hardware.nvidia = {
+    modesetting.enable = true;
+    powerManagement.enable = false;
+    powerManagement.finegrained = false;
+    open = true;
+    nvidiaSettings = false;
+  };
+
+  hardware.nvidia-container-toolkit.enable = true;
 
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;

@@ -1,0 +1,50 @@
+# vi: ft=sshconfig
+Host meu_lote_hom
+    HostName 52.67.216.214
+    User rodrigo
+    IdentityFile ~/.ssh/id_rsa
+    ServerAliveInterval 60
+
+Host meu_lote_prod
+    HostName 52.67.42.210
+    User rodrigo
+    ServerAliveInterval 60
+
+Host meu_lote_prod_kp
+    HostName 52.67.42.210
+    User centos
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+Host meu_lote_hom_kp
+    HostName 52.67.216.214
+    User centos
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+
+Host meu_lote_keycloak
+    HostName 18.231.49.221
+    User ubuntu
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+
+Host meu_lote_elk
+    HostName 18.231.192.209
+    User centos
+    IdentityFile ~/.ssh/khor-linux-default.pem
+    ServerAliveInterval 60
+
+
+Host meu_lote_clickhouse
+    HostName 18.231.128.46
+    User centos
+    IdentityFile ~/.ssh/meulote-kp.pem
+    ServerAliveInterval 60
+
+Host meu_lote_services
+    HostName 15.228.56.10
+    User centos
+    IdentityFile ~/.ssh/meulote-kp.pem
+    ServerAliveInterval 60

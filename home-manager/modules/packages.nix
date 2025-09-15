@@ -18,6 +18,7 @@
     unstable.cmake
     libreoffice
     github-desktop
+    figma-linux
 
     # rofi-wayland
     waybar
@@ -80,6 +81,10 @@
     sd
     sad
     dig
+    sbctl
+
+    nvidia-container-toolkit
+    nvidia-vaapi-driver
 
     # soundsss and VIDEOS
     pavucontrol
@@ -122,9 +127,10 @@
       python3-with-packages)
     jetbrains.pycharm-professional
     docker-compose
-    postgresql_13
+    postgresql
     gdk-pixbuf
     gtk3
+    nomad
     terraform
     delta
     difftastic

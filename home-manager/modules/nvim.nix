@@ -20,12 +20,13 @@
         cssls = { "${unstable.vscode-langservers-extracted}/bin/vscode-css-language-server", "--stdio" },
         marksman = { "${unstable.marksman}/bin/marksman", "server" },
         ts_ls = { "${unstable.nodePackages.typescript-language-server}/bin/typescript-language-server", "--stdio" },
-        volar = { "${unstable.vue-language-server}/bin/vue-language-server", "--stdio" },
+        vue_ls = { "${unstable.vue-language-server}/bin/vue-language-server", "--stdio" },
         nil_ls = { "${unstable.nil}/bin/nil" },
         lua_ls = { "${unstable.lua-language-server}/bin/lua-language-server" },
         tailwindcss = { "${unstable.tailwindcss-language-server}/bin/tailwindcss-language-server" },
         zls = { "${unstable.zls}/bin/zls" },
         vue_ts_plugin = "${unstable.vue-language-server}/lib/node_modules/@vue/language-server",
+        vtsls = { "${unstable.vtsls}/bin/vtsls", "--stdio" },
       }
     '';
   };
@@ -46,6 +47,8 @@
     unstable.lua-language-server
     unstable.tailwindcss-language-server
     unstable.zls
+    unstable.typescript-go
+    unstable.vtsls
     # vue-typescript-plugin
   ];
 }

@@ -11,6 +11,11 @@
     source = ../../configs/ssh/config;
   };
 
+  home.file.".ssh/config.d" = {
+    source = ../../configs/ssh/config.d;
+    recursive = true;
+  };
+
   sops = {
     age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
     defaultSopsFile = ../../secrets/common/secrets.yaml;

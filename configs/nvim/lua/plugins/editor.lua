@@ -85,6 +85,20 @@ return {
 		event = "VeryLazy",
 	},
 
+    -- Shine undo/redo
+    {
+        "y3owk1n/undo-glow.nvim",
+        version = "*", -- remove this if you want to use the `main` branch
+        opts = {
+            animation = {
+                enabled = true
+            }
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+        }
+    }
+
 	-- hello AI
 	-- {
 	-- 	"yetone/avante.nvim",

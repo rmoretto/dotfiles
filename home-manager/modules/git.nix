@@ -10,7 +10,7 @@
     };
     userName = "rmoretto";
     userEmail = "rodrigo.ce.moretto@gmail.com";
-    difftastic.enable = true;
+    difftastic.enable = false;
     extraConfig = {
       init = {
         defaultBranch = "main";

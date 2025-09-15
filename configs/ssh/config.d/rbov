@@ -1,0 +1,6 @@
+# vi: ft=sshconfig 
+Host rbov_poc
+    HostName 18.228.26.81
+    User rmoretto
+    ServerAliveInterval 60
+    LocalForward 5466 localhost:5432
