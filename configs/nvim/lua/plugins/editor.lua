@@ -21,14 +21,6 @@ return {
 		end,
 	},
 
-	-- restore the f/F/t/T lightspeed behaviour with leap.nvim
-	{
-		"ggandor/flit.nvim",
-		config = function()
-			require("flit").setup()
-		end,
-	},
-
 	-- Smoothersons scroll
 	{ "psliwka/vim-smoothie" },
 
