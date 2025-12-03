@@ -11,8 +11,7 @@
     spotify
     discord
     vesktop
-    bitwarden
-    # warp-terminal
+    bitwarden-desktop
     unstable.terminaltexteffects
     joplin-desktop
     unstable.cmake
@@ -20,7 +19,6 @@
     github-desktop
     figma-linux
 
-    # rofi-wayland
     waybar
     wl-gammactl
     wl-clipboard
@@ -32,7 +30,6 @@
     grim
     slurp
     imagemagick
-    swww
     easyeffects
 
     # System utilities

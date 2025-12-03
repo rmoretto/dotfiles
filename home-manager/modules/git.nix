@@ -2,19 +2,20 @@
   programs.git = {
     enable = true;
     lfs.enable = true;
-    aliases = {
-      s = "status";
-      a = "add";
-      p = "push";
-      c = "commit --verbose";
-    };
-    userName = "rmoretto";
-    userEmail = "rodrigo.ce.moretto@gmail.com";
-    difftastic.enable = false;
-    extraConfig = {
+    settings = {
+      alias = {
+        s = "status";
+        a = "add";
+        p = "push";
+        c = "commit --verbose";
+      };
+      user.name = "rmoretto";
+      user.email = "rodrigo.ce.moretto@gmail.com";
+
       init = {
         defaultBranch = "main";
       };
     };
+    difftastic.enable = false;
   };
 }

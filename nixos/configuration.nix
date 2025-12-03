@@ -14,10 +14,12 @@
     ./hardware-configuration.nix
     ./pipewire-rnn.nix
 
-    ./../modules/nixos/hyprland.nix
-    ./../modules/nixos/cosmic.nix
     ./../modules/nixos/boot.nix
+    ./../modules/nixos/cosmic.nix
+    ./../modules/nixos/hyprland.nix
     ./../modules/nixos/networking.nix
+    ./../modules/nixos/niri.nix
+    ./../modules/nixos/stream.nix
   ];
 
   nixpkgs = {
@@ -60,6 +62,12 @@
     enable = false;
     loginUser = "rmoretto";
   };
+
+  services.myniri = {
+    enable = false;
+  };
+
+  services.mystream.enable = false;
 
   # networking.hostName = "rodrigo-pc";
   # networking.networkmanager.enable = true;
@@ -223,7 +231,7 @@
   programs.virt-manager.enable = true;
 
   programs.openvpn3.enable = true;
-  programs.ssh.startAgent = true;
+  # programs.ssh.startAgent = true;
   programs.dconf.enable = true;
 
   systemd = {

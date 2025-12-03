@@ -23,6 +23,17 @@
     recursive = true;
   };
 
+  services.wpaperd.enable = true;
+  services.wpaperd.settings = {
+    DP-4 = {
+      path = "~/Pictures/Wallpapers/center.jpg";
+    };
+    DP-3 = {
+      path = "~/Pictures/Wallpapers/left.jpg";
+    };
+  };
+
+
   # home.packages = with pkgs; [
   #   xdg-desktop-portal-hyprland
   # ];
@@ -32,7 +43,7 @@
 
   wayland.windowManager.hyprland.settings = {
     "$monitor_left" = "DP-3";
-    "$monitor_right" = "DP-4";
+    "$monitor_center" = "DP-4";
 
     debug = {
       disable_logs = false;
@@ -49,16 +60,12 @@
 
     monitor = [
       "$monitor_left, 1920x1080@144, -1920x360, 1"
-      # "$monitor_center, 1920x1080@144, 0x0, 1"
-      "$monitor_right, 3440x1440@165, 0x0, 1"
+      "$monitor_center, 3440x1440@165, 0x0, 1"
     ];
 
     exec-once = [
-      "swww init"
       # "xwaylandvideobridge"
       "lxqt-policykit-agent"
-      "swww img ~/Pictures/Wallpapers/right.jpg --transition-type=grow -o DP-2"
-      "swww img ~/Pictures/Wallpapers/center.jpg --transition-type=grow"
       "waybar"
     ];
 
@@ -144,10 +151,10 @@
       "1, monitor:$monitor_left"
       "3, monitor:$monitor_left"
 
-      "2, monitor:$monitor_right"
-      "4, monitor:$monitor_right"
+      "2, monitor:$monitor_center"
+      "4, monitor:$monitor_center"
 
-      # "6, monitor:$monitor_right"
+      # "6, monitor:$monitor_center"
     ];
 
     general = {

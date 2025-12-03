@@ -1,7 +1,7 @@
 { pkgs, config, inputs, ... }:
 {
   # boot.kernelPackages = pkgs.unstable.linuxPackages_6_8;
-  boot.kernelPackages = pkgs.unstable.linuxPackages_zen;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
 
   boot.loader = {
     efi.canTouchEfiVariables = true;

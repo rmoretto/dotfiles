@@ -19,6 +19,13 @@ local function keymaps()
 	-- keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
 end
 
+local vue_plugin = {
+	name = "@vue/typescript-plugin",
+	location = lsp_location.vue_ts_plugin,
+	languages = { "vue" },
+	configNamespace = "typescript",
+}
+
 return {
 	{
 		"neovim/nvim-lspconfig",
@@ -55,13 +62,7 @@ return {
 				pylsp = true,
 				zls = true,
 				ts_ls = {
-					filetypes = {
-						"javascript",
-						"javascriptreact",
-						"typescript",
-						"typescriptreact",
-						"vue",
-					},
+					filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
 					typescript = {
 						tsserver = {
 							log = "verbose",
@@ -69,32 +70,19 @@ return {
 					},
 					init_options = {
 						log = "verbose",
-						plugins = {
-							{
-								name = "@vue/typescript-plugin",
-								location = lsp_location.vue_ts_plugin,
-								languages = { "javascript", "typescript", "vue" },
-							},
-						},
+						plugins = { vue_plugin },
 					},
 				},
-				vtsls = {
-					settings = {
-						vtsls = {
-							tsserver = {
-								globalPlugins = {
-									{
-                                        name = "@vue/typescript-plugin",
-                                        location = lsp_location.vue_ts_plugin,
-                                        languages = { "javascript", "typescript", "vue" },
-										configNamespace = "typescript",
-									},
-								},
-							},
-						},
-					},
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact" },
-				},
+				-- vtsls = {
+				-- 	settings = {
+				-- 		vtsls = {
+				-- 			tsserver = {
+				-- 				globalPlugins = { vue_plugin },
+				-- 			},
+				-- 		},
+				-- 	},
+				-- 	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+				-- },
 				vue_ls = true,
 				arduino_language_server = true,
 				nil_ls = true,
@@ -120,7 +108,7 @@ return {
 				end
 
 				vim.lsp.config(lsp_name, server_opts)
-                vim.lsp.enable(lsp_name)
+				vim.lsp.enable(lsp_name)
 			end
 
 			for server, server_opts in pairs(opts.servers) do
