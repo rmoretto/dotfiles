@@ -7,16 +7,14 @@ windows:
   - otter-frontend:
       root: ~/programations/granter/conecta_favu/otter/frontend/otter
       panes:
-        - nvim:
-          - nix develop
-          - nvim
+        - editor:
+          - nix develop --command fish -c "nvim; fish"
 
   - otter-backend:
       root: ~/programations/granter/conecta_favu/otter/backend/otter
       panes:
-        - nvim:
-          - nix develop .#test
-          - nvim
+        - editor:
+          - nix develop .#test --command fish -c "nvim; fish"
 
   - terms:
       root: ~/programations/granter/conecta_favu/otter
@@ -27,10 +25,8 @@ windows:
 
         - backend:
           - cd backend/otter
-          - nix develop
-          - MIX_ENV=dev mix phx.server
+          - nix develop --command fish -c "MIX_ENV=dev mix phx.server; fish"
 
         - frontend: 
           - cd frontend/otter
-          - nix develop
-          - yarn dev
+          - nix develop --command fish -c "yarn dev; fish"

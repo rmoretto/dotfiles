@@ -2,67 +2,6 @@ local keymap = vim.keymap
 local utils_cmp = require("utils.cmp")
 
 return {
-	-- Nvim Cmp
-	--  ANTIGO SAI DAQUI
-	-- {
-	-- 	"hrsh7th/nvim-cmp",
-	-- 	version = false,
-	-- 	event = "InsertEnter",
-	-- 	dependencies = {
-	-- 		"hrsh7th/cmp-nvim-lsp",
-	-- 		"hrsh7th/cmp-buffer",
-	-- 		"hrsh7th/cmp-path",
-	-- 		"hrsh7th/cmp-emoji",
-	-- 		"hrsh7th/cmp-vsnip",
-	-- 		"hrsh7th/vim-vsnip",
-	-- 		"hrsh7th/vim-vsnip-integ",
-	-- 		"rafamadriz/friendly-snippets",
-	-- 	},
-	-- 	opts = function()
-	-- 		vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
-	-- 		local cmp = require("cmp")
-	-- 		local defaults = require("cmp.config.default")()
-	-- 		local auto_select = true
-	--
-	-- 		return {
-	-- 			completion = { completeopt = "menu,menuone,noinsert" },
-	-- 			preselect = auto_select and cmp.PreselectMode.Item or cmp.PreselectMode.None,
-	-- 			snippet = {
-	-- 				expand = function(args)
-	-- 					vim.fn["vsnip#anonymous"](args.body)
-	-- 				end,
-	-- 			},
-	-- 			mapping = cmp.mapping.preset.insert({
-	-- 				["<C-g>"] = cmp.mapping.scroll_docs(-4),
-	-- 				["<C-f>"] = cmp.mapping.scroll_docs(4),
-	-- 				["<C-Space>"] = cmp.mapping.complete(),
-	-- 				["<CR>"] = utils_cmp.confirm({ select = auto_select }),
-	-- 				["<C-y>"] = utils_cmp.confirm({ select = true }),
-	-- 				["<S-CR>"] = utils_cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace }),
-	-- 				["<C-CR>"] = function(fallback)
-	-- 					cmp.abort()
-	-- 					fallback()
-	-- 				end,
-	-- 			}),
-	-- 			sources = cmp.config.sources({
-	-- 				{ name = "nvim_lsp" },
-	-- 				{ name = "vsnip" },
-	-- 			}, {
-	-- 				{ name = "path" },
-	-- 				{ name = "buffer" },
-	-- 				{ name = "emoji" },
-	-- 				{ name = "nvim_lsp", trigger_characters = { "-" } },
-	-- 			}),
-	-- 			experimental = {
-	-- 				ghost_text = {
-	-- 					hl_group = "CmpGhostText",
-	-- 				},
-	-- 			},
-	-- 			sorting = defaults.sorting,
-	-- 		}
-	-- 	end,
-	-- },
-
 	-- Uhull novo bonitinho legal UHUL
 	{
 		"saghen/blink.cmp",
@@ -105,14 +44,14 @@ return {
 			snippets = { preset = "default" },
 			sources = {
 				default = { "lsp", "path", "snippets", "buffer", "emoji" },
-                providers = {
-                    emoji = {
-                        module = "blink-emoji",
-                        name = "Emoji",
-                        score_offset = 15, -- Tune by preference
-                        opts = { insert = true }, -- Insert emoji (default) or complete its name
-                    },
-                },
+				providers = {
+					emoji = {
+						module = "blink-emoji",
+						name = "Emoji",
+						score_offset = 15, -- Tune by preference
+						opts = { insert = true }, -- Insert emoji (default) or complete its name
+					},
+				},
 			},
 			fuzzy = { implementation = "prefer_rust_with_warning" },
 		},
@@ -203,15 +142,6 @@ return {
 		end,
 	},
 
-	-- colors in code
-	-- {
-	-- 	"drenoprata10/nvim-highlight-colors",
-	-- 	opts = {
-	-- 		render = "virtual",
-	-- 		virtual_symbol = "■",
-	-- 	},
-	-- },
-
 	-- LazyDev
 	{
 		"folke/lazydev.nvim",
@@ -286,10 +216,9 @@ return {
 						return string.format('console.log("%s = ", %s)', text_inside, text_var)
 					end,
 				},
+				-- to turn off default behaviour and add nothing
 				add_to_inside = function(text)
-					local filename = vim.fn.expand("%:t")
-					local line_nr = vim.fn.line(".")
-					return string.format("[%s:%s] %s", filename, line_nr, text)
+					return text
 				end,
 			})
 

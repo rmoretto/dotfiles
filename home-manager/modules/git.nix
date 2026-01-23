@@ -16,6 +16,6 @@
         defaultBranch = "main";
       };
     };
-    difftastic.enable = false;
+    # difftastic.enable = false;
   };
 }

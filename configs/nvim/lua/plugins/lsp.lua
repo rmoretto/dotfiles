@@ -47,7 +47,16 @@ return {
 					},
 				},
 				dockerls = true,
-				elixirls = true,
+				-- elixirls = true,
+				expert = {
+					cmd_env = {
+						RELEASE_DISTRIBUTION = "sname",
+					},
+					settings = {
+						dialyzerEnabled = false,
+						mixEnv = "test",
+					},
+				},
 				erlangls = true,
 				eslint = true,
 				gopls = true,
@@ -62,7 +71,7 @@ return {
 				pylsp = true,
 				zls = true,
 				ts_ls = {
-					filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 					typescript = {
 						tsserver = {
 							log = "verbose",
@@ -73,20 +82,26 @@ return {
 						plugins = { vue_plugin },
 					},
 				},
-				-- vtsls = {
-				-- 	settings = {
-				-- 		vtsls = {
-				-- 			tsserver = {
-				-- 				globalPlugins = { vue_plugin },
-				-- 			},
-				-- 		},
-				-- 	},
-				-- 	filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
-				-- },
 				vue_ls = true,
 				arduino_language_server = true,
 				nil_ls = true,
 				gdscript = true,
+				efm = {
+					settings = {
+						rootMarkers = { ".git/" },
+						languages = {
+							elixir = {
+                                -- Mix Credo
+								{
+									lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
+									lintStdin = true,
+									lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m", },
+									rootMarkers = { "mix.lock", "mix.exs", },
+								},
+							},
+						},
+					},
+				},
 			},
 		},
 		config = function(_, opts)

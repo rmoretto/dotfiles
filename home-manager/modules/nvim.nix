@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, inputs, ...}: {
   programs.neovim.enable = true;
   programs.neovim.package = pkgs.unstable.neovim-unwrapped;
 
@@ -49,6 +49,7 @@
     unstable.zls
     unstable.typescript-go
     unstable.vtsls
+    inputs.expert.packages.x86_64-linux.default
     # vue-typescript-plugin
   ];
 }

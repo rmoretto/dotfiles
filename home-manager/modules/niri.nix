@@ -1,5 +1,10 @@
 {pkgs, ...}: {
   home.packages = with pkgs; [
+    alacritty 
+    fuzzel 
+    swaylock 
+    mako 
+    swayidle
     xwayland-satellite
   ];
 

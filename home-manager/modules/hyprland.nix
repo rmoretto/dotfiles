@@ -87,12 +87,13 @@
       # "SUPER, M, exit, "
       # "SUPER, E, exec, dolphin"
       "SUPER, F, fullscreen, 1"
+      "SUPER_SHIFT, F, fullscreen, 0"
       "SUPER, T, togglegroup, "
       "SUPER, V, togglefloating, "
       # "SUPER, P, pseudo, # dwindle"
       # "SUPER, J, togglesplit, # dwindle"
       "SUPER, code:35, exec, grim -g \"$(slurp -d)\" - | wl-copy"
-      # "SUPER, Print, exec, XDG_CURRENT_DESKTOP=sway flameshot gui"
+      "SUPER, Print, exec, grim -g \"$(slurp -d)\" - | wl-copy"
 
       # Sound control
       ", XF86AudioRaiseVolume, exec, pactl set-sink-volume @DEFAULT_SINK@ +2%"

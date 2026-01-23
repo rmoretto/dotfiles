@@ -17,6 +17,7 @@
     notifd.url = "github:rmoretto/notifd";
     nix-gaming.url = "github:fufexan/nix-gaming";
     pnpm2nix.url = "github:nzbr/pnpm2nix-nzbr";
+    expert.url = "github:elixir-lang/expert";
   };
 
   outputs = {
@@ -24,6 +25,7 @@
     nixpkgs,
     nixpkgs-unstable,
     home-manager,
+    expert,
     ...
   } @ inputs: let
     inherit (self) outputs;
