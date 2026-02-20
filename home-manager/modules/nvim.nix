@@ -24,7 +24,6 @@
         nil_ls = { "${unstable.nil}/bin/nil" },
         lua_ls = { "${unstable.lua-language-server}/bin/lua-language-server" },
         tailwindcss = { "${unstable.tailwindcss-language-server}/bin/tailwindcss-language-server" },
-        zls = { "${unstable.zls}/bin/zls" },
         vue_ts_plugin = "${unstable.vue-language-server}/lib/node_modules/@vue/language-server",
         vtsls = { "${unstable.vtsls}/bin/vtsls", "--stdio" },
       }
@@ -33,6 +32,7 @@
 
   # vue_ts_plugin = "${vue-typescript-plugin}/lib/node_modules/@vue/typescript-plugin"
   # nil = "${unstable.nil}/bin/nil"
+  # zls = { "${unstable.zls}/bin/zls" },
 
   home.packages = with pkgs; [
     unstable.elixir-ls
@@ -46,7 +46,7 @@
     unstable.nil
     unstable.lua-language-server
     unstable.tailwindcss-language-server
-    unstable.zls
+    # unstable.zls
     unstable.typescript-go
     unstable.vtsls
     inputs.expert.packages.x86_64-linux.default

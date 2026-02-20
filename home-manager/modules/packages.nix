@@ -18,6 +18,7 @@
     libreoffice
     github-desktop
     figma-linux
+    boxflat
 
     waybar
     wl-gammactl
@@ -124,7 +125,6 @@
       python3-with-packages)
     jetbrains.pycharm-professional
     docker-compose
-    postgresql
     gdk-pixbuf
     gtk3
     nomad
@@ -139,6 +139,7 @@
     gh
     qemu
     quickemu
+    ddcutil
 
     # Fonts
     # nerdfonts

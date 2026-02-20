@@ -137,6 +137,8 @@
   hardware.pulseaudio.enable = false;
   hardware.bluetooth.enable = true;
 
+  hardware.i2c.enable = true;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -194,7 +196,7 @@
       isNormalUser = true;
       description = "zequinha d vdd";
       shell = pkgs.fish;
-      extraGroups = ["networkmanager" "wheel" "docker" "libvirtd"];
+      extraGroups = ["networkmanager" "wheel" "docker" "libvirtd" "i2c"];
       packages = with pkgs; [
         firefox
         git
@@ -261,6 +263,10 @@
     #   };
     # };
   };
+
+  services.udev.extraRules = ''
+SUBSYSTEM=="tty", KERNEL=="ttyACM*", ATTRS{idVendor}=="346e", ACTION=="add", MODE="0666", TAG+="uaccess"
+  '';
 
   # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   system.stateVersion = "25.05";
