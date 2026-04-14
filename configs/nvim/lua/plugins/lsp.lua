@@ -72,31 +72,39 @@ return {
 				zls = true,
 				ts_ls = {
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-					typescript = {
-						tsserver = {
-							log = "verbose",
-						},
-					},
 					init_options = {
-						log = "verbose",
 						plugins = { vue_plugin },
 					},
+				},
+				vtsls = {
+					settings = {
+						vtsls = {
+							tsserver = {
+								globalPlugins = {
+									vue_plugin,
+								},
+							},
+						},
+					},
+					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 				},
 				vue_ls = true,
 				arduino_language_server = true,
 				nil_ls = true,
 				gdscript = true,
+				qmlls = true,
+				ols = true,
 				efm = {
 					settings = {
 						rootMarkers = { ".git/" },
 						languages = {
 							elixir = {
-                                -- Mix Credo
+								-- Mix Credo
 								{
 									lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
 									lintStdin = true,
-									lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m", },
-									rootMarkers = { "mix.lock", "mix.exs", },
+									lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
+									rootMarkers = { "mix.lock", "mix.exs" },
 								},
 							},
 						},

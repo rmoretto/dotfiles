@@ -24,8 +24,9 @@
         nil_ls = { "${unstable.nil}/bin/nil" },
         lua_ls = { "${unstable.lua-language-server}/bin/lua-language-server" },
         tailwindcss = { "${unstable.tailwindcss-language-server}/bin/tailwindcss-language-server" },
-        vue_ts_plugin = "${unstable.vue-language-server}/lib/node_modules/@vue/language-server",
+        vue_ts_plugin = "${unstable.vue-language-server}/lib/language-tools/packages/language-server",
         vtsls = { "${unstable.vtsls}/bin/vtsls", "--stdio" },
+        ols = { "${unstable.ols}/bin/ols" }
       }
     '';
   };
@@ -50,6 +51,9 @@
     unstable.typescript-go
     unstable.vtsls
     inputs.expert.packages.x86_64-linux.default
+    unstable.kdePackages.qtdeclarative
+    unstable.ols
+    unstable.vtsls
     # vue-typescript-plugin
   ];
 }

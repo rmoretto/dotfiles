@@ -236,6 +236,11 @@
   # programs.ssh.startAgent = true;
   programs.dconf.enable = true;
 
+  services.ollama = {
+    package = pkgs.unstable.ollama;
+    enable = true;
+  };
+
   systemd = {
     # user.services.polkit-gnome-authentication-agent-1 = {
     #   description = "polkit-gnome-authentication-agent-1";

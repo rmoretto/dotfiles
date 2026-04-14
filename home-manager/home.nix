@@ -15,6 +15,7 @@
     ./modules/tmux.nix
     ./modules/window_manager.nix
     ./modules/hyprland.nix
+    ./../modules/home-manager/quickshell.nix
     # ./modules/niri.nix
     # ./modules/i3.nix
     # ./modules/picom.nix
@@ -52,6 +53,8 @@
       WantedBy = ["default.target"];
     };
   };
+
+  home.my-quickshell.enable = true;
 
   # Enable home-manager and git
   programs.home-manager.enable = true;

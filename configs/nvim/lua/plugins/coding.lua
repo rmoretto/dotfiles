@@ -73,6 +73,10 @@ return {
 				return { exe = "nix", args = { "fmt" }, stdin = true }
 			end
 
+			local function odin()
+				return { exe = "odinfmt", args = { "-stdin" }, stdin = true }
+			end
+
 			local stylua = require("formatter.filetypes.lua").stylua
 			local prettier = require("formatter.filetypes.javascript").prettier
 			local black = require("formatter.filetypes.python").black
@@ -100,6 +104,7 @@ return {
 					rust = { rustfmt },
 					terraform = { terraform },
 					nix = { nix },
+					odin = { odin },
 				},
 			}
 		end,
