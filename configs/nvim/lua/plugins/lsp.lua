@@ -76,18 +76,18 @@ return {
 						plugins = { vue_plugin },
 					},
 				},
-				vtsls = {
-					settings = {
-						vtsls = {
-							tsserver = {
-								globalPlugins = {
-									vue_plugin,
-								},
-							},
-						},
-					},
-					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-				},
+				-- vtsls = {
+				-- 	settings = {
+				-- 		vtsls = {
+				-- 			tsserver = {
+				-- 				globalPlugins = {
+				-- 					vue_plugin,
+				-- 				},
+				-- 			},
+				-- 		},
+				-- 	},
+				-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
+				-- },
 				vue_ls = true,
 				arduino_language_server = true,
 				nil_ls = true,

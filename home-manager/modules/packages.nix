@@ -19,6 +19,7 @@
     github-desktop
     figma-linux
     boxflat
+    whatsapp-electron 
 
     waybar
     wl-gammactl
@@ -32,6 +33,7 @@
     slurp
     imagemagick
     easyeffects
+    obs-studio
 
     # System utilities
     htop
