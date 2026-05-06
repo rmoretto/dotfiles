@@ -1,7 +1,7 @@
 return {
 	-- go fast
 	{
-		"ggandor/leap.nvim",
+		url = "https://codeberg.org/andyg/leap.nvim",
 		opts = {
 			-- highlight_unlabeled_phase_one_targets = true,
 			substitute_chars = {

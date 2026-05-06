@@ -136,10 +136,28 @@
       "SUPER_SHIFT, 9, movetoworkspace, 9"
       "SUPER_SHIFT, 0, movetoworkspace, 10"
 
-      "SUPER, P, togglespecialworkspace, dashboard"
+      "SUPER, P, togglespecialworkspace, spotify"
+      "SUPER, F3, togglespecialworkspace, obs"
+      "SUPER, F5, togglespecialworkspace, database"
+      # "SUPER, F4, togglespecialworkspace, obs-preview"
+      # "SUPER, O, exec, [workspace special:spotify silent;float;noanim;size 2500 1200;move 15 45] spotify"
 
-      "SUPER, O, exec, [workspace special:dashboard silent;float;noanim;size 2500 1200;move 15 45] spotify"
+      # "SUPER, F7, togglespecialworkspace, gromit"
+      # "SUPER_SHIFT , F7, exec, gromit-mpx --clear"
+      # "SUPER, F6, exec, gromit-mpx --undo"
+      # "SUPER SHIFT , F6, exec, gromit-mpx --redo"
     ];
+
+    # workspace = special:gromit, gapsin:0, gapsout:0, on-created-empty: gromit-mpx -a
+    # windowrule = noblur, ^(Gromit-mpx)$
+    # windowrule = opacity 1 override, 1 override, ^(Gromit-mpx)$
+    # windowrule = noshadow, ^(Gromit-mpx)$
+    # windowrule = nofullscreenrequest, ^(Gromit-mpx)$
+    # windowrule = size 100% 100%, ^(Gromit-mpx)$
+    # bind = , F7, togglespecialworkspace, gromit
+    # bind = SHIFT , F7, exec, gromit-mpx --clear
+    # bind = , F6, exec, gromit-mpx --undo
+    # bind = SHIFT , F6, exec, gromit-mpx --redo
 
     bindm = [
       # Move/resize windows with mainMod + LMB/RMB and dragging
@@ -154,6 +172,12 @@
 
       "2, monitor:$monitor_center"
       "4, monitor:$monitor_center"
+
+      # "special:gromit, gapsin:0, gapsout:0, on-created-empty: gromit-mpx -a"
+      "special:obs-preview, monitor:$monitor_left"
+      "special:obs, on-created-empty: [silent;float;size 2500 1200;move 15 45] obs"
+      "special:database, on-created-empty: [silent;float;size 2500 1200;center] pycharm"
+      "special:spotify, on-created-empty: [silent;float;noanim;size 2500 1200;move 15 45] spotify"
 
       # "6, monitor:$monitor_center"
     ];
@@ -258,6 +282,13 @@
       "float,title:^(Open Folder)(.*)$"
       "float,title:^(Save As)(.*)$"
       "float,title:^(Library)(.*)$"
+
+      "noblur,title:^(gromit-mpx)$"
+      "opacity 1 override 1 override,title:^(gromit-mpx)$"
+      "noshadow,title:^(gromit-mpx)$"
+      "move 0 0,title:^(gromit-mpx)$"
+      # "nofullscreenrequest,title:^(gromit-mpx)$"
+      "size 100% 100%,title:^(gromit-mpx)$"
     ];
 
     windowrulev2 = [
@@ -274,6 +305,9 @@
 
       "bordersize 0, class:^(flameshot)$"
       "rounding 0, class:^(flameshot)$"
+
+      # "workspace special:obs-preview, title:^(Projector - Preview)$"
+      # "fullscreen_state 3, title:^(Projector - Preview)$"
 
       # XWaylandVideoBridge
       # "opacity 0.0 override 0.0 override,class:^(xwaylandvideobridge)$"

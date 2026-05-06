@@ -34,6 +34,8 @@
     imagemagick
     easyeffects
     obs-studio
+    gromit-mpx
+    unstable.claude-code
 
     # System utilities
     htop

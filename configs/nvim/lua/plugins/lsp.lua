@@ -29,9 +29,9 @@ local vue_plugin = {
 return {
 	{
 		"neovim/nvim-lspconfig",
-		branch = "master",
 		dependencies = {
 			{ "VonHeikemen/lsp-zero.nvim", branch = "v4.x" },
+			{ "b0o/schemastore.nvim" },
 		},
 		opts = {
 			servers = {
@@ -61,7 +61,15 @@ return {
 				eslint = true,
 				gopls = true,
 				html = true,
-				jsonls = true,
+                jsonls = true,
+				-- jsonls = {
+				-- 	settings = {
+				-- 		json = {
+				-- 			schemas = require("schemastore").json.schemas(),
+				-- 			validate = { enable = true },
+				-- 		},
+				-- 	},
+				-- },
 				marksman = true,
 				rust_analyzer = true,
 				sqlls = true,

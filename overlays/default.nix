@@ -20,6 +20,13 @@
         hash = "sha256-DzNJxZbSdhqdtIQvQ7ZKrKwu6zTcBjtsR9rv/uudZcw=";
       };
     });
+
+    obs-studio = prev.obs-studio.overrideAttrs (oldAttrs: {
+      # extend old postInstall (if exists) with wrapProgram
+      postInstall = (oldAttrs.postInstall or "") + ''
+        wrapProgram $out/bin/obs --set __NV_DISABLE_EXPLICIT_SYNC 1
+      '';
+    });
   };
 
   # When applied, the unstable nixpkgs set (declared in the flake inputs) will
