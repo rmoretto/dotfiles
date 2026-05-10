@@ -1,0 +1,13 @@
+# vi: ft=sshconfig
+Include config.d/*
+
+Host *
+    ServerAliveInterval 60
+
+Host cbti
+    HostName 93.127.210.171
+    User root
+    ServerAliveInterval 60
+    IdentityFile ~/.ssh/id_ed25519
+
+

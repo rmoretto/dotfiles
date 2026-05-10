@@ -1,0 +1,19 @@
+# vi: ft=sshconfig
+Host flowtify_demo
+    HostName 18.229.165.215
+    User admin
+    ServerAliveInterval 60
+    IdentityFile ~/.ssh/flowtify-kp.pem
+
+Host flowtify_bastion
+    HostName 54.232.19.197
+    User admin
+    ServerAliveInterval 60
+    IdentityFile ~/.ssh/flowtify-kp.pem
+    LocalForward 8200 active.vault.service.consul:8200
+    LocalForward 8500 consul.service.consul:8500
+    LocalForward 4646 nomad.service.consul:4646
+    LocalForward 9090 prometheus.service.consul:9090
+    LocalForward 3031 grafana.service.consul:3000
+    LocalForward 54133 flowtify-demo.c3yty0cpxryt.sa-east-1.rds.amazonaws.com:5432
+    LocalForward 54134 flowtify-prod.c3yty0cpxryt.sa-east-1.rds.amazonaws.com:5432
