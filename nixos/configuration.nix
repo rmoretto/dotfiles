@@ -22,6 +22,7 @@
     ./../modules/nixos/stream.nix
   ];
 
+  # ---- DONE
   nixpkgs = {
     # You can add overlays here
     overlays = [
@@ -36,6 +37,7 @@
     };
   };
 
+  # ---- DONE
   nix = {
     # This will add each flake input as a registry
     # To make nix3 commands consistent with your flakeconf.nix
@@ -53,6 +55,7 @@
     };
   };
 
+  # ---- DONE
   services.myhypr = {
     enable = true;
     loginUser = "rmoretto";
@@ -72,6 +75,7 @@
   # networking.hostName = "rodrigo-pc";
   # networking.networkmanager.enable = true;
 
+  # ---- DONE
   # Set your time zone.
   time.timeZone = "America/Sao_Paulo";
   time.hardwareClockInLocalTime = true;
@@ -94,6 +98,7 @@
   # security.pam.services.lightdm.enableGnomeKeyring = true;
   # security.pam.services.gdm.enableGnomeKeyring = true;
   # security.pam.services.login.enableGnomeKeyring = true;
+  # ---- DONE
   services.gnome.gnome-keyring.enable = true;
   security = {
     polkit.enable = true;
@@ -114,6 +119,7 @@
   # hardware.nvidia-container-toolkit.enable = true;
   # hardware.nvidia.nvidiaSettings = true;
 
+  # ---- DONE
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -122,7 +128,7 @@
   hardware.opengl.enable = true;
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
-  
+
   hardware.nvidia = {
     modesetting.enable = true;
     powerManagement.enable = false;
@@ -133,11 +139,10 @@
 
   hardware.nvidia-container-toolkit.enable = true;
 
+  # ---- DONE
   # Enable sound with pipewire.
   hardware.pulseaudio.enable = false;
   hardware.bluetooth.enable = true;
-
-  hardware.i2c.enable = true;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -155,6 +160,8 @@
 
   services.blueman.enable = true;
   programs.noisetorch.enable = true;
+
+  hardware.i2c.enable = true;
 
   hardware.keyboard.qmk.enable = true;
   environment.etc."ppp/options".text = "ipcp-accept-remote";

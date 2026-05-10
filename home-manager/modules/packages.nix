@@ -103,10 +103,7 @@
     nano
     vscode
     rustup
-    # cargo
     rustc
-    # rust-analyzer
-    # marksman
     go
     gcc
     lua

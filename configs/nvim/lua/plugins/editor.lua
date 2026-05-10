@@ -19,7 +19,7 @@ return {
 				require("leap.treesitter").select()
 			end)
 
-            -- require('leap.user').set_repeat_keys('<enter>', '<backspace>')
+			-- require('leap.user').set_repeat_keys('<enter>', '<backspace>')
 		end,
 	},
 
@@ -75,5 +75,13 @@ return {
 			deleteBufferWhenFileDeleted = true,
 		},
 		event = "VeryLazy",
+	},
+
+	-- help
+	{
+		"nmac427/guess-indent.nvim",
+		config = function()
+			require("guess-indent").setup({})
+		end,
 	},
 }
