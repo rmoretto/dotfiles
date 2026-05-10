@@ -28,7 +28,7 @@
     imports = [
       self.modules.nixos.core-packages
 
-      # self.modules.nixos.rmoretto-packages
+      self.modules.nixos.rmoretto-packages
 
       self.modules.nixos.fortclient
       self.modules.nixos.git

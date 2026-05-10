@@ -1,5 +1,9 @@
 {self, ...}: {
   flake.modules.homeManager.tmux = {pkgs, ...}: {
+    imports = [
+      self.modules.homeManager.tmuxinator
+    ];
+
     programs.tmux = {
       enable = true;
 
