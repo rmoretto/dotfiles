@@ -1,14 +1,19 @@
-{self, ...}: {
+{
+  self,
+  inputs,
+  lib,
+  ...
+}: {
   flake.modules.nixos.nix-settings = {
     nixpkgs.config.allowUnfree = true;
 
     nixpkgs = {
       overlays = [
         self.overlays.unstable-packages
-        self.overlays.modifications
       ];
     };
 
+    nix.registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
     nix.settings.experimental-features = ["nix-command" "flakes"];
     nix.settings = {
       substituters = [

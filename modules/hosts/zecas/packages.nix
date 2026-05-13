@@ -11,7 +11,7 @@
         unstable.google-chrome
         chromium
         spotify
-        discord
+        unstable.discord
         vesktop
         bitwarden-desktop
         unstable.terminaltexteffects

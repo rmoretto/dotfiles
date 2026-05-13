@@ -39,7 +39,8 @@
       self.modules.nixos.kitty
       self.modules.nixos.tmux
 
-      self.modules.nixos.hyprland
+      self.modules.nixos.niri
+      # self.modules.nixos.hyprland
     ];
   };
 
