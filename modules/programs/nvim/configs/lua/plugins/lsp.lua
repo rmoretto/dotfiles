@@ -35,8 +35,6 @@ return {
 		},
 		opts = {
 			servers = {
-				ansiblels = true,
-				awk_ls = true,
 				bashls = true,
 				cssls = {
 					single_file_support = false,
@@ -47,7 +45,6 @@ return {
 					},
 				},
 				dockerls = true,
-				-- elixirls = true,
 				expert = {
 					cmd_env = {
 						RELEASE_DISTRIBUTION = "sname",
@@ -57,47 +54,20 @@ return {
 						mixEnv = "test",
 					},
 				},
-				erlangls = true,
 				eslint = true,
-				gopls = true,
 				html = true,
                 jsonls = true,
-				-- jsonls = {
-				-- 	settings = {
-				-- 		json = {
-				-- 			schemas = require("schemastore").json.schemas(),
-				-- 			validate = { enable = true },
-				-- 		},
-				-- 	},
-				-- },
 				marksman = true,
 				rust_analyzer = true,
-				sqlls = true,
 				lua_ls = true,
-				-- tailwindcss = true,
-				terraformls = true,
 				pylsp = true,
-				zls = true,
 				ts_ls = {
 					filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 					init_options = {
 						plugins = { vue_plugin },
 					},
 				},
-				-- vtsls = {
-				-- 	settings = {
-				-- 		vtsls = {
-				-- 			tsserver = {
-				-- 				globalPlugins = {
-				-- 					vue_plugin,
-				-- 				},
-				-- 			},
-				-- 		},
-				-- 	},
-				-- 	filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-				-- },
 				vue_ls = true,
-				arduino_language_server = true,
 				nil_ls = true,
 				gdscript = true,
 				qmlls = true,
@@ -112,12 +82,31 @@ return {
 									lintCommand = "mix credo suggest --format=flycheck --read-from-stdin ${INPUT}",
 									lintStdin = true,
 									lintFormats = { "%f:%l:%c: %t: %m", "%f:%l: %t: %m" },
-									rootMarkers = { "mix.lock", "mix.exs" },
+									lintIgnoreExitCode = true,
+									rootMarkers = { "mix.lock", "mix.exs" }
 								},
 							},
 						},
 					},
 				},
+				-- arduino_language_server = true,
+				-- sqlls = true,
+				-- tailwindcss = true,
+				-- terraformls = true,
+				-- zls = true,
+				-- erlangls = true,
+				-- gopls = true,
+				-- elixirls = true,
+				-- ansiblels = true,
+				-- awk_ls = true,
+				-- jsonls = {
+				-- 	settings = {
+				-- 		json = {
+				-- 			schemas = require("schemastore").json.schemas(),
+				-- 			validate = { enable = true },
+				-- 		},
+				-- 	},
+				-- },
 			},
 		},
 		config = function(_, opts)

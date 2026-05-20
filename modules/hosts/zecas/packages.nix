@@ -10,7 +10,7 @@
         unstable.firefox
         unstable.google-chrome
         chromium
-        spotify
+        unstable.spotify
         unstable.discord
         vesktop
         bitwarden-desktop

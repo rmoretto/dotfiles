@@ -5,12 +5,14 @@
   ...
 }: {
   flake.modules.nixos.nix-settings = {
-    nixpkgs.config.allowUnfree = true;
-
     nixpkgs = {
       overlays = [
         self.overlays.unstable-packages
       ];
+
+      config = {
+        allowUnfree = true;
+      };
     };
 
     nix.registry = lib.mapAttrs (_: value: {flake = value;}) inputs;
