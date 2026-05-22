@@ -296,5 +296,10 @@ return {
 			{ "<leader>na", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
 			{ "<leader>nd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 		},
+		opts = {
+			diff_opts = {
+				open_in_new_tab = false,
+			},
+		},
 	},
 }
