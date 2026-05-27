@@ -1,30 +1,33 @@
-{
-  self,
-  ...
-}: {
+{self, ...}: {
   flake.modules.homeManager.rmoretto-llm = {
     pkgs,
     config,
+    lib,
     ...
   }: let
-    deep-code-gen = conf:
-      pkgs.writeShellApplication {
-        name = "deepcode-${conf.model}";
-        runtimeInputs = with pkgs; [unstable.claude-code];
-        text = ''
-          #! /usr/bin/env bash
-          set -euo pipefail
+    deep-code-gen = {
+      model,
+      deepApiKeyPath,
+    }:
+      assert (lib.asserts.assertOneOf "model" model ["v4-pro" "v4-flash"]);
+      assert (lib.asserts.assertMsg (builtins.isString deepApiKeyPath) "deepApiKeyPath should be a string, received ${builtins.typeOf deepApiKeyPath}");
+        pkgs.writeShellApplication {
+          name = "deepcode-${model}";
+          runtimeInputs = with pkgs; [unstable.claude-code];
+          text = ''
+            #! /usr/bin/env bash
+            set -euo pipefail
 
-          ANTHROPIC_AUTH_TOKEN=$(cat ${conf.deepApiKeyPath})
+            ANTHROPIC_AUTH_TOKEN=$(cat ${deepApiKeyPath})
 
-          export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
-          export ANTHROPIC_AUTH_TOKEN
-          export ANTHROPIC_MODEL=deepseek-${conf.model}
-          export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
+            export ANTHROPIC_BASE_URL=https://api.deepseek.com/anthropic
+            export ANTHROPIC_AUTH_TOKEN
+            export ANTHROPIC_MODEL=deepseek-${model}
+            export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1
 
-          exec claude "$@"
-        '';
-      };
+            exec claude "$@"
+          '';
+        };
   in {
     imports = [
       self.modules.homeManager.rmoretto-sops
