@@ -8,6 +8,7 @@
     nixpkgs = {
       overlays = [
         self.overlays.unstable-packages
+        self.overlays.modifications
       ];
 
       config = {

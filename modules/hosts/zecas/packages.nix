@@ -125,7 +125,7 @@
             ]);
         in
           python3-with-packages)
-        jetbrains.pycharm-professional
+        unstable.jetbrains.pycharm
         docker-compose
         gdk-pixbuf
         gtk3

@@ -33,6 +33,7 @@
       self.modules.nixos.fortclient
       self.modules.nixos.git
       self.modules.nixos.ssh
+      self.modules.nixos.rmoretto-llm
 
       self.modules.nixos.nvim
       self.modules.nixos.fish

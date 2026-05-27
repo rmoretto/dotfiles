@@ -298,7 +298,7 @@ return {
 		},
 		opts = {
 			diff_opts = {
-				open_in_new_tab = false,
+				open_in_new_tab = true,
 			},
 		},
 	},

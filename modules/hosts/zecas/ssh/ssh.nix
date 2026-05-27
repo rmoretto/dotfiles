@@ -1,15 +1,10 @@
 {
   self,
-  inputs,
   ...
 }: {
-  flake-file.inputs = {
-    sops-nix.url = "github:mic92/sops-nix";
-  };
-
   flake.modules.homeManager.ssh = {config, ...}: {
     imports = [
-      inputs.sops-nix.homeManagerModule
+      self.modules.homeManager.rmoretto-sops
     ];
 
     home.file.".ssh/config" = {
@@ -22,9 +17,6 @@
     };
 
     sops = {
-      age.sshKeyPaths = ["${config.home.homeDirectory}/.ssh/id_ed25519"];
-      defaultSopsFile = ../../../../secrets/common/secrets.yaml;
-
       secrets."ssh_keys/cbti/priv" = {
         path = "${config.home.homeDirectory}/.ssh/cbti";
         mode = "0600";
