@@ -39,6 +39,7 @@
       self.modules.nixos.fish
       self.modules.nixos.kitty
       self.modules.nixos.tmux
+      self.modules.nixos.games
 
       self.modules.nixos.niri
       # self.modules.nixos.hyprland

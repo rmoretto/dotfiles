@@ -72,8 +72,6 @@
         btop
         woeusb
         efibootmgr
-        steam
-        steam-run
         # wine
         wineWowPackages.stable
         winetricks
