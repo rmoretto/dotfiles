@@ -1,4 +1,8 @@
-{self, inputs, ...}: {
+{
+  self,
+  inputs,
+  ...
+}: {
   flake.modules.homeManager.niri = {pkgs, ...}: {
     imports = [
       # self.modules.homeManager.rofi
@@ -44,8 +48,8 @@
 
     imports = [
       # Import the dms-shell only available in unstable right now
-      "${inputs.nixpkgs-unstable}/nixos/modules/programs/wayland/dms-shell.nix"
-      "${inputs.nixpkgs-unstable}/nixos/modules/programs/dsearch.nix"
+      # "${inputs.nixpkgs-unstable}/nixos/modules/programs/wayland/dms-shell.nix"
+      # "${inputs.nixpkgs-unstable}/nixos/modules/programs/dsearch.nix"
     ];
 
     programs.niri.enable = true;
@@ -56,14 +60,14 @@
       package = pkgs.unstable.dsearch;
     };
 
-    programs.dms-shell ={
+    programs.dms-shell = {
       enable = true;
       package = pkgs.unstable.dms-shell;
 
       enableSystemMonitoring = false;
     };
 
-    environment.systemPackages = with pkgs; [ unstable.dgop ];
+    environment.systemPackages = with pkgs; [unstable.dgop];
 
     systemd.user.services.niri.enableDefaultPath = false;
 
@@ -81,7 +85,7 @@
 
     programs.thunar = {
       enable = true;
-      plugins = with pkgs.xfce; [
+      plugins = with pkgs; [
         thunar-archive-plugin
         thunar-volman
       ];

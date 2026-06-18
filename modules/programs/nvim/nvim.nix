@@ -8,6 +8,8 @@
     ...
   }: {
     programs.neovim.enable = true;
+    programs.neovim.withRuby = true;
+    programs.neovim.withPython3 = true;
     programs.neovim.package = pkgs.unstable.neovim-unwrapped;
 
     home.file.".config/nvim" = {
@@ -48,7 +50,7 @@
       unstable.elixir-ls
       unstable.bash-language-server
       unstable.typescript-language-server
-      unstable.dockerfile-language-server-nodejs
+      unstable.dockerfile-language-server
       unstable.efm-langserver
       unstable.vscode-langservers-extracted
       unstable.marksman

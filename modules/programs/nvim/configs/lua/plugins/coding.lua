@@ -280,7 +280,6 @@ return {
 		keys = {
 			{ "<leader>n", nil, desc = "AI/Claude Code" },
 			{ "<leader>nc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-			{ "<C-,>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
 			{ "<leader>nf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
 			{ "<leader>nr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 			{ "<leader>nC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
@@ -296,6 +295,9 @@ return {
 			-- Diff management
 			{ "<leader>na", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
 			{ "<leader>nd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+			-- Faster
+			{ "<A-,>", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude", mode = { "n", "x" } },
+			{ "<A-.>", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 		},
 		opts = {
 			terminal = {
@@ -303,11 +305,12 @@ return {
 				---@type snacks.win.Config|{}
 				snacks_win_opts = {
 					position = "float",
+					border = "rounded",
 					width = 0.9,
 					height = 0.9,
 					keys = {
 						claude_hide = {
-							"<C-,>",
+							"<A-,>",
 							function(self)
 								self:hide()
 							end,

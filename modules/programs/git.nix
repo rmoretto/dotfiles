@@ -19,6 +19,15 @@
         };
       };
 
+      ignores = [
+        "TODO.md"
+        "NOTES.md"
+        "HISTORY_NOTES.md"
+        "test.txt"
+        "test.csv"
+        "test.sqlite"
+      ];
+
       # difftastic.enable = false;
     };
   };

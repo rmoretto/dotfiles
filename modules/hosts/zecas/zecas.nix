@@ -65,7 +65,7 @@
       shell = pkgs.fish;
     };
 
-    system.stateVersion = "25.11";
+    system.stateVersion = "26.05";
 
     home-manager.useGlobalPkgs = true;
     home-manager.useUserPackages = true;
@@ -76,7 +76,7 @@
     home-manager.users.rmoretto = {
       home = {
         username = "rmoretto";
-        stateVersion = "25.11";
+        stateVersion = "26.05";
         homeDirectory = "/home/rmoretto";
       };
 

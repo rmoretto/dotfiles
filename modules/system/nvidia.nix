@@ -5,7 +5,6 @@
       enable32Bit = true;
     };
 
-    hardware.opengl.enable = true;
     services.xserver.enable = true;
     services.xserver.videoDrivers = ["nvidia"];
 

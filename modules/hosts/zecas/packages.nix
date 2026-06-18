@@ -13,7 +13,6 @@
         unstable.spotify
         unstable.discord
         vesktop
-        bitwarden-desktop
         unstable.terminaltexteffects
         joplin-desktop
         unstable.cmake
@@ -55,7 +54,6 @@
         xclip
         gnome-disk-utility
         sl
-        neofetch
         cmatrix
         libnotify
         seahorse
@@ -73,7 +71,7 @@
         woeusb
         efibootmgr
         # wine
-        wineWowPackages.stable
+        wineWow64Packages.stable
         winetricks
         lutris
         ffmpeg
