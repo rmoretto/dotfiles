@@ -2,51 +2,30 @@
   flake.modules.homeManager.games = {pkgs, ...}: {
     home.packages = [
       pkgs.steam-run
-      pkgs.unstable.gamescope
+      pkgs.unstable.gamescope.override
+      (_: {
+        NIX_CFLAGS_COMPILE = ["-fno-fast-math"];
+      })
       pkgs.steam
     ];
   };
 
   flake.modules.nixos.games = {pkgs, ...}: {
-    # home-manager.sharedModules = [
-    #   self.modules.homeManager.games
-    # ];
+    # Steam Usage: 
+    #  env -u LD_PRELOAD gamescope -W 3440 -H 1440 -w 3440 -h 1440 -f -- env LD_PRELOAD="$LD_PRELOAD" %command%
+    programs.gamescope = {
+      enable = true;
+      # https://github.com/ValveSoftware/gamescope/issues/1924#issuecomment-3725667842
+      package = pkgs.gamescope.overrideAttrs (_: {
+        NIX_CFLAGS_COMPILE = ["-fno-fast-math"];
+      });
+    };
 
-    # environment.systemPackages = [ pkgs.unstable.gamescope ];
-    #
     programs.steam = {
       enable = true;
-      # extraPackages = [ pkgs.unstable.gamescope ];
-      gamescopeSession = {
-        enable = true;
-        env = {
-          WLR_RENDERER = "vulkan";
-          DXVK_HDR = "1";
-          ENABLE_GAMESCOPE_WSI = "1";
-          WINE_FULLSCREEN_FSR = "1";
-          # Games allegedly prefer X11
-          SDL_VIDEODRIVER = "x11";
-        };
-        args = [
-          # "--xwayland-count 2"
-          "--expose-wayland"
-
-          "-e" # Enable steam integration
-          "--steam"
-
-          "--adaptive-sync"
-          "--hdr-enabled"
-          "--hdr-itm-enable"
-
-          "--output-width 3440"
-          "--output-height 1440"
-          "-r 165"
-
-          "--prefer-vk-device" # lspci -nn | grep VGA
-          # "1002:73ef" # Dedicated
-          # 1002:1681 # Integrated
-        ];
-      };
+      extraCompatPackages = [
+        pkgs.proton-ge-bin
+      ];
     };
   };
 }
