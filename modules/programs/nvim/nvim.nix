@@ -1,6 +1,6 @@
 { self, inputs, ... }: {
   flake-file.inputs = {
-    expert.url = "github:elixir-lang/expert";
+    expert.url = "github:elixir-lang/expert/v0.1";
   };
 
   flake.modules.homeManager.nvim = {
@@ -47,6 +47,7 @@
     # zls = { "${unstable.zls}/bin/zls" },
 
     home.packages = with pkgs; [
+      tree-sitter
       unstable.elixir-ls
       unstable.bash-language-server
       unstable.typescript-language-server

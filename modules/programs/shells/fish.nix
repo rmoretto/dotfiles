@@ -28,7 +28,7 @@
         ls = "eza";
         ll = "eza -la";
         ip = "ip -c";
-        ciasc-vpn = "sudo openfortivpn sslvpn01.ciasc.gov.br --username=granter_rmoretto@vpn.ciasc.gov.br";
+        ciasc-vpn = "sudo openfortivpn sslvpn01.ciasc.gov.br --username=granter_rmoretto@vpn.ciasc.gov.br  --trusted-cert 584bd0380d5a2c5def5832195d8bb447768bff2d4fe3b53fef1b645f3c70dae6";
       };
       functions = {
         ssh = {
