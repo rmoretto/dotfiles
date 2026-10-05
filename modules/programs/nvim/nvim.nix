@@ -60,7 +60,6 @@
       unstable.lua-language-server
       unstable.tailwindcss-language-server
       # unstable.zls
-      unstable.typescript-go
       unstable.vtsls
       inputs.expert.packages.x86_64-linux.default
       unstable.kdePackages.qtdeclarative

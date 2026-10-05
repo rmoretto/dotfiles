@@ -18,6 +18,7 @@
       self.modules.nixos.nvidia
       self.modules.nixos.pipewire
       self.modules.nixos.swapfile
+      self.modules.nixos.mounts
     ];
 
     hardware.i2c.enable = true;

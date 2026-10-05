@@ -12,6 +12,7 @@
         chromium
         unstable.spotify
         unstable.discord
+        unstable.teamspeak6-client
         vesktop
         unstable.terminaltexteffects
         joplin-desktop
@@ -81,6 +82,9 @@
         sad
         dig
         sbctl
+
+        # unstable.bitwarden-desktop
+        unstable.bitwarden-cli
 
         nvidia-container-toolkit
         nvidia-vaapi-driver
@@ -178,6 +182,8 @@
     programs.virt-manager.enable = true;
 
     programs.openvpn3.enable = true;
+    services.resolved.enable = true;
+
     # programs.ssh.startAgent = true;
     programs.dconf.enable = true;
 
